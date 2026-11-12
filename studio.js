@@ -1,6 +1,6 @@
 "use strict";
-/* Huda Studio studio.js — version 4.6.0 — Multi Editor (admin) */
-var STUDIO_JS_VERSION="4.6.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+/* Huda Studio studio.js — version 4.7.0 — Multi Editor (admin) */
+var STUDIO_JS_VERSION="4.7.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -2881,7 +2881,7 @@ function hdfView(){hdfInit();HDF.cp=null;HDF.tab='gl';HDF.err='';app.innerHTML='
 function hdfExport(kind){var p=HDF.p;if(!hdfCount(p)){toast(t('hdf_empty'));return}var nm=(p.fam||'HudaFont').replace(/[^\w\-]+/g,'')||'HudaFont';try{if(kind=='ttf')stSave(new Blob([hdfTTF(p)],{type:'font/ttf'}),nm+'.ttf');else hdfWOFF(p).then(function(u){stSave(new Blob([u],{type:'font/woff'}),nm+'.woff')},function(){toast(t('hdf_err'))})}catch(e){toast(t('hdf_err')+': '+e.message)}}
 function hdfOpenProject(id){hdfSaveNow();var p=S('hdf_'+id,null);if(!p||!p.g)return;HDF.p=p;P('hdfcur',id);HDF.cp=null;HDF.tab='gl';HDF.err='';hdfRegister();hdfShell()}
 function hdfDelProject(i){var L=S('hdfi',[]),e=L.splice(i,1)[0];if(!e)return;try{localStorage.removeItem('dd_hdf_'+e.id)}catch(x){}P('hdfi',L);if(e.id==HDF.p.id){if(L.length)hdfOpenProject(L[0].id);else{var np=hdfDefault(1);P('hdf_'+np.id,np);HDF.p=np;hdfIdx(np);P('hdfcur',np.id);hdfShell()}}else hdfBody()}
-/* ================= Huda Editor (V4.6.0) ================= */
+/* ================= Huda Editor (V4.7.0) ================= */
 function hedtx(k){return k.indexOf('ed_')==0?hedt(k.slice(3)):t(k)}
 /* ================= Huda Editor (hed*) — own code, no new libraries ================= */
 var HED=null,HEDDB=null;
@@ -3001,7 +3001,9 @@ function hedDrawClip(ctx,c,W,H,t,o,k,u){var lt=t-c.s,an=hedAnim(c,lt),src=null,s
    else if(e.px>0){var q=1+e.px*.6,tw=Math.max(4,Math.round(dw/q)),th=Math.max(4,Math.round(dh/q)),tc=HED.tmp||(HED.tmp=D.createElement('canvas'));tc.width=tw;tc.height=th;var tx=tc.getContext('2d');tx.drawImage(src,ssx,ssy,ssw,ssh,0,0,tw,th);var sm=ctx.imageSmoothingEnabled;ctx.imageSmoothingEnabled=false;ctx.drawImage(tc,0,0,tw,th,dx,dy,dw,dh);ctx.imageSmoothingEnabled=sm}
    else ctx.drawImage(src,ssx,ssy,ssw,ssh,dx,dy,dw,dh)}
   else if(L)hedTextPaint(ctx,c,L,u);else hedShapePaint(ctx,c,nw,nh,k)};
- var fs=nf?'none':hedFilter(c,an,k,u);if(fs!='none')ctx.filter=fs;paint();
+ var fs=nf?'none':hedFilter(c,an,k,u),bq=fs!='none'&&/blur\(([\d.]+)px\)/.exec(fs),br=bq?parseFloat(bq[1]):0;
+ if(br>=4&&dw>0&&dh>0){var sq=br<14?.5:(br<40?.25:.125),mg=Math.ceil(br*2.5),tw2=Math.max(4,Math.ceil((dw+mg*2)*sq)),th2=Math.max(4,Math.ceil((dh+mg*2)*sq)),tc2=HED.tbl||(HED.tbl=D.createElement('canvas'));if(tc2.width!=tw2||tc2.height!=th2){tc2.width=tw2;tc2.height=th2}var tx2=tc2.getContext('2d'),oc=ctx;tx2.setTransform(1,0,0,1,0,0);tx2.globalAlpha=1;tx2.globalCompositeOperation='source-over';tx2.filter='none';tx2.clearRect(0,0,tw2,th2);tx2.setTransform(sq,0,0,sq,-(dx-mg)*sq,-(dy-mg)*sq);tx2.filter=fs.replace(/blur\(([\d.]+)px\)/,function(q2,a2){return'blur('+(a2*sq).toFixed(2)+'px)'});ctx=tx2;try{paint()}finally{ctx=oc}tx2.filter='none';ctx.drawImage(tc2,0,0,tw2,th2,dx-mg,dy-mg,dw+mg*2,dh+mg*2)}
+ else{if(fs!='none')ctx.filter=fs;paint()}
  if(!nf&&e.gl>0){ctx.save();ctx.filter='blur('+(e.gl*.35*k*u).toFixed(2)+'px) brightness(1.35)';ctx.globalCompositeOperation='lighter';ctx.globalAlpha=al*e.gl/100*.7;paint();ctx.restore()}
  if(fs!='none')ctx.filter='none';
  var f=c.col,te=f.te||0,ti=f.ti||0,vg=e.vg||0,gr=e.gr||0;
@@ -3065,7 +3067,7 @@ function hedDetach(){var c=hedSelC();if(!c||c.k!='video')return;hedHist();var a=
 /* ---- get / set helper for data-hep paths ---- */
 function hedGet(o,path,d){var a=path.replace(/^@/,'').split('.'),i;for(i=0;i<a.length;i++){if(o==null)return d;o=o[a[i]]}return o==null?d:o}
 function hedSetP(o,path,v){var a=path.split('.'),i;for(i=0;i<a.length-1;i++){if(o[a[i]]==null||typeof o[a[i]]!='object')o[a[i]]={};o=o[a[i]]}o[a[a.length-1]]=v}
-function hedAll(){hedTidy();hedTl();hedPanel();hedTimeUi();hedPlUi();hedFitPv();hedDrawSoon();hedSaveSoon()}
+function hedAll(){hedTidy();hedTl();hedPanel();hedTimeUi();hedPlUi();hedFitPv();if(!HED.pl&&!HED.gate)hedSync(HED.t,false);hedDrawSoon();hedSaveSoon()}
 
 /* ---- keyframes ---- */
 function hedKfAt(c,lt){var k=c.kf||[],i,tol=.6/(HED.p.fps||30);for(i=0;i<k.length;i++)if(Math.abs(k[i].t-lt)<=tol)return i;return-1}
@@ -3388,7 +3390,7 @@ async function hedExport(kind){if(HED.job)return;hedPause();var d=hedDims(),W=d.
   var tot=hedDur(),N=Math.max(1,Math.ceil(tot*fps));hedProg(.04,hedt('x_audio'));var mix=await sw(function(){return hedMix(tot)});if(job.cancel){hedProg(null);return}
   var wc=null;try{wc=await stWcRec(W,H,!!mix,mix,[],[0],tot,fps)}catch(e){wc=null}var res=null;
   if(wc){var fin=new Promise(function(ok){wc.onstop=ok});if(wc.start)wc.start();
-   for(var k=0;k<N;k++){while(job.pz&&!job.cancel)await hedSleep(120);if(job.cancel){try{wc.stop()}catch(e){}hedProg(null);return}var tm=k/fps;await sw(function(){return hedPrep(tm,xe)});sw(function(){hedDraw(ctx,W,H,tm,{u:1,els:xe})});while(wc.q()>6)await hedSleep(8);wc.pushAt(cv,k);if(k%2==0){hedProg(.06+.92*k/N,hedt('x_busy'));await hedSleep(0)}}
+   for(var k=0;k<N;k++){while(job.pz&&!job.cancel)await hedSleep(120);if(job.cancel){try{wc.stop()}catch(e){}hedProg(null);return}var tm=k/fps;await sw(function(){return hedPrepS(tm,xe,fps)});sw(function(){hedDraw(ctx,W,H,tm,{u:1,els:xe})});while(wc.q()>6)await hedSleep(8);wc.pushAt(cv,k);if(k%2==0){hedProg(.06+.92*k/N,hedt('x_busy'));await hedSleep(0)}}
    wc.stop();await fin;if(!wc.blob)throw new Error('x');res={blob:wc.blob,ext:'mp4'}}
   else res=await hedExportMr(W,H,tot,fps,mix,job);
   if(!res){hedProg(null);return}stSave(res.blob,hedExName(res.ext),'Multi Editor');hedProg(1,hedt('x_ok_s'),'ok')}
@@ -3478,13 +3480,13 @@ function hedThumbOf(){try{var p=HED.p,d=hedDims(),w=140,h=Math.round(140*d.H/d.W
  if(c0){var m=HED.media[c0.m],s=m&&m.th&&m.th[0];if(s){var r=Math.max(w/s.width,h/s.height);x.drawImage(s,(w-s.width*r)/2,(h-s.height*r)/2,s.width*r,s.height*r)}}
  else p.cl.forEach(function(c){if(c.k=='shape'){x.fillStyle=c.sh.c;x.fillRect(w*.25,h*.25,w*.5,h*.5)}else if(c.k=='text'&&c.tx){x.fillStyle=c.tx.c||'#fff';x.font='700 '+Math.round(h*.22)+'px sans-serif';x.textAlign='center';x.fillText((c.tx.s||'').split('\n')[0].slice(0,14),w/2,h/2)}});
  return cv.toDataURL('image/jpeg',.6)}catch(e){return''}}
-function hedSaveNow(){if(!HED||!HED.p||!HED.p.id)return;hedMainPack();try{var p=HED.p,l=hedLoadList(),e=hedLEnt(p.id);P('hedp_'+p.id,p);if(!e){e={id:p.id};l.unshift(e)}e.nm=p.nm;e.ts=Date.now();e.dur=hedDur();e.rt=p.ratio;var th=hedThumbOf();if(th)e.th=th;hedLSave()}catch(x){}}
+function hedSaveNow(){if(!HED||!HED.p||!HED.p.id)return;hedMainPack();if(hedIsEmpty(HED.p)){hedDropEmpty();return}try{var p=HED.p,l=hedLoadList(),e=hedLEnt(p.id);P('hedp_'+p.id,p);if(!e){e={id:p.id};l.unshift(e)}e.nm=p.nm;e.ts=Date.now();e.dur=hedDur();e.rt=p.ratio;var th=hedThumbOf();if(th)e.th=th;hedLSave()}catch(x){}}
 function hedLeave(){if(!HED)return;try{hedSaveNow()}catch(e){}hedPause();hedStopEls();clearInterval(HED.ti);try{if(HED.mo)HED.mo.disconnect()}catch(e){}Object.keys(HED.media||{}).forEach(function(k){try{URL.revokeObjectURL(HED.media[k].url)}catch(e){}});clearTimeout(HED._sv);HED=null}
 function hedGoList(){hedLeave();hedHome()}
 function hedOpenProject(id,keep){var p=S('hedp_'+id,null),e=hedLEnt(id);if(!p||!p.tr||!p.cl){p=hedBlank();p.nm=e?e.nm:hedt('proj')}p.id=id;if(!p.nm)p.nm=e?e.nm:hedt('proj');hedRoleFix(p);hedStDef(p);hedLeave();
- HED={p:p,media:{},els:{},sel:'',t:0,z:40,snap:1,tab:'edit',sub:'',un:[],re:[],lk:'',lt:0,xn:'',job:null,th:null,ms:[],lsm:0,view:'ed'};hedMainPack();hedLoadMedia(p);
+ HED={p:p,media:{},els:{},sel:'',t:0,z:40,snap:1,tab:'edit',sub:'',un:[],re:[],lk:'',lt:0,xn:'',job:null,th:null,ms:[],lsm:0,view:'ed'};hedMainPack();hedLoadMedia(p);setTimeout(hedPrewarm,900);setTimeout(hedPrewarm,2600);
  if(!keep){try{history.pushState({v:'studio',t:'plus',he:1},'');HEDHS++}catch(x){}}hedView()}
-function hedNewProject(){var l=hedLoadList(),p=hedBlank(),mt0=p.tr.filter(function(x){return x.r=='vid'})[0],n=l.length+1,has=function(s){return l.some(function(e){return e.nm==s})};while(has(hedt('proj')+' '+n))n++;hedStDef(p);if(mt0)p.cl.push(hedBgClip(mt0.id,0,10));p.nm=hedt('proj')+' '+n;try{P('hedp_'+p.id,p)}catch(e){}l.unshift({id:p.id,nm:p.nm,ts:Date.now(),dur:0,rt:p.ratio,th:''});hedLSave();hedOpenProject(p.id)}
+function hedNewProject(){var l=hedLoadList(),p=hedBlank(),mt0=p.tr.filter(function(x){return x.r=='vid'})[0],n=l.length+1,has=function(s){return l.some(function(e){return e.nm==s})};while(has(hedt('proj')+' '+n))n++;hedStDef(p);if(mt0)p.cl.push(hedBgClip(mt0.id,0,10));p.nm=hedt('proj')+' '+n;try{P('hedp_'+p.id,p)}catch(e){}hedOpenProject(p.id)}
 function hedDupProject(id,sfx){var p=S('hedp_'+id,null);if(!p)return null;var np=JSON.parse(JSON.stringify(p)),e=hedLEnt(id),l=hedLoadList();np.id=hedU();np.nm=(p.nm||hedt('proj'))+' '+(sfx||hedt('copy'));try{P('hedp_'+np.id,np)}catch(x){}l.unshift({id:np.id,nm:np.nm,ts:Date.now(),dur:e?e.dur:0,rt:np.ratio,th:e?e.th:''});hedLSave();return np.id}
 function hedDelProject(id){var l=hedLoadList(),p=S('hedp_'+id,null),mm=(p&&p.mm||[]).map(function(m){return m.id});HEDL=l.filter(function(e){return e.id!=id});hedLSave();try{localStorage.removeItem('dd_hedp_'+id)}catch(e){}
  var keep={};HEDL.forEach(function(e){var q=S('hedp_'+e.id,null);(q&&q.mm||[]).forEach(function(m){keep[m.id]=1})});mm.forEach(function(m){if(!keep[m])hedDbDel(m)})}
@@ -3802,7 +3804,7 @@ function hedSync(tm,playing){var p=HED.p,mst=p.master/100,now=performance.now(),
   el=hedEl(c);if(!el)continue;var lt=tm-c.s,rvv=c.rv&&c.k=='video',src=rvv?c.i+(c.d-lt)*c.sp:c.i+lt*c.sp,fi=c.fi>0&&lt<c.fi?lt/c.fi:1,fo=c.fo>0&&c.d-lt<c.fo?(c.d-lt)/c.fo:1,v=hedC(c.vol/100*mst*fi*fo,0,1),mu=!!(c.mu||HED.xm||(tr&&tr.hid)),rate=hedC(c.sp,.0625,16);
   if(el._v!==v){try{el.volume=v}catch(e){}el._v=v}if(el._mu!==mu){el.muted=mu;el._mu=mu}if(el.playbackRate!=rate)el.playbackRate=rate;
   if(rvv){if(!el.paused)el.pause();hedSeek(el,src);continue}
-  if(playing){if(el.paused){if(el._bad||el.error){continue}if(now-(el._pp||0)<400)continue;el._pp=now;if(Math.abs(el.currentTime-src)>.1)hedSeek(el,src);var pr=el.play();if(pr&&pr.catch)pr.catch(function(e){if(e&&e.name=='NotSupportedError'){el._bad=1;hedVidFail(el)}});el._dc=now}else if(now-(el._dc||0)>250){el._dc=now;var vd=c.k=='video'&&!HED._soft;if(Math.abs(el.currentTime-src)>(vd?.55:.35)&&!el.seeking&&now-(el._sk||0)>(vd?900:200)){el._sk=now;hedSeek(el,src)}}if(c.k=='video'&&HEDVF&&!el._vf)hedVfBind(el)}
+  if(playing&&HED._frz&&el!==HED._mel){if(!el.paused){el.pause();el._pp=0}continue}if(playing){if(el.paused){if(el._bad||el.error){continue}if(now-(el._pp||0)<400)continue;el._pp=now;if(Math.abs(el.currentTime-src)>.1)hedSeek(el,src);var pr=el.play();if(pr&&pr.catch)pr.catch(function(e){if(e&&e.name=='NotSupportedError'){el._bad=1;hedVidFail(el)}});el._dc=now}else if(now-(el._dc||0)>250){el._dc=now;var vd=c.k=='video'&&!HED._soft;if(el!==HED._mel&&Math.abs(el.currentTime-src)>(vd?.55:.35)&&!el.seeking&&now-(el._sk||0)>(vd?900:200)){el._sk=now;hedSeek(el,src)}}if(c.k=='video'&&HEDVF&&!el._vf)hedVfBind(el)}
   else{if(!el.paused)el.pause();hedSeek(el,src)}}}
 /* ---- cached draw order (re-sorted only when the project really changed) ---- */
 function hedHash(s){var h=0,i;for(i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return h}
@@ -3821,12 +3823,14 @@ function hedPlay(){if(HED.gate){HED.gate=0;hedPlUi();return}if(HED.pl)return;if(
  var wait=hedNeedWarm(HED.t),go=function(){if(!HED||!HED.gate&&wait.length)return;HED.gate=0;if(!hedAlive())return;HED.pl=1;HED._st=null;HED._soft=0;HED._stN=[];HED._stq=performance.now()+700;HED.p0=HED.t;HED.t0=performance.now();HED.vfDirty=1;hedPlUi();hedTick()};
  if(!wait.length){go();return}
  HED.gate=1;var gt=HED._gt=(HED._gt||0)+1;hedPlUi();wait.forEach(function(el){hedPrime(el,1)});
- var fired=0,t0=performance.now(),iv=setInterval(function(){if(fired)return;if(!HED||HED._gt!==gt){fired=1;clearInterval(iv);return}if(!HED.gate||performance.now()-t0>1600||!hedNeedWarm(HED.t).length){fired=1;clearInterval(iv);go()}},50)}
+ var fired=0,t0=performance.now(),iv=setInterval(function(){if(fired)return;if(!HED||HED._gt!==gt){fired=1;clearInterval(iv);return}if(!HED.gate||performance.now()-t0>1200||!hedNeedWarm(HED.t).length){fired=1;clearInterval(iv);go()}},50)}
 function hedPause(){if(!HED)return;HED.stopAt=null;HED.gate=0;HED._st=null;if(!HED.pl){hedPlUi();return}HED.pl=0;cancelAnimationFrame(HED.raf);Object.keys(HED.els).forEach(function(k){hedVfOff(HED.els[k])});hedPlUi();hedSync(HED.t,false);hedDrawSoon();hedReleaseFar(8,3)}
-function hedPlEnd(){var du=hedDur();HED._st=null;HED.t=du;hedSync(du,false);HED.pl=0;cancelAnimationFrame(HED.raf);Object.keys(HED.els).forEach(function(k){hedVfOff(HED.els[k])});hedDrawPv();hedTimeUi();hedPhUp(1);hedPlUi();hedReleaseFar(0,0);if(HED.onend)HED.onend()}
+function hedPlEnd(){var du=hedDur();HED._st=null;HED.t=du;hedSync(du,false);HED.pl=0;cancelAnimationFrame(HED.raf);Object.keys(HED.els).forEach(function(k){hedVfOff(HED.els[k])});hedDrawPv();hedTimeUi();hedPhUp(1);hedPlUi();HED._mel=null;if(HED.onend)HED.onend()}
 function hedTick(){if(!hedAlive()){hedStopAll();return}if(!HED.pl)return;
  if(HED._st){var n0=performance.now();if(hedStallDone()||n0-HED._st.t>4500){var tm0=HED._st.tm;HED._st=null;HED._stq=n0+700;HED.p0=tm0;HED.t0=n0;HED.vfDirty=1;Object.keys(HED.els).forEach(function(k){HED.els[k]._dc=0})}else{HED.raf=requestAnimationFrame(hedTick);return}}
- var now=performance.now(),tm=HED.p0+(now-HED.t0)/1000,du=hedDur();if(tm>=du){hedPlEnd();return}
+ var now=performance.now(),tm=HED.p0+(now-HED.t0)/1000,du=hedDur(),ms=hedMaster(HED.t);HED._mel=null;HED._frz=false;
+ if(ms){var mel=ms.el,mc=ms.c,ct=mel.currentTime,mt=mc.s+(ct-mc.i)/mc.sp;if(mel._mt!==ct){mel._mt=ct;mel._mT=now}if(now-(mel._mT||now)>3000)mel._nom=1;else if(Math.abs(mt-HED.t)<1.5){tm=Math.max(mt,HED.t);HED.p0=tm;HED.t0=now;HED._mel=mel;HED._frz=now-(mel._mT||now)>120}}
+ if(tm>=du){hedPlEnd();return}
  if(HED.stopAt!=null&&tm>=HED.stopAt){HED.stopAt=null;HED.t=tm;hedPause();hedTimeUi();hedPhUp(1);return}
  HED.t=tm;hedSync(tm,true);if(hedNeedDraw(tm)){hedDrawPv();HED.vfDirty=0}
  if(now-(HED._ui||0)>45){HED._ui=now;hedTimeUi();hedPhUp(1)}if(now-(HED._rl||0)>4000){HED._rl=now;hedReleaseFar(8,3)}
@@ -4479,7 +4483,7 @@ function hedVidFail(el){if(!el||el._fm)return;el._fm=1;toast(hedt('vid_fail')+(e
 function hedCapLf(el){try{if(!el||el.tagName!='VIDEO'||!el.videoWidth||el.readyState<2)return;var w=Math.min(640,el.videoWidth),h=Math.max(1,Math.round(w*el.videoHeight/el.videoWidth)),cv=el._lf||(el._lf=D.createElement('canvas'));if(cv.width!=w||cv.height!=h){cv.width=w;cv.height=h}cv.getContext('2d').drawImage(el,0,0,w,h)}catch(e){}}
 function hedPh(c,el,t){if(el&&el._lf)return el._lf;var m=HED.media[c.m];if(!m)return null;var n=m.th&&m.th.length||0;if(!n)return m.th0||null;var lt=Math.max(0,t-c.s),st=c.rv?c.i+(c.d-lt)*c.sp:c.i+lt*c.sp,i=hedC(Math.floor(st/(m.dur||1)*n),0,n-1);return i==0&&m.th0?m.th0:m.th[i]}
 /* ---- playback stall: when a video runs out of decoded data the clock waits for it instead of racing ahead ---- */
-function hedStall(el){var now=performance.now();if(!HED||!HED.pl||HED._st||now<(HED._stq||0)||HED._soft)return;HED._stN=(HED._stN||[]).filter(function(x){return now-x<8000});HED._stN.push(now);if(HED._stN.length>3){HED._soft=1;return}
+function hedStall(el){return;var now=performance.now();if(!HED||!HED.pl||HED._st||now<(HED._stq||0)||HED._soft)return;HED._stN=(HED._stN||[]).filter(function(x){return now-x<8000});HED._stN.push(now);if(HED._stN.length>3){HED._soft=1;return}
  hedCapLf(el);HED._st={t:now,tm:HED.t};Object.keys(HED.els).forEach(function(k){var e=HED.els[k];if(!e.paused){try{e.pause()}catch(x){}}hedVfOff(e)});hedPrime(el,1)}
 function hedStallDone(){var ok=true;hedVisAt(HED._st.tm).forEach(function(c){if(c.k!='video'||c.rv)return;var el=HED.els[c.id];if(el&&!el._bad&&!(el.readyState>=3||(el.readyState>=2&&!el.seeking)))ok=false});return ok}
 /* ---- main layer: always exists (a 10 s Background when empty) and never has gaps ---- */
@@ -4498,22 +4502,36 @@ scr_c:['திரை நிறம்','Screen colour','තිර වර්ණය
 need_base:['முதலில் அடிப்படை அட்டையை (திரை) தேர்ந்தெடுங்கள்','Choose a base card (Screen) first','මුලින්ම මූලික කාඩ්පත (තිරය) තෝරන්න','اختر البطاقة الأساسية (الشاشة) أولاً']});
 var HEDSCR=['#FFFFFF','#000000','#F5F5F5','#E0E0E0','#9E9E9E','#424242','#FFEBEE','#EF5350','#C62828','#FFF3E0','#FFA726','#E65100','#FFFDE7','#FFEE58','#F9A825','#E8F5E9','#66BB6A','#1B5E20','#E0F7FA','#26C6DA','#006064','#E3F2FD','#42A5F5','#0D47A1','#EDE7F6','#7E57C2','#311B92','#FCE4EC','#EC407A','#880E4F','#EFEBE9','#8D6E63','#3E2723','#0F3D3A','#D4AF37'];
 HEDCSS+=`
-.hednomain #hedbar,.hednomain .hedpbar,.hednomain #hedpv,.hednomain .hedtp,.hednomain .hedtb,.hednomain .hedrow:not(.hedmr),.hednomain .hedrow.hedmr .hedlane{opacity:.3;transition:opacity .2s}
-.hednomain .hedrow.hedmr .hedtn{position:relative;z-index:3}
+.hednomain #hedbar,.hednomain .hedrow:not(.hedmr) .hedtn>*{opacity:.3;transition:opacity .2s}
+.hedts{background:linear-gradient(var(--ln,rgba(127,127,127,.3)),var(--ln,rgba(127,127,127,.3))) 65px 0/1px 100% no-repeat,linear-gradient(var(--cd,#fff),var(--cd,#fff)) 0 0/66px 100% no-repeat}
 .hedscr{display:flex;flex-wrap:wrap;gap:8px}
 `;
 function hedLockedPv(c){return hedLocked(c)||!!c.scr}
 function hedNoMain(){if(!HED||!HED.p)return false;var t=hedMainTr();return!!t&&!HED.p.cl.some(function(c){return c.tr==t.id})}
-function hedBlockNoMain(k,g){if(!HED||!hedNoMain())return false;var mt=hedMainTr(),ok=/^(home|undo|redo|popx|scradd|scrcu|addv|fs|zo|zi|zf)$/.test(k)||(k=='pop'&&(g=='mainadd'||g=='scr'||g=='settings'))||((k=='trp'||k=='tv')&&mt&&g==mt.id);if(ok)return false;toast(hedt('need_base'));return true}
+function hedBlockNoMain(k,g){if(!HED||!hedNoMain())return false;var mt=hedMainTr(),ok=/^(home|undo|redo|popx|scradd|scrcu|addv|fs|zo|zi|zf|play|prev|next|snap|rsm)$/.test(k)||(k=='pop'&&(g=='mainadd'||g=='scr'||g=='settings'))||((k=='trp'||k=='tv')&&mt&&g==mt.id);if(ok)return false;toast(hedt('need_base'));return true}
 function hedDropDbg(){var t=hedMainTr();if(!t)return;var mc=HED.p.cl.filter(function(c){return c.tr==t.id});if(mc.length&&mc.every(function(c){return c.dbg}))HED.p.cl=HED.p.cl.filter(function(c){return c.tr!=t.id})}
 function hedMainSlot(d,t){var tr=hedMainTr();if(!tr)return Math.max(0,t);var L=HED.p.cl.filter(function(c){return c.tr==tr.id});if(!L.length)return 0;var b=[0],best;L.forEach(function(c){b.push(c.s+c.d)});best=b[0];b.forEach(function(v){if(Math.abs(v-t)<Math.abs(best-t)-1e-9)best=v});return best-d/2}
 function hedScrClip(trid,s,d,col){var c=hedClip('shape',trid,s,d,{sh:hedShpDef('rect')});c.sh.t='rect';c.sh.w=100;c.sh.h=100;c.sh.c=col;c.sh.c2=col;c.sh.an=90;c.nm=hedt('scr_n');c.scr=1;return c}
 function hedAddScreen(col){var tr=hedMainTr();if(!tr)return;hedHist();hedDropDbg();var c=hedScrClip(tr.id,hedMainSlot(10,HED.t),10,col);HED.p.cl.push(c);HED.sel=c.id;HED.pop='';hedAll()}
 function hedScrSet(col){var c=hedSelC();if(!c||!c.scr)return;hedHist();c.sh.c=col;c.sh.c2=col;hedPanel();hedDrawSoon();hedSaveSoon()}
 function hedStage(f){if(!f||!f.arrayBuffer||f.size>120e6||f._st)return Promise.resolve(f);return f.arrayBuffer().then(function(ab){try{var g=new File([ab],f.name||'media',{type:f.type,lastModified:f.lastModified||Date.now()});g._st=1;return g}catch(e){return f}}).catch(function(){return f})}
+/* ================= 4.7.0 — video-driven clock, streamed export frames, empty projects are not kept ================= */
+function hedMaster(t){var o=null;hedVisAt(t).some(function(c){if(c.k!='video'||c.rv)return false;var el=HED.els[c.id];if(!el||el._bad||el._nom||el.paused||el.readyState<1||el.ended)return false;o={c:c,el:el};return true});return o}
+function hedPrewarm(){if(!hedAlive())return;var l=HED.p.cl.filter(function(c){return c.k=='video'&&!c.rv}).sort(function(a,b){return a.s-b.s}).slice(0,3),i=0,nx=function(){if(!hedAlive()||i>=l.length)return;var c=l[i++],m=HED.media[c.m];if(m&&m.url){var el=hedEl(c);if(el&&!HED.pl)hedSeek(el,c.i)}setTimeout(nx,700)};nx()}
+function hedIsEmpty(p){return!p.cl.some(function(c){return!c.dbg})}
+function hedDropEmpty(){var id=HED.p.id,l=hedLoadList();if(hedLEnt(id)){HEDL=l.filter(function(e){return e.id!=id});hedLSave()}try{localStorage.removeItem('dd_hedp_'+id)}catch(e){}}
+/* export: a video element advances in short play bursts to each frame's time (mediaTime from requestVideoFrameCallback), so no seek per frame */
+function hedWaitFrame(el,tg,fd){return new Promise(function(ok){var done=0,to=setTimeout(function(){if(done)return;done=1;try{el.pause()}catch(e){}ok(false)},2500),cb=function(n,md){if(done)return;if(md.mediaTime>=tg-fd*.5){done=1;clearTimeout(to);try{el.pause()}catch(e){}ok(true)}else el.requestVideoFrameCallback(cb)};el.requestVideoFrameCallback(cb)})}
+function hedFresh(el){return new Promise(function(ok){var to=setTimeout(ok,600);try{el.requestVideoFrameCallback(function(){clearTimeout(to);ok()})}catch(e){clearTimeout(to);ok()}})}
+async function hedStream(el,tg,fdS){if(el.readyState<1||el._xs==null||el.ended||el.currentTime-tg>fdS*.8||tg-el.currentTime>fdS*12){try{el.pause()}catch(e){}el.muted=true;try{el.volume=0}catch(e){}await hedSeekW(el,tg);await hedFresh(el);el._xs=1;return}
+ if(tg-el.currentTime>fdS*.5){el.muted=true;el.playbackRate=1;var pr;try{pr=el.play()}catch(e){}if(pr&&pr.catch)pr.catch(function(){el._xbad=1});var ok=await hedWaitFrame(el,tg,fdS);if(!ok){el._xbad=1;await hedSeekW(el,tg)}}}
+function hedPrepS(t,xe,fps){var fd=1/fps,ps=[],vis={};HED.p.cl.forEach(function(c){var tr=hedTr(c.tr);if(c.k!='video'||!tr||tr.hid||!(t>=c.s-1e-6&&t<c.s+c.d))return;vis[c.id]=1;var el=hedEl(c,{els:xe});if(!el)return;var tg=c.rv?c.i+(c.d-(t-c.s))*c.sp:c.i+(t-c.s)*c.sp;
+  if(c.rv||c.sp>2.01||el._xbad||!HEDVF){ps.push(hedSeekW(el,tg));return}ps.push(hedStream(el,tg,fd*c.sp).catch(function(){el._xbad=1;return hedSeekW(el,tg)}))});
+ Object.keys(xe).forEach(function(k){if(!vis[k]&&xe[k]&&xe[k].tagName=='VIDEO'){if(!xe[k].paused)try{xe[k].pause()}catch(e){}xe[k]._xs=null}});return Promise.all(ps)}
 LZ.f={stUp:stUp,stLibUi:stLibUi,stSave:stSave,stDl:stDl,stShare:stShare,stVdl:stVdl,stWmRead:stWmRead,stOpen:stOpen,stCaLoad:stCaLoad,stCreate:stCreate,stGather:stGather,aoSet:aoSet,stPrevSoon:stPrevSoon,stSumTxt:stSumTxt,studiov:studiov,stVs:stVs,stSelFill:stSelFill,stPvSoon:stPvSoon,stWsUi:stWsUi,vzThumbs:vzThumbs};
 
 /* CHANGELOG
+4.7.0 — Fixed: the main-layer icon no longer slides sideways, the icon column reaches the bottom of the timeline, and only the buttons that are really blocked fade while the main layer is empty. Player: the playing video is now the clock (no drift, no racing ahead, no stop-go), elements are kept after playback ends so Play again starts at once, editing a clip refreshes the preview immediately, the first clips are pre-warmed when a project opens. Export: video frames are produced by short sequential play bursts instead of one seek per frame (far faster, no repeated stale frames), and blur is computed on a smaller canvas (4-16x cheaper) — smooth output and minutes become seconds. Projects that only hold the untouched base card (or nothing) are not saved to the project list.
 4.6.0 — New: main layer starts with a pure-white 10 s Screen card (like a Canva page); it can be deleted, replaced or recoloured, and while the main layer is empty everything except the main-layer icons is dimmed and says to choose a base card first. The Canvas tool is gone from the toolbar; the main layer "+" now offers Screen (colours, locked in place) or From your phone. New layers (video/image on main, text, overlay, music) are added at the playhead: on the main layer at the nearest clip boundary (neighbours move, never a gap), on other layers at the playhead, or on the layer below when there is no room. Fixed: videos added to the main layer or used with Replace now load from an in-memory copy, the old element is released on Replace, timeline thumbnails always cover the whole clip.
 4.5.0 — New: the main layer is mandatory (a new or empty project starts with a 10 s Background on it; the Background is replaced by the first video/image added) and can never have gaps — moving, trimming, shortening, deleting or undoing always closes them. Fixed: videos from the phone gallery load and show reliably (first frame is forced, the loading shimmer follows the preview only, thumbnails/IndexedDB copy wait for the first frame, thumbnails start on metadata and retry, clear errors when a video cannot be played or saved); Play warms the decoders first (including a clip about to start) and the clock waits when a video stalls; a video that cannot play is no longer retried on every frame; a cancelled Play never starts later by itself; last good frame is shown while seeking; Undo/Redo and Resize now show at once (stale layer cache removed, history buttons refreshed).
 4.4.0 — New: Canva-style mid-edge handles (width/height; crop on media), smaller rotate/move buttons kept clear of the corner dots, small icons on layers for applied edits, static animation samples, Extend to Clip Start/End measured against the main layer. Fixed: gallery video loading (15 s timeout with a clear apology message, busy chip, deferred save, lighter thumbnails), tapping a layer stops playback, Animate All plays a preview, animation changes refresh the timeline at once, clearer reverse icon.
