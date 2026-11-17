@@ -1,6 +1,6 @@
 "use strict";
-/* Huda Studio studio.js — version 4.12.1 — Multi Editor (admin) */
-var STUDIO_JS_VERSION="4.12.1"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+/* Huda Studio studio.js — version 4.13.0 — Multi Editor (admin) */
+var STUDIO_JS_VERSION="4.13.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -464,7 +464,7 @@ function msApply(){var c=STCA;if(!c||!c.raw)return Promise.resolve();if(MSPV.on)
  if(!use){if(c.buf!==c.raw)msSwap(c,c.raw);c.ms=0;c.snr=null;msStatus('off');return Promise.resolve()}
  msStatus('busy');
  return msProcess(c.raw,STMS.e,STMS.v).then(function(nb){if(tk!==STMS.tk||STCA!==c)return;c.snr=nb.snr||null;msSwap(c,nb);c.ms=1;msStatus('ok')}).catch(function(){if(tk!==STMS.tk||STCA!==c)return;if(c.buf!==c.raw)msSwap(c,c.raw);c.ms=0;c.snr=null;msStatus('err');toast(t('ms_err'))})}
-function msSwap(c,nb){var od=c.buf.duration,sS=c.s*od,nd=nb.duration,full=c.e>=.999;if(STSYP)stSyStop();
+function msSwap(c,nb){if(c.hed){hedMsDone(c,nb);return}var od=c.buf.duration,sS=c.s*od,nd=nb.duration,full=c.e>=.999;if(STSYP)stSyStop();
  nb.sil=stSilence(nb,.8);c.buf=nb;c.pk=stPk(nb,600);c.s=Math.max(0,Math.min(.99,sS/nd));c.e=full?1:Math.min(1,c.e*od/nd);
  if(c.auto)stSyAuto();else c.marks=c.marks.filter(function(m){return m<nd});
  if(STPN=='sn')stSyUi();stVrDone();stWvDraw()}
@@ -3201,7 +3201,7 @@ var HEDTP=[['classic',{c:'#ffffff',b:1,sh:45,st:0,bg:'',f:'site'}],['gold',{c:'G
 var HEDRZ=[['wd',16,9,'wd'],['st',9,16,'st'],['sq',1,1,'sq'],['p45',4,5,'p45'],['p34',3,4,'p34'],['c:21:9',21,9,'cin'],['c:4:3',4,3,'cls'],['c:3:2',3,2,'ph'],['c:2:3',2,3,'tall']];
 var HEDSW=['#000000','#ffffff','#0f3d3a','#0b1f3a','#4a0f1f','#2e1a47','#f3ead2','GOLD'];
 var HEDTT={cpk:'tb_color',kf:'b_kf',filter:'b_filter',adjust:'b_adjust',mask:'b_mask',layers:'b_layers',resize:'b_resize',anall:'b_anall',settings:'b_settings',jn:'anim',mus:'b_music',sfx:'b_sfx',trim:'b_trim',speed:'b_speed',vol:'volume',anim:'anim',trn:'b_trn',opa:'b_opa',xf:'b_xf',crop:'b_crop',color:'tb_color',fx:'tb_fx',txt:'b_txt',tst:'b_tst',shp:'b_shp',more:'b_more',add:'b_add',ovl:'b_ovl',exp:'b_exp',canvas:'b_canvas',mainadd:'b_add',scr:'scr_n',scrc:'scr_c'};
-function hedPopOk(k,c){if(!k)return false;if(k=='cpk'&&HED.cpkT)return true;if(/^(add|ovl|exp|canvas|settings|layers|anall|mus|sfx|resize|reset|mainadd|scr|ovlshp|ovlstk|vrec)$/.test(k))return true;if(!c)return false;if(k=='aln')return!!c;if(k=='bdr'||k=='shd')return!!(c.k!='audio'&&!c.scr);if(k=='cpk')return!!(c.scr||c.k=='shape'||c.k=='text');if(k=='txt'||k=='tst')return c.k=='text';if(k=='shp')return c.k=='shape';if(k=='vol'||k=='speed')return hedHasSnd(c);if(k=='crop')return c.k=='video'||c.k=='image';if(/^(filter|adjust|fx|anim|opa|xf|trn|kf|mask|jn)$/.test(k))return c.k!='audio';return true}
+function hedPopOk(k,c){if(!k)return false;if(k=='cpk'&&HED.cpkT)return true;if(/^(add|ovl|exp|canvas|settings|layers|anall|mus|sfx|resize|reset|mainadd|scr|ovlshp|ovlstk|vrec|verses)$/.test(k))return true;if(!c)return false;if(k=='aln')return!!c;if(k=='bdr'||k=='shd')return!!(c.k!='audio'&&!c.scr);if(k=='cpk')return!!(c.scr||c.k=='shape'||c.k=='text');if(k=='txt'||k=='tst')return c.k=='text';if(k=='shp')return c.k=='shape';if(k=='mast')return c.k=='audio';if(k=='vol'||k=='speed')return hedHasSnd(c);if(k=='crop')return c.k=='video'||c.k=='image';if(/^(filter|adjust|fx|anim|opa|xf|trn|kf|mask|jn)$/.test(k))return c.k!='audio';return true}
 function hAnTile(ty,cur,act,out){return'<button type="button" class="hedant'+(String(cur)==String(ty)?' on':'')+'" data-ha="'+act+ty+'"><span class="hedanv"><i class="hedanb a-'+(ty||'none')+(out?' out':'')+'"></i></span><span>'+hedt('an_'+(ty||'none'))+'</span></button>'}
 function hAnGrid(cur,act,out){return'<div class="hedang">'+HEDAN.map(function(v){return hAnTile(v,cur,act,out)}).join('')+'</div>'}
 function hSeg(path,list,cur){return'<div class="hedseg">'+list.map(function(x){return'<button type="button" class="'+(x[0]==cur?'on':'')+'" data-ha="'+path+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>'}
@@ -3211,17 +3211,17 @@ function hedSnapSmall(c){try{var cv=D.createElement('canvas'),d=hedDims();cv.wid
 function gcdF(a,b){a=Math.round(a);b=Math.round(b);while(b){var t=b;b=a%b;a=t}return a||1}
 function hedTool(a,ic2,lab,cls,on){lab=hedLbS(a,lab);return'<button type="button" class="hedtool'+(cls?' '+cls:'')+(on?' on':'')+'" data-ha="'+a+'" data-cat="'+hedCat(a)+'"><span class="hedtic'+(ic2=='cpk'?' cpkt':'')+'">'+hi(ic2)+'</span><span>'+lab+'</span></button>'}
 function hedBar(){var el=$('#hedbar');if(!el)return;var c=hedSelC(),h='',P=function(k,i,l,cls){return hedTool('pop:'+k,i,hedt(l),cls,HED.pop==k)};
- if(HED.cms){h=hedMsBar(P)}else if(!c){h=P('layers','layers','b_layers')+P('resize','resize','b_resize')+P('anall','anim2','b_anall')+P('reset','rst','b_reset')+P('settings','gear','b_settings')}
+ if(HED.cms){h=hedMsBar(P)}else if(!c){h=P('layers','layers','b_layers')+P('resize','resize','b_resize')+P('verses','vs','b_verses')+hedTool('coder','coder',hedt('b_coder'))+P('anall','anim2','b_anall')+P('reset','rst','b_reset')+P('settings','gear','b_settings')}
  else if(c.scr){h+=hedTool('split','split',hedt('b_split'))+P('trim','cut','b_trim')+hedTool('dup','copy',hedt('b_dup'))+hedTool('del','trash',hedt('b_del'),'dng')+P('cpk','cpk','tb_color')}
  else{var snd=hedHasSnd(c),vis=c.k!='audio',med=c.k=='video'||c.k=='image';h+=hedTool('split','split',hedt('b_split'))+P('trim','cut','b_trim')+hedTool('dup','copy',hedt('b_dup'))+hedTool('del','trash',hedt('b_del'),'dng');
   if(vis)h+=P('anim','motion','anim')+P('mask','mask','b_mask')+P('xf','move','b_xf')+(med?hedTool('ff',c.fit=='fill'?'fit2':'fill2',hedt(c.fit=='fill'?'fit':'fill')):'')+P('filter','filter','b_filter')+P('fx','sliders','tb_fx')+P('opa','opacity','b_opa')+hedTool('rot','rotate',hedt('b_rot'));
   if(c.k=='text')h+=P('txt','text','b_txt')+P('cpk','cpk','tb_color')+P('tst','color','b_tst');if(c.k=='shape')h+=P('shp','shape','b_shp')+P('cpk','cpk','tb_color');if(HED.gs&&c.g==HED.gs&&!hedColbl(c)&&hedSelSet().some(hedColbl))h+=P('cpk','cpk','tb_color');if(vis)h+=P('bdr','border','tb_border')+P('shd','shadow','tb_shadow');
-  if(snd)h+=P('vol','vol','volume')+P('speed','speed','b_speed');if(med)h+=P('crop','crop','b_crop');if(c.k=='video')h+=hedTool('freeze','camera',hedt('b_freeze'))+hedTool('detach','audio',hedt('detach'))}
+  if(snd)h+=P('vol','vol','volume')+P('speed','speed','b_speed');if(c.k=='audio')h+=P('mast','mast','b_mast');if(med)h+=P('crop','crop','b_crop');if(c.k=='video')h+=hedTool('freeze','camera',hedt('b_freeze'))+hedTool('detach','audio',hedt('detach'))}
  if(c&&!HED.cms){h+=P('layers','layers','b_layers');if(c.k!='audio')h+=hedTool('msel','msel',hedt('b_msel'));if(c.g&&HED.gs==c.g)h+=hedTool('ungrp','ungroup2',hedt('l_ungrp'),'dng');if(c.k=='video'||c.k=='image'||c.k=='audio'||c.scr)h+=hedTool('rpl','repl',hedt('b_replace'));if(c.k=='video'||c.k=='audio')h+=(c._rv!=null?hedTool('rvstop','stop',hedt('x_stop'),'dng',true):hedTool('rev','rev2',hedt('b_reverse'),'',!!c.rv))}
  var hr1=$('#hed');if(hr1)hr1.classList.toggle('hednomain',hedNoMain());var sc=el.scrollLeft;el.innerHTML=hedBarOrder(h);el.scrollLeft=sc;var rp=$('#hedrecp');if(rp)rp.classList.toggle('on',!!HED.rec)}
 /* ---- popup (does not push the layout) ---- */
-function hedPanel(){var c=hedSelC();HED.ddl={};hedPC=c;hedBar();var p=$('#hedpop');if(!p)return;if(HED.pop&&!hedPopOk(HED.pop,c))HED.pop='';if(!HED.pop){p.classList.remove('on');p.innerHTML='';if(HED.eyed)hedEyeEnd();if(HED.cpkT)HED.cpkT=null;if(HED.vr)hedVrKill();var hr0=$('#hed');if(hr0){hr0.classList.remove('xpop');hr0.classList.remove('cpkon');hr0.classList.remove('cptgt');hr0.classList.remove('vron')}p.style.maxHeight='';p.style.height='';hedBar();hedTimeUi();return}
- var o=p.querySelector('.hedpbody'),sc=o?o.scrollTop:0;p.innerHTML='<div class="hedgrip" aria-label="resize"><i></i></div><div class="hedphd">'+(HED.pop=='cpk'?'<span class="cpkhi">'+hi('cpk')+'</span>':(HEDPI[HED.pop]?'<span class="cpkhi ico">'+hi(HEDPI[HED.pop])+'</span>':''))+'<b>'+hedt(HED.pop=='jn'&&HED.jn&&HED.jn.k=='mid'?'b_trn':(HEDTT[HED.pop]||'b_more'))+'</b><span class="hedsp"></span>'+(HED.pop=='layers'?'<button type="button" class="hedib'+(HED.lsm?' on':'')+'" data-ha="lsm" aria-label="select">'+hi('msel')+'</button>':'')+'<button type="button" class="hedib" data-ha="'+(HED.pop=='vrec'?'vradd':'popx')+'" aria-label="done">'+hi('check')+'</button></div><div class="hedpbody">'+hedPopBody(HED.pop,c)+'</div>';p.classList.add('on');p.classList.toggle('big',HED.pop=='layers');var hr=$('#hed');if(hr){hr.classList.toggle('xpop',HED.pop=='exp');hr.classList.toggle('cpkon',HED.pop=='cpk');hr.classList.toggle('cptgt',!!HED.cpkT);hr.classList.toggle('vron',HED.pop=='vrec')}if(HED.eyed&&HED.pop!='cpk')hedEyeEnd();if(HED.cpkT&&HED.pop!='cpk')HED.cpkT=null;if(HED.vr&&HED.pop!='vrec')hedVrKill();hedPopSize(p);if(HED.pop=='cpk')hedCpkHook(p);var pbx=p.querySelector('.hedpbody');if(pbx){var fx=HED.pop=='exp'&&HED.xs&&HED.xh;pbx.classList.toggle('xfix',!!fx);pbx.style.minHeight=fx?HED.xh+'px':''}var n=p.querySelector('.hedpbody');if(n)n.scrollTop=sc;hedBar();hedTimeUi()}
+function hedPanel(){var c=hedSelC();if(HED.pop!='mast'&&typeof STCA!=='undefined'&&STCA&&STCA.hed)hedMsDetach();HED.ddl={};hedPC=c;hedBar();var p=$('#hedpop');if(!p)return;if(HED.pop&&!hedPopOk(HED.pop,c))HED.pop='';if(!HED.pop){p.classList.remove('on');p.innerHTML='';if(HED.eyed)hedEyeEnd();if(HED.cpkT)HED.cpkT=null;if(HED.vr)hedVrKill();var hr0=$('#hed');if(hr0){hr0.classList.remove('xpop');hr0.classList.remove('cpkon');hr0.classList.remove('cptgt');hr0.classList.remove('vron')}p.style.maxHeight='';p.style.height='';hedBar();hedTimeUi();return}
+ var o=p.querySelector('.hedpbody'),sc=o?o.scrollTop:0;p.innerHTML='<div class="hedgrip" aria-label="resize"><i></i></div><div class="hedphd">'+(HED.pop=='cpk'?'<span class="cpkhi">'+hi('cpk')+'</span>':(HEDPI[HED.pop]?'<span class="cpkhi ico">'+hi(HEDPI[HED.pop])+'</span>':''))+'<b>'+hedt(HED.pop=='jn'&&HED.jn&&HED.jn.k=='mid'?'b_trn':(HEDTT[HED.pop]||'b_more'))+'</b><span class="hedsp"></span>'+(HED.pop=='layers'?'<button type="button" class="hedib'+(HED.lsm?' on':'')+'" data-ha="lsm" aria-label="select">'+hi('msel')+'</button>':'')+(HED.pop=='verses'?hedVsHead():'<button type="button" class="hedib" data-ha="'+(HED.pop=='vrec'?'vradd':'popx')+'" aria-label="done">'+hi('check')+'</button>')+'</div><div class="hedpbody">'+hedPopBody(HED.pop,c)+'</div>';p.classList.add('on');p.classList.toggle('big',HED.pop=='layers');var hr=$('#hed');if(hr){hr.classList.toggle('xpop',HED.pop=='exp');hr.classList.toggle('cpkon',HED.pop=='cpk');hr.classList.toggle('cptgt',!!HED.cpkT);hr.classList.toggle('vron',HED.pop=='vrec')}if(HED.eyed&&HED.pop!='cpk')hedEyeEnd();if(HED.cpkT&&HED.pop!='cpk')HED.cpkT=null;if(HED.vr&&HED.pop!='vrec')hedVrKill();hedPopSize(p);if(HED.pop=='cpk')hedCpkHook(p);var pbx=p.querySelector('.hedpbody');if(pbx){var fx=HED.pop=='exp'&&HED.xs&&HED.xh;pbx.classList.toggle('xfix',!!fx);pbx.style.minHeight=fx?HED.xh+'px':''}var n=p.querySelector('.hedpbody');if(n)n.scrollTop=sc;hedBar();hedTimeUi()}
 function hedPopBody(k,c){var h='',x;var xb=hedPopBody2(k,c);if(xb!=null)return xb;switch(k){
  case'mainadd':h='<div class="hedtiles">'+hTile('pop:scr','bg',hedt('scr_n'))+hTile('addv','video',hedt('scr_ph'))+'</div>';break;
  case'scr':h='<div class="hedsw hedscr">'+HEDSCR.map(function(q){return'<button type="button" style="background:'+q+'" data-ha="scradd:'+q+'" aria-label="'+q+'"></button>'}).join('')+'</div><div class="hedsr hedcr"><label>'+hedt('scr_cu')+'</label><button type="button" class="hedcolb" data-ha="cpkt2:#scrc" style="background:'+(HED.scrc||'#ffffff')+'"></button><button type="button" class="hedchip" data-ha="scrcu">'+hedt('scr_add')+'</button></div>';break;
@@ -3483,7 +3483,7 @@ function hedThumbOf(){try{var p=HED.p,d=hedDims(),w=140,h=Math.round(140*d.H/d.W
  else p.cl.forEach(function(c){if(c.k=='shape'){x.fillStyle=c.sh.c;x.fillRect(w*.25,h*.25,w*.5,h*.5)}else if(c.k=='text'&&c.tx){x.fillStyle=c.tx.c||'#fff';x.font='700 '+Math.round(h*.22)+'px sans-serif';x.textAlign='center';x.fillText((c.tx.s||'').split('\n')[0].slice(0,14),w/2,h/2)}});
  return cv.toDataURL('image/jpeg',.6)}catch(e){return''}}
 function hedSaveNow(){if(!HED||!HED.p||!HED.p.id)return;hedMainPack();if(hedIsEmpty(HED.p)){hedDropEmpty();return}try{var p=HED.p,l=hedLoadList(),e=hedLEnt(p.id);P('hedp_'+p.id,p);if(!e){e={id:p.id};l.unshift(e)}e.nm=p.nm;e.ts=Date.now();e.dur=hedDur();e.rt=p.ratio;var th=hedThumbOf();if(th)e.th=th;hedLSave()}catch(x){}}
-function hedLeave(){if(!HED)return;hedQGuard();hedReoClean();hedVrKill();try{hedSaveNow()}catch(e){}hedPause();hedStopEls();clearInterval(HED.ti);try{if(HED.mo)HED.mo.disconnect()}catch(e){}Object.keys(HED.media||{}).forEach(function(k){try{URL.revokeObjectURL(HED.media[k].url)}catch(e){}});clearTimeout(HED._sv);HED=null}
+function hedLeave(){if(!HED)return;try{hedMsDetach()}catch(e){}hedQGuard();hedReoClean();hedVrKill();try{hedSaveNow()}catch(e){}hedPause();hedStopEls();clearInterval(HED.ti);try{if(HED.mo)HED.mo.disconnect()}catch(e){}Object.keys(HED.media||{}).forEach(function(k){try{URL.revokeObjectURL(HED.media[k].url)}catch(e){}});clearTimeout(HED._sv);HED=null}
 function hedGoList(){hedLeave();hedHome()}
 function hedOpenProject(id,keep){var p=S('hedp_'+id,null),e=hedLEnt(id);if(!p||!p.tr||!p.cl){p=hedBlank();p.nm=e?e.nm:hedt('proj')}p.id=id;if(!p.nm)p.nm=e?e.nm:hedt('proj');hedRoleFix(p);hedStDef(p);hedLeave();
  HED={p:p,media:{},els:{},sel:'',t:0,z:40,snap:1,tab:'edit',sub:'',un:[],re:[],lk:'',lt:0,xn:'',job:null,th:null,ms:[],lsm:0,view:'ed'};hedMainPack();hedLoadMedia(p);setTimeout(hedPrewarm,900);setTimeout(hedPrewarm,2600);
@@ -3593,7 +3593,7 @@ function hedWavSt(b,rev){var ch=Math.min(2,b.numberOfChannels),n=b.length,sr=b.s
  var o=44;for(i=0;i<n;i++){var s=rev?n-1-i:i;for(j=0;j<ch;j++){v.setInt16(o,Math.max(-1,Math.min(1,d[j][s]))*32767,true);o+=2}}return new Blob([ab],{type:'audio/wav'})}
 function hedRegMedia(file){return hedStage(file).then(function(sf){file=sf;return hedMeta(sf)}).then(function(m){var id=hedU();m.id=id;m.name=file.name||'media';m.blob=file;HED.media[id]=m;HED.p.mm.push({id:id,type:m.type,name:m.name,dur:m.dur,w:m.w,h:m.h});hedMediaPost(m,id,file);if(m.type=='audio')hedPeaks(m);else if(m.type!='video')hedThumbImg(m);return m})}
 function hedReplace(id,file){var c=hedCl(id);if(!c||!file)return;hedRegMedia(file).then(function(m){var ok=c.k=='audio'?m.type=='audio':(m.type=='video'||m.type=='image');if(!ok){toast(hedt('rpl_bad'));return}hedHist();hedElKill(c.id);
-  c.m=m.id;c.k=m.type;c.nm=m.name;c.i=0;c.rv=0;delete c.scr;delete c.dbg;delete c.sh;if(m.type!='image'&&m.dur){var nx=1e9;HED.p.cl.forEach(function(q){if(q.tr==c.tr&&q.id!=c.id&&q.s>=c.s+c.d-1e-6)nx=Math.min(nx,q.s)});c.d=hedC(Math.min(c.d,m.dur/c.sp),.1,nx-c.s)}if(c.k=='video')hedEl(c);hedAll()}).catch(function(){toast(hedt('err_file'))})}
+  c.m=m.id;delete c.mo;delete c.mm;c.k=m.type;c.nm=m.name;c.i=0;c.rv=0;delete c.scr;delete c.dbg;delete c.sh;if(m.type!='image'&&m.dur){var nx=1e9;HED.p.cl.forEach(function(q){if(q.tr==c.tr&&q.id!=c.id&&q.s>=c.s+c.d-1e-6)nx=Math.min(nx,q.s)});c.d=hedC(Math.min(c.d,m.dur/c.sp),.1,nx-c.s)}if(c.k=='video')hedEl(c);hedAll()}).catch(function(){toast(hedt('err_file'))})}
 function hedAlign(k){var c=hedSelC();if(!c||c.k=='audio'||hedLockedPv(c))return;var b=hedBox(c),d=hedDims();if(!b)return;hedHist();var dx=0,dy=0;
  if(k=='l')dx=-b.l;else if(k=='r')dx=d.W-b.r;else if(k=='c')dx=d.W/2-(b.l+b.r)/2;else if(k=='t')dy=-b.t;else if(k=='b')dy=d.H-b.b;else dy=d.H/2-(b.t+b.b)/2;
  hedGrp(c).forEach(function(q){q.x+=dx/d.W*100;q.y+=dy/d.H*100;if(q.kf&&q.kf.length)hedKfUpsert(q)});hedPanel();hedDrawSoon();hedSaveSoon()}
@@ -4510,7 +4510,7 @@ HEDCSS+=`
 `;
 function hedLockedPv(c){return hedLocked(c)||!!c.scr}
 function hedNoMain(){if(!HED||!HED.p)return false;var t=hedMainTr();return!!t&&!HED.p.cl.some(function(c){return c.tr==t.id})}
-function hedBlockNoMain(k,g){if(!HED||!hedNoMain())return false;var mt=hedMainTr(),ok=/^(home|undo|redo|popx|scradd|scrcu|addv|fs|zo|zi|zf|play|prev|next|snap|rsm|stlang|stsk|cpkt2|stic)$/.test(k)||(k=='pop'&&(g=='mainadd'||g=='scr'||g=='settings'))||((k=='trp'||k=='tv')&&mt&&g==mt.id);if(ok)return false;toast(hedt('need_base'));return true}
+function hedBlockNoMain(k,g){if(!HED||!hedNoMain())return false;var mt=hedMainTr(),ok=/^(home|undo|redo|popx|scradd|scrcu|addv|fs|zo|zi|zf|play|prev|next|snap|rsm|stlang|stsk|cpkt2|stic|vsadd|vsopt|vsdur|vsfont|vsretry|mplay|coder)$/.test(k)||(k=='pop'&&(g=='mainadd'||g=='scr'||g=='settings'||g=='verses'))||((k=='trp'||k=='tv')&&mt&&g==mt.id);if(ok)return false;toast(hedt('need_base'));return true}
 function hedDropDbg(){var t=hedMainTr();if(!t)return;var mc=HED.p.cl.filter(function(c){return c.tr==t.id});if(mc.length&&mc.every(function(c){return c.dbg}))HED.p.cl=HED.p.cl.filter(function(c){return c.tr!=t.id})}
 function hedMainSlot(d,t){var tr=hedMainTr();if(!tr)return Math.max(0,t);var L=HED.p.cl.filter(function(c){return c.tr==tr.id});if(!L.length)return 0;var b=[0],best;L.forEach(function(c){b.push(c.s+c.d)});best=b[0];b.forEach(function(v){if(Math.abs(v-t)<Math.abs(best-t)-1e-9)best=v});return best-d/2}
 function hedScrClip(trid,s,d,col){var c=hedClip('shape',trid,s,d,{sh:hedShpDef('rect')});c.sh.t='rect';c.sh.w=100;c.sh.h=100;c.sh.c=col;c.sh.c2=col;c.sh.an=90;c.nm=hedt('scr_n');c.scr=1;return c}
@@ -5015,7 +5015,7 @@ stopq:'<rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/>',
 sticker:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.2a4 4 0 0 0 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/>'});
 var HEDPI={"layers": "layers", "resize": "resize", "anall": "anim2", "reset": "rst", "settings": "gear", "trim": "cut", "cpk": "cpk", "anim": "motion", "mask": "mask", "xf": "move", "filter": "filter", "fx": "sliders", "opa": "opacity", "txt": "text", "tst": "color", "shp": "shape", "bdr": "border", "shd": "shadow", "vol": "vol", "speed": "speed", "crop": "crop", "aln": "alt", "ovlshp": "shape", "ovlstk": "sticker", "mus": "audio", "sfx": "wave", "vrec": "mic", "add": "plus", "ovl": "overlay", "jn": "motion", "trn": "motion", "kf": "kf"};
 HEDTT.ovlshp='b_shp';HEDTT.ovlstk='stk';HEDTT.mus='b_audio';HEDTT.vrec='vr_t';HEDTT.sfx='b_sfx2';
-function hedCat(a){var k=a.slice(0,3)=='clk'?'clk':a;if(/^(del|mdel)$/.test(k))return'del';if(/^(pop:cpk|pop:tst|pop:bdr|pop:shd|pop:opa|pop:filter|pop:fx|pop:mask|pop:shp|pop:txt|pop:adjust)$/.test(k))return'style';if(/^(pop:anim|pop:anall|pop:kf)$/.test(k))return'motion';if(/^(pop:layers|msel|mgrp|ungrp|pop:aln|pop:xf|rot|msall|msdone)$/.test(k))return'org';if(/^(pop:vol|detach)$/.test(k))return'aud';if(/^(pop:resize|pop:reset|pop:settings)$/.test(k))return'sys';return'edit'}
+function hedCat(a){var k=a.slice(0,3)=='clk'?'clk':a;if(/^(del|mdel)$/.test(k))return'del';if(/^(pop:cpk|pop:tst|pop:bdr|pop:shd|pop:opa|pop:filter|pop:fx|pop:mask|pop:shp|pop:txt|pop:adjust)$/.test(k))return'style';if(/^(pop:anim|pop:anall|pop:kf)$/.test(k))return'motion';if(/^(pop:layers|msel|mgrp|ungrp|pop:aln|pop:xf|rot|msall|msdone)$/.test(k))return'org';if(/^(pop:vol|pop:mast|detach)$/.test(k))return'aud';if(/^(pop:resize|pop:reset|pop:settings)$/.test(k))return'sys';return'edit'}
 function hedBarOrder(h){var hr=$('#hed');if(hr)hr.classList.toggle('hedcat',S('hedcat',0)==1);if(HED.cms)return h;var m=h.match(/<button type="button" class="hedtool[\s\S]*?<\/button>/g);if(!m||m.length<3||m.join('')!==h)return h;var pri=['pop:cpk','dup','del','split','pop:anim'],first=[],rest=m.slice();pri.forEach(function(k){for(var i=0;i<rest.length;i++){if(rest[i].indexOf('data-ha="'+k+'"')>0){first.push(rest[i]);rest.splice(i,1);break}}});return first.concat(rest).join('')}
 HEDCSS+=`
 .hedib[data-ha=popx]{color:#1f9d55!important}.hedib[data-ha=popx] .hedic{stroke:#1f9d55!important;stroke-width:2.8}
@@ -5134,6 +5134,8 @@ function hedRecToggle(){hedVrOpen()}
 var HEDMKS=[['','mk_none'],['rect','s_rect'],['round','s_round'],['ellipse','s_ell'],['tri','s_tri'],['dia','s_dia'],['star5','s_st5'],['star8','s_st8'],['heart','s_heart']];
 function hedFxTiles(c){var e=c.ef||{},L=[['none','fx_none',0,''],['blur','blur',e.bl>0,'f-blur'],['vig','vig',e.vg>0,'f-vig'],['grain','grain',e.gr>0,'f-grain'],['glow','glow',e.gl>0,'f-glow'],['pixel','pixel',e.px>0,'f-pixel'],['gray','gray',!!e.gs,'f-gray'],['sepia','sepia',!!e.sp,'f-sepia'],['invert','invert',!!e.inv,'f-invert']],none=!L.slice(1).some(function(q){return q[2]});return'<div class="hedpres">'+L.map(function(q){var on=q[0]=='none'?none:q[2];return'<button type="button" class="hedpt'+(on?' on':'')+'" data-ha="fxp:'+q[0]+'"><span class="hedpts">'+(q[0]=='none'?'<span class="nn"></span>':'<span class="hedfxs '+q[3]+'"></span>')+'</span>'+hedt(q[1])+'</button>'}).join('')+'</div>'}
 function hedPopBody2(k,c){var h;switch(k){
+ case'verses':return hedVsBody();
+ case'mast':return hedMsBody(c);
  case'mus':return'<div class="hedtiles">'+hTile('addaud','headset',hedt('b_audio'))+hTile('pop:sfx','wave',hedt('b_sfx2'))+hTile('rec','mic',hedt('rec_l'))+'</div>';
  case'vrec':return hedVrBody();
  case'ovl':return'<div class="hedtiles">'+hTile('addvo','overlay',hedt('ovl_pv'))+hTile('pop:ovlstk','sticker',hedt('stk'))+hTile('pop:ovlshp','shape',hedt('b_shp'))+'</div>';
@@ -5154,6 +5156,13 @@ function hedXAct2(k,g){var c=hedSelC();
  case'vrlis':hedVrPlay();return true;
  case'vrdel':if(HED.vr){var st=HED.vr;hedVrKill();HED.vr={st:'idle',peaks:[],t:0,dur:0};hedPanel()}return true;
  case'vradd':hedVrAdd();return true;
+ case'vsadd':hedVsAdd();return true;
+ case'vsopt':hedVsSt()[g]=hedVsSt()[g]?0:1;hedPanel();return true;
+ case'vsdur':hedVsSt().dur=+g;hedPanel();return true;
+ case'vsfont':hedVsSt().fo=g;hedPanel();return true;
+ case'vsretry':HED._vse=0;hedPanel();return true;
+ case'coder':toast(hedt('coder_soon'));return true;
+ case'mplay':hedMsPlay(g);return true;
  case'stas':P('hedas',+g);hedPanel();return true;
  case'stic':P('hedcat',+g);hedBar();hedPanel();return true}
  return false}
@@ -5213,7 +5222,102 @@ function msShTop(){var sp=$('.stbar .stpv')||$('.stbar'),t0=sp?Math.round(sp.get
 function msShFix(o){try{if(getComputedStyle(o).position=='fixed')return}catch(e){}if(!$('#msshcss')){var st=D.createElement('style');st.id='msshcss';st.textContent='.msh{position:fixed;left:0;right:0;bottom:0;z-index:9000;display:flex;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .22s;pointer-events:none}.msh>.msc{pointer-events:auto}.msh.open{opacity:1}';D.head.appendChild(st)}}
 LZ.f={stUp:stUp,stLibUi:stLibUi,stSave:stSave,stDl:stDl,stShare:stShare,stVdl:stVdl,stWmRead:stWmRead,stOpen:stOpen,stCaLoad:stCaLoad,stCreate:stCreate,stGather:stGather,aoSet:aoSet,stPrevSoon:stPrevSoon,stSumTxt:stSumTxt,studiov:studiov,stVs:stVs,stSelFill:stSelFill,stPvSoon:stPvSoon,stWsUi:stWsUi,vzThumbs:vzThumbs};
 
+/* ================= 4.13.0 — Mastering on audio layers, Verses tool, Coder button ================= */
+Object.assign(HEDT,{
+b_mast:['மாஸ்டரிங்','Mastering','මාස්ටරින්','الماسترنغ'],
+b_verses:['வசனங்கள்','Verses','වාක්‍ය','آيات'],
+b_coder:['கோடர்','Coder','කෝඩර්','كودر'],
+coder_soon:['அல்லாஹ் நாடினால் விரைவில் வரும்','In shā’ Allāh, coming soon','අල්ලාහ් කැමති නම් ඉක්මනින් පැමිණේ','إن شاء الله قريبًا'],
+vs_add:['சேர்','Add','එක් කරන්න','إضافة'],
+vs_ld:['வசனங்கள் ஏற்றப்படுகின்றன…','Loading verses…','වාක්‍ය පූරණය වෙමින්…','جارٍ تحميل الآيات…'],
+vs_err:['வசனங்களை ஏற்ற முடியவில்லை. இணையத்தைச் சரிபார்க்கவும்','Could not load the verses. Check your connection','වාක්‍ය පූරණය කළ නොහැක. අන්තර්ජාලය පරීක්ෂා කරන්න','تعذر تحميل الآيات. تحقق من الاتصال'],
+vs_ar:['அரபி வசனம்','Arabic text','අරාබි පාඨය','النص العربي'],
+vs_fnt:['அரபி எழுத்துரு','Arabic font','අරාබි අකුරු','الخط العربي'],
+vs_dur:['ஒரு வசனத்தின் நேரம்','Time per verse','එක් වාක්‍යයකට කාලය','مدة كل آية'],
+vs_auto:['தானாக','Auto','ස්වයං','تلقائي'],
+vs_done:['வசனங்கள் சேர்க்கப்பட்டன','Verses added','වාක්‍ය එක් කරන ලදී','تمت إضافة الآيات'],
+vs_non:['எந்த வசனமும் இல்லை','No verses found','වාක්‍ය නැත','لا توجد آيات']});
+HEDI.mast='<path d="M5 20v-8M10 20V5M15 20v-11M20 20V3"/>';
+HEDI.vs='<path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/>';
+HEDI.coder='<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>';
+HEDI.xx='<path d="M6 6l12 12M18 6L6 18"/>';
+HEDPI.verses='vs';HEDPI.mast='mast';HEDTT.verses='b_verses';HEDTT.mast='b_mast';
+HEDLB['pop:mast']=['மாஸ்டர்','Master','මාස්ටර්','ماستر'];HEDLB['pop:verses']=['வசனம்','Verses','වාක්‍ය','آيات'];HEDLB['coder']=['கோடர்','Coder','කෝඩර්','كودر'];
+HEDCSS+=`
+.hedvs{padding:2px 2px 14px}.hedvs label.hvl{display:block;margin:12px 0 5px;font-size:12px;font-weight:800;opacity:.85}
+.hedvs select,.hedvs textarea{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1.5px solid var(--ln);background:var(--cd);color:var(--tx);font:inherit;font-size:14px}
+.hedvs textarea{margin-top:8px;resize:vertical}.hedvs .hvtwo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hedvs .hvch{display:flex;flex-wrap:wrap;gap:7px}.hedvs .hvc{padding:8px 14px;border-radius:18px;border:1.5px solid var(--ln);background:var(--cd);color:var(--tx);font:inherit;font-size:13px;font-weight:700}
+.hedvs .hvc.on{border-color:var(--g);background:rgba(var(--gr),.28)}.hedvs .hvc.ar{font-family:'KFGQPC Uthman Taha Naskh','Amiri',serif;font-size:17px}
+.hedvs .hvl2{padding:26px 6px;text-align:center;opacity:.75;font-size:13px}
+.hedvsadd{display:flex;align-items:center;gap:6px;border:0;border-radius:18px;padding:8px 16px;margin-right:6px;background:#1f9d55;color:#fff;font:inherit;font-size:14px;font-weight:800;box-shadow:none}
+.hedvsadd .hedic{width:18px;height:18px;stroke:#fff;stroke-width:2.6}
+.hedmsc{width:auto!important;max-width:none!important;max-height:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;transform:none!important;padding:0 0 4px}
+.hedmsc .hedmsh{display:flex;align-items:center;gap:10px;padding:6px 2px 4px}.hedmsc .msbd{overflow:visible!important;padding:0 2px 8px}.hedmsc .msps{padding:8px 2px}
+.hedmsc .msft{position:sticky;bottom:0;z-index:2;background:var(--cd);padding:8px 2px calc(8px + env(safe-area-inset-bottom,0px))}
+.hedmsc .msft .btn.on{outline:2px solid var(--g)}
+`;
+/* ---- Mastering on an audio layer: the Quran-video Mastering engine (msProcess, STMS, presets, rows) drives the selected layer ---- */
+function hedWavBuf(b){var nc=Math.min(2,b.numberOfChannels),n=b.length,sr=b.sampleRate,ab=new ArrayBuffer(44+n*nc*2),v=new DataView(ab),w=function(p,x){for(var i=0;i<x.length;i++)v.setUint8(p+i,x.charCodeAt(i))},ch=[],i,k,o=44;w(0,'RIFF');v.setUint32(4,36+n*nc*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,nc,true);v.setUint32(24,sr,true);v.setUint32(28,sr*nc*2,true);v.setUint16(32,nc*2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*nc*2,true);
+ for(k=0;k<nc;k++)ch.push(b.getChannelData(k));for(i=0;i<n;i++)for(k=0;k<nc;k++){var x=Math.max(-1,Math.min(1,ch[k][i]));v.setInt16(o,x<0?x*32768:x*32767,true);o+=2}return new Blob([ab],{type:'audio/wav'})}
+function hedMsStop(){var p=HED&&HED.msp;if(HED)HED.msp=null;if(p){try{p.s.onended=null;p.s.stop()}catch(e){}try{p.ac.close()}catch(e){}}hedMsBtn()}
+function hedMsBtn(){var w=HED&&HED.msp?HED.msp.w:'';D.querySelectorAll('[data-ha^="mplay:"]').forEach(function(b){b.classList.toggle('on',b.dataset.ha=='mplay:'+w)})}
+function hedMsAttach(c){if(!c||c.k!='audio')return;var cur0=STCA;if(cur0&&cur0.hed&&cur0.cid==c.id)return;hedMsDetach();var om=HED.media[c.mo||c.m];if(!om)return;
+ var sh={hed:1,cid:c.id,prev:STCA,aid:'h'+c.id,src:'rec',s:0,e:1,marks:[],auto:0,cur:null,raw:null,buf:{duration:Math.max(.1,om.dur||1)},pk:null,ms:c.mo?1:0,snr:null};STCA=sh;msStatus(sh.ms?'ok':'off');
+ hedBuf(om).then(function(b){if(STCA!==sh)return;if(!b){msStatus('err');toast(t('ms_err'));return}sh.raw=b;sh.buf=b;msStatus(sh.ms?'ok':'off');setTimeout(function(){if(STCA===sh){msStatus();rnnUi();rnnWarm()}},0)})}
+function hedMsDetach(){var sh=STCA;clearTimeout(msTm);msTm=0;try{hedMsStop()}catch(e){}if(sh&&sh.hed){STMS.tk++;STCA=sh.prev||null}}
+function hedMsBody(c){if(!c||c.k!='audio')return'';hedMsAttach(c);var on=STMS.on;
+ return'<div class="msc hedmsc'+(on?'':' moff')+'"><div class="hedmsh"><div class="mstt"><b>'+t('ms_title')+'</b><small id="msst"></small></div><label class="mssw big"><input type="checkbox" data-msm="1"'+(on?' checked':'')+'><i></i></label></div><div class="msps" id="msps">'+msPresHtml()+'</div><div class="msbd" id="msbd">'+msBody()+'</div><div class="msft"><button type="button" class="btn sm" data-ha="mplay:org">'+ic('p')+t('ms_orig')+'</button><button type="button" class="btn sm go" data-ha="mplay:mas">'+ic('p')+t('ms_mast')+'</button></div></div>'}
+function hedMsDone(sh,nb){var cl=HED?hedCl(sh.cid):null;if(!cl||STCA!==sh)return;var raw=sh.raw;sh.buf=nb;
+ if(!sh.hd){sh.hd=1;hedHist()}
+ if(nb===raw){if(cl.mo&&cl.m!==cl.mo){cl.m=cl.mo;hedElKill(cl.id)}hedSync(HED.t,!!HED.pl);hedTl();hedSaveSoon();return}
+ var om=HED.media[cl.mo||cl.m],oid=cl.mo||cl.m,id=cl.mm,shared=id&&HED.p.cl.some(function(x){return x!==cl&&(x.mm==id||x.m==id)});if(!id||shared)id=hedU();
+ var blob=hedWavBuf(nb),m=HED.media[id];
+ if(!m){m={id:id,type:'audio',name:(om&&om.name)||'audio',dur:nb.duration,blob:blob};HED.media[id]=m;HED.p.mm.push({id:id,type:'audio',name:m.name,dur:nb.duration})}
+ else{try{URL.revokeObjectURL(m.url)}catch(e){}m.blob=blob;m.dur=nb.duration;HED.p.mm.forEach(function(q){if(q.id==id)q.dur=nb.duration})}
+ m.url=URL.createObjectURL(blob);m.buf=undefined;m.bp=null;m.pk=null;
+ cl.mo=oid;cl.mm=id;cl.m=id;hedElKill(cl.id);hedDbPut(id,blob);hedPeaks(m);hedSync(HED.t,!!HED.pl);hedTl();hedSaveSoon()}
+function hedMsPlay(w){var sh=STCA;if(!HED)return;if(!sh||!sh.hed||!sh.raw){toast(t('ms_noaud'));return}var same=HED.msp&&HED.msp.w==w;hedMsStop();if(same)return;if(HED.pl)hedPause();
+ var go=function(){if(STCA!==sh)return;var b=(w=='org'||!sh.ms)?sh.raw:sh.buf,cl=hedCl(sh.cid),AC=window.AudioContext||window.webkitAudioContext;if(!cl||!AC)return;var ac=new AC(),s=ac.createBufferSource();try{ac.resume()}catch(e){}s.buffer=b;s.connect(ac.destination);
+  var off=Math.max(0,Math.min(cl.i||0,b.duration-.05)),dur=Math.max(.3,Math.min(cl.d*(cl.sp||1),b.duration-off));s.onended=function(){if(HED&&HED.msp&&HED.msp.s===s){HED.msp=null;try{ac.close()}catch(e){}hedMsBtn()}};s.start(0,off,dur);HED.msp={ac:ac,s:s,w:w};hedMsBtn()};
+ if(w=='mas'&&!sh.ms&&STMS.on&&msCount()>0){msApply().then(go)}else go()}
+/* ---- Verses: Quran verse picker → one main layer per verse with Arabic + translation on text layers ---- */
+function hedVsSt(){if(!HED.vs)HED.vs={n:1,f:1,t:1,tr:'',ar:1,fo:'uth',dur:0};return HED.vs}
+function hedVsLoad(){if(HED._vsl)return;HED._vsl=1;var ld=function(l){return stJ('/edition?format=text&type=translation&language='+l).catch(function(){return[]})};
+ Promise.all([SURS?SURS:stJ('/surah').then(function(d0){return SURS=d0}),STE?STE:Promise.all([ld('ta'),ld('si'),ld('en')]).then(function(r){return STE=r})]).then(function(){if(HED){HED._vsl=0;if(HED.pop=='verses')hedPanel()}}).catch(function(){if(HED){HED._vsl=0;HED._vse=1;if(HED.pop=='verses')hedPanel();toast(hedt('vs_err'))}})}
+function hedVsHead(){return'<button type="button" class="hedvsadd" data-ha="vsadd">'+hi('plus')+hedt('vs_add')+'</button><button type="button" class="hedib" data-ha="popx" aria-label="close">'+hi('xx')+'</button>'}
+function hedVsFT(){var v=hedVsSt(),cnt=(SURS[v.n-1]||{}).numberOfAyahs||1,lim=(typeof getMaxAyahLimit=='function'?getMaxAyahLimit():10)||10,i,a='',b='';v.f=Math.min(Math.max(v.f||1,1),cnt);v.t=Math.min(Math.max(v.t||v.f,v.f),Math.min(cnt,v.f+lim-1));
+ for(i=1;i<=cnt;i++)a+='<option value="'+i+'"'+(i==v.f?' selected':'')+'>'+i+'</option>';for(i=v.f;i<=Math.min(cnt,v.f+lim-1);i++)b+='<option value="'+i+'"'+(i==v.t?' selected':'')+'>'+i+'</option>';
+ var fa=$('#hvfa'),ta=$('#hvta');if(fa)fa.innerHTML=a;if(ta)ta.innerHTML=b;return[a,b]}
+function hedVsBody(){HED.ph=HED.ph||{};if(!HED.ph.verses)HED.ph.verses=Math.round((window.innerHeight||700)*.5);
+ if(!SURS||!STE){if(HED._vse)return'<div class="hedvs"><p class="hvl2">'+hedt('vs_err')+'</p><div class="hvch" style="justify-content:center"><button type="button" class="hvc on" data-ha="vsretry">↻</button></div></div>';hedVsLoad();return'<div class="hedvs"><p class="hvl2">'+hedt('vs_ld')+'</p></div>'}
+ var v=hedVsSt(),GL=[['தமிழ்',0],['සිංහල',1],['English',2]],h,ft=hedVsFT();
+ var trO='<option value="">'+t('st_none')+'</option>'+GL.map(function(g){var L2=STE[g[1]].filter(function(e){return STOK.indexOf(e.identifier)>=0});return L2.length?'<optgroup label="'+g[0]+'">'+L2.map(function(e){return'<option value="'+esc(e.identifier)+'"'+(v.tr==e.identifier?' selected':'')+'>'+esc(e.name||e.englishName)+' · '+t('st_pd')+'</option>'}).join('')+'</optgroup>':''}).join('')+'<option value="'+HUDA_ID+'"'+(v.tr==HUDA_ID?' selected':'')+'>'+HUDA_ED.name+'</option><option value="__own"'+(v.tr=='__own'?' selected':'')+'>'+t('st_own')+'</option>';
+ h='<div class="hedvs"><label class="hvl">'+t('st_sura')+'</label><select id="hvsn">'+SURS.map(function(s2){return'<option value="'+s2.number+'"'+(s2.number==v.n?' selected':'')+'>'+s2.number+'. '+esc(s2.englishName)+' — '+s2.name+'</option>'}).join('')+'</select>'
+ +'<div class="hvtwo"><div><label class="hvl">'+t('st_from')+'</label><select id="hvfa">'+ft[0]+'</select></div><div><label class="hvl">'+t('st_to')+'</label><select id="hvta">'+ft[1]+'</select></div></div>'
+ +'<label class="hvl">'+t('st_tr')+'</label><select id="hvtr">'+trO+'</select><textarea id="hvown" rows="4"'+(v.tr=='__own'?'':' hidden')+' placeholder="'+esc(t('st_own_h'))+'">'+esc(S('stown',''))+'</textarea>'
+ +'<label class="hvl">'+hedt('vs_ar')+'</label><div class="hvch"><button type="button" class="hvc'+(v.ar?' on':'')+'" data-ha="vsopt:ar">'+(v.ar?'✓ ':'')+hedt('vs_ar')+'</button></div>'
+ +(v.ar?'<label class="hvl">'+hedt('vs_fnt')+'</label><div class="hvch">'+[['uth','KFGQPC Uthman Taha Naskh'],['hafs','KFGQPC Hafs'],['amiri','Amiri']].map(function(q){return'<button type="button" class="hvc ar'+(v.fo==q[0]?' on':'')+'" data-ha="vsfont:'+q[0]+'" style="font-family:'+hedFam(q[0])+'">'+q[1]+'</button>'}).join('')+'</div>':'')
+ +'<label class="hvl">'+hedt('vs_dur')+'</label><div class="hvch">'+[[0,hedt('vs_auto')],[5,'5 s'],[8,'8 s'],[12,'12 s'],[20,'20 s']].map(function(q){return'<button type="button" class="hvc'+(v.dur==q[0]?' on':'')+'" data-ha="vsdur:'+q[0]+'">'+q[1]+'</button>'}).join('')+'</div></div>';return h}
+D.addEventListener('change',function(e){var x=e.target;if(!x||!x.id||x.id.slice(0,2)!='hv'||typeof HED==='undefined'||!HED||!HED.p||!SURS)return;var v=hedVsSt();
+ if(x.id=='hvsn'){v.n=+x.value;v.f=1;v.t=1;hedVsFT()}else if(x.id=='hvfa'){v.f=+x.value;if(v.t<v.f)v.t=v.f;hedVsFT()}else if(x.id=='hvta')v.t=+x.value;else if(x.id=='hvtr'){v.tr=x.value;var o=$('#hvown');if(o)o.hidden=v.tr!='__own'}});
+D.addEventListener('input',function(e){var x=e.target;if(x&&x.id=='hvown')P('stown',x.value)});
+function hedVsAdd(){if(!HED||HED._vsb)return;var v=hedVsSt(),own=v.tr=='__own';if(!SURS){hedVsLoad();return}if(own){var ta=$('#hvown');if(ta)P('stown',ta.value)}
+ HED._vsb=1;hedBusy(hedt('vs_ld'),1);var o={n:v.n,f:v.f,t:v.t,tr:v.tr||'',fo:'',vn:0,ws:null,wsk:''},sv=STSRC,pr;STSRC='q';try{pr=stData(o,true)}catch(e){pr=Promise.reject(e)}STSRC=sv;
+ pr.then(function(r){if(!HED)return;var it=(r.items||[]).filter(function(q){return q&&(q.ar||q.tr)});if(!it.length){toast(hedt('vs_non'));return}
+  hedHist();hedDropDbg();var mt=hedMainTr();if(!mt){toast(hedt('vs_err'));return}
+  var s0=0,tl=r.tl||'',tf=tl=='ta'?'tam':tl=='si'?'sin':tl=='ar'?'uth':'inter',dg=function(q){return String(q).replace(/\d/g,function(z){return'٠١٢٣٤٥٦٧٨٩'[z]})},plan=[],tot=0,n=0;
+  HED.p.cl.forEach(function(c){if(c.tr==mt.id)s0=Math.max(s0,c.s+c.d)});
+  it.forEach(function(q){var ar=v.ar&&q.ar?q.ar+' ﴿'+dg(q.num)+'﴾':'',tr=q.tr||'',len=ar.length+tr.length*.7,d=v.dur>0?v.dur:Math.round(Math.max(4,Math.min(25,3+len/13))*2)/2;if(!ar&&!tr)return;plan.push({ar:ar,tr:tr,d:d,nm:v.n+':'+q.num,s:s0+tot});tot+=d});
+  var first=plan.length?plan[0].s:null,arT=hedFreeTrack('v',s0,tot,'txt'),trT=null,s;
+  plan.forEach(function(q){HED.p.cl.push(hedScrClip(mt.id,q.s,q.d,'#0F3D3A'));HED.p.cl[HED.p.cl.length-1].nm=q.nm;n++});
+  if(v.ar)plan.forEach(function(q){if(!q.ar)return;var az=q.ar.length>300?4.6:q.ar.length>180?5.6:q.ar.length>90?7:8.5;HED.p.cl.push(hedClip('text',arT,q.s,q.d,{nm:q.nm,y:q.tr?-14:0,ai:'fade',ao:'fade',tx:Object.assign(hedTxtDef(),{s:q.ar,f:v.fo,z:az,c:'#ffffff',b:0,w:88,lh:1.75,sh:0})}))});
+  if(plan.some(function(q){return q.tr})){trT=hedFreeTrack('v',s0,tot,'txt');plan.forEach(function(q){if(!q.tr)return;var tz=q.tr.length>420?3.4:q.tr.length>260?4:q.tr.length>140?4.8:5.6;HED.p.cl.push(hedClip('text',trT,q.s,q.d,{nm:q.nm,y:q.ar?24:0,ai:'fade',ao:'fade',tx:Object.assign(hedTxtDef(),{s:q.tr,f:tf,z:tz,c:'#F1D98A',b:0,w:88,lh:1.45,sh:0})}))})}
+  HED.sel='';HED.pop='';hedAll();if(first!=null){try{hedGo(first)}catch(e){}}hedFontsReady().then(function(){if(HED)hedDrawSoon()});toast(hedt('vs_done')+' · '+n)})
+ .catch(function(){toast(hedt('vs_err'))}).then(function(){hedBusy(0);if(HED)HED._vsb=0})}
+
 /* CHANGELOG
+4.13.0 — New (Multi Editor): Mastering on the audio-layer toolbar (the same Mastering engine and presets as the Quran video studio, applied to the selected audio layer; Original / Mastered listen buttons; undo-able; saved with the project; used by the export), Verses tool on the main toolbar (half-screen popup with the Quran verse picker — surah, from/to, translation incl. own text, Arabic font, time per verse; green Add makes one main layer per verse with the Arabic text and the translation on text layers), and a Coder button ("coming soon, in shā’ Allāh" message). Only studio.js changed; no new libraries.
 4.12.1 — Fixed: auto-scroll while dragging is much slower and has a speed setting (Off/Slow/Normal/Fast), clips snap to neighbours with a green guide, dragging a layer below its last track creates a lower track only then; main layer row no longer overlaps the audio row and its track icons are bigger; the + circle on the main layer is static (no inner box, no motion); rotation shows the angle in the middle, snaps every 45° and turns green; handles hide while moving/rotating/scaling; voice-recorder sheet hides the toolbar; grip taps no longer press buttons underneath; Audio icon is a headset; gear icon for Settings; Ungroup name shortened and red; Done is green and the toolbar scrolls to it; overlay + shows Photo / Video. Only studio.js changed.
 4.12.0 — Fixed: touch drag no longer loses the finger (clips use touch-action:none, manual timeline panning, gentle edge auto-scroll, no extra empty track, no trim handles while moving); reorder sheet cleans up on exit/cancel; new layers go to the play-head in FRONT of older ones; layers eye icon restored, selection icon redrawn; join + circle animates itself (no inner box); Animation icon + Shadow icon redrawn. New: audio + sheet (Audio / Sound effect / Voice record, centred), voice recorder sheet (natural voice, no processing; waveform + time, listen/delete, green tick adds at play-head), previews for Mask / Effects / Shapes / Text styles, Overlay + sheet (Overlay, Stickers, Shapes), Shapes sheets without settings, Animation Start/End/Loop, groups are ONE layer on the timeline (tap = whole group, tap again = open, tap outside = close), group rotate/move buttons like a single layer, double-tap text to edit (canvas + timeline), every colour box opens the Color sheet, green tick, tool icons in sheet titles, main layer rows taller, toolbar order (Color, Duplicate, Delete, Split, Animation first), optional icon colours by type in Settings. Only studio.js changed.
 4.11.0 — New: animated gradients (Flow, Reverse Flow, Rotate, Wave, Shift, Diagonal Flow + speed/spread), eyedropper in the Color sheet (alpha bar now full width, hue label removed), ready-made gradient chips and recent colours, rotate handle for a whole selection/group (15° snap), VN-style main-layer reorder (long-press: other lanes hide, clips become squares) and auto-scroll of the timeline while dragging, preview cards + presets (incl. No shadow / No border) for Shadow, Border and Shape sheets, shadow now works on rounded photos/videos, Align for a selection, group Duplicate makes a new group (single layers never join the old one), language + theme-colour buttons in Settings, haptic tick on snapping. Fixed: Color icon fills the whole tile, group selection shows no trim handles until one layer is picked, audio lane shows a speaker icon, toolbar is higher-contrast and its Tamil labels are shortened and no longer clipped. Only studio.js changed.
