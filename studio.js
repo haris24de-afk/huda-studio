@@ -1,6 +1,6 @@
 "use strict";
-/* Huda Studio studio.js — version 4.19.0 — Multi Editor (admin) */
-var STUDIO_JS_VERSION="4.19.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+/* Huda Studio studio.js — version 4.20.0 — Multi Editor (admin) */
+var STUDIO_JS_VERSION="4.20.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -5154,7 +5154,7 @@ function hedPopBody2(k,c){var h;switch(k){
 /* ---- actions ---- */
 function hedXAct2(k,g){var c=hedSelC();
  switch(k){
- case'tts':HED.pop='tts';hedPanel();return true;case'ttsdl':case'ttsstop':case'ttsretry':case'ttsplay':case'ttsadd':case'ttsdw':case'ttscan':case'ttsclr':case'ttsrep':case'ttssmp':case'ttsst':case'ttsrs':ttsAct(k,g);return true;case'thumb':case'thmpick':case'thmframe':case'thmdel':thmAct(k);return true;
+ case'tts':HED.pop='tts';hedPanel();return true;case'ttsdl':case'ttsstop':case'ttsretry':case'ttsplay':case'ttsadd':case'ttsdw':case'ttscan':case'ttsclr':case'ttsrep':case'ttssmp':case'ttsst':case'ttsrs':case'ttsmd':case'ttsvc':case'ttscopy':ttsAct(k,g);return true;case'thumb':case'thmpick':case'thmframe':case'thmdel':thmAct(k);return true;
  case'cpkt2':HED.cpkT=hedCpkTarget(g);HED.cpkRet=HED.pop;HED.cpk=null;HED.pop='cpk';hedPanel();return true;
  case'lpset':if(c){hedHist();hedTgt(c).forEach(function(x){if(g)x.al=g;else delete x.al});hedPanel();hedDrawSoon();hedSaveSoon();hedTl();if(g)try{hedPrevRange(c.s,Math.min(c.s+c.d,c.s+3))}catch(e){}}return true;
  case'fxp':if(c){hedHist();var map={blur:{bl:8},vig:{vg:60},grain:{gr:40},glow:{gl:50},pixel:{px:35},gray:{gs:1},sepia:{sp:1},invert:{inv:1}},ks={blur:'bl',vig:'vg',grain:'gr',glow:'gl',pixel:'px',gray:'gs',sepia:'sp',invert:'inv'};hedTgt(c).forEach(function(x){if(g=='none'){x.ef=Object.assign({},x.ef);['bl','vg','gr','gl','px','gs','sp','inv'].forEach(function(q){delete x.ef[q]})}else{x.ef=Object.assign({},x.ef);var key=ks[g];if(x.ef[key])delete x.ef[key];else Object.assign(x.ef,map[g])}});hedPanel();hedDrawSoon();hedSaveSoon()}return true;
@@ -5821,7 +5821,7 @@ HEDCSS+=`
 .hedib.hedflash svg,.hedib.hedflash .hedic{color:#1f9d55!important;stroke:#1f9d55!important;stroke-width:2.6;animation:hedflp .45s cubic-bezier(.2,.9,.3,1.3)}
 .hedib.hedflash .hedic.hmdi path{stroke:none!important;fill:#1f9d55!important}
 `;
-/* ================= 4.19.0 — AI voice (English, male): own worker, download prompt with Stop, advanced controls; project cover thumbnail ================= */
+/* ================= 4.20.0 — AI voice (English, male): own worker, download prompt with Stop, advanced controls; project cover thumbnail ================= */
 Object.assign(HEDT,{
 b_tts:['குரல் (AI)','Voice (AI)','හඬ (AI)','صوت (AI)'],
 tts_t:['AI ஆண் குரல் (ஆங்கிலம்)','AI male voice (English)','AI පිරිමි හඬ (ඉංග්‍රීසි)','صوت ذكوري بالذكاء الاصطناعي (إنجليزي)'],
@@ -5883,52 +5883,105 @@ thm_er:['படத்தைச் சேர்க்க முடியவில
 });
 HEDTT.tts='tts_t';HEDPI.tts='tts';HEDI.tts='<path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/>';
 HEDTT.thumb='thm_t';HEDPI.thumb='imgp';
-/* ---------- engine: a module worker (Pyodide phonemizer + ONNX Runtime Web), everything cached on the device ---------- */
+/* ---------- engine: a module worker (Pyodide phonemizer + ONNX Runtime Web); three models: Tiny Voca, Paradee 1.2, Kitten TTS Nano (male voices only) ---------- */
+Object.assign(HEDT,{
+tts_dt:['குரல் இயந்திரத்தைப் பதிவிறக்கவா?','Download the voice engine?','හඬ එන්ජිම බාගත කරන්නද?','تحميل محرك الصوت؟'],
+tts_dd:['ஒரு முறை மட்டும் பதிவிறக்கம்: குரல் மாதிரி சுமார் {m} MB + பகிரப்பட்ட இயந்திரம் சுமார் 26 MB (மொத்தம் ≈ {n} MB). Wi‑Fi பரிந்துரை. சாதனத்தில் சேமிக்கப்படும்; உரை எங்கும் அனுப்பப்படாது.','One-time download: voice model about {m} MB + shared engine about 26 MB (≈ {n} MB in total). Wi‑Fi is recommended. It is stored on this device and your text is never sent anywhere.','එක් වරක් බාගත කිරීම: හඬ මාදිලිය MB {m} ක් පමණ + හවුල් එන්ජිම MB 26 ක් පමණ (මුළු ≈ MB {n}). Wi‑Fi යෝග්‍යයි. උපාංගයේ ගබඩා වේ; ඔබේ පෙළ කිසිවිටක නොයැවේ.','تحميل لمرة واحدة: نموذج الصوت نحو {m} MB + المحرك المشترك نحو 26 MB (≈ {n} MB إجمالًا). يُنصح باستخدام Wi‑Fi. يُحفظ على الجهاز ولا يُرسل نصك إلى أي مكان.'],
+tts_db:['பதிவிறக்கு','Download','බාගන්න','تحميل'],
+tts_mdl:['குரல் மாதிரி','Voice model','හඬ මාදිලිය','نموذج الصوت'],
+tts_vcm:['குரல் (ஆண்)','Voice (male)','හඬ (පිරිමි)','الصوت (ذكر)'],
+tts_lgs:['மொழி: ஆங்கிலம்','Language: English','භාෂාව: ඉංග්‍රීසි','اللغة: الإنجليزية'],
+tts_csp:['இணையதளத்தின் பாதுகாப்புக் கொள்கை (CSP) பதிவிறக்கத்தைத் தடுக்கிறது. theme-இன் connect-src-இல் கீழ்க்காணும் முகவரிகளைச் சேர்த்து, பக்கத்தை reload செய்யவும்:','The site\u2019s security policy (CSP) is blocking the download. Add these addresses to connect-src in the theme, then reload the page:','අඩවියේ ආරක්ෂණ ප්‍රතිපත්තිය (CSP) බාගත කිරීම අවහිර කරයි. theme හි connect-src වෙත මෙම ලිපින එක් කර පිටුව නැවත පූරණය කරන්න:','سياسة أمان الموقع (CSP) تمنع التحميل. أضف هذه العناوين إلى connect-src في القالب ثم أعد تحميل الصفحة:'],
+tts_cpy:['நகலெடு','Copy','පිටපත් කරන්න','نسخ'],
+tts_cpd:['நகலெடுக்கப்பட்டது','Copied','පිටපත් කළා','تم النسخ'],
+tts_np:['இந்த மாதிரியில் சுருதி/வெளிப்பாடு கட்டுப்பாடு இல்லை.','Pitch and expression are available only in Tiny Voca.','තානය/ප්‍රකාශනය Tiny Voca හි පමණි.','النبرة والتعبير متاحان في Tiny Voca فقط.']
+});
 function ttsWorkerMain(){
-var E={ses:null,py:null,ort:null,p:0};
+var E={ses:null,py:null,ort:null,p:0,m:null,list:null,vocab:null,vox:null,kcfg:null,pcfg:null};
 function post(m,t){self.postMessage(m,t||[])}
 function prog(p,s){E.p=p;post({t:'prog',p:p,s:s})}
+self.addEventListener('securitypolicyviolation',function(e){post({t:'csp',u:e.blockedURI,d:e.violatedDirective})});
 var CN='hs-tts-v1';
+function short(u){return u.replace(/^https?:\/\//,'').split('/').slice(0,3).join('/')}
 async function getBuf(u,s,p0,p1){var c=null;try{c=await caches.open(CN);var h=await c.match(u);if(h){var b0=await h.arrayBuffer();prog(p1,s);return b0}}catch(e){}
- var r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status+' '+u.replace(/^https?:\/\//,'').slice(0,70));
+ var r;try{r=await fetch(u)}catch(e){throw new Error('Cannot reach '+short(u)+' ('+(e&&e.message||e)+')')}
+ if(!r.ok)throw new Error('HTTP '+r.status+' '+short(u));
  var tot=+r.headers.get('content-length')||0,buf;
  if(r.body&&tot>1e6){var rd=r.body.getReader(),ch=[],n=0;for(;;){var x=await rd.read();if(x.done)break;ch.push(x.value);n+=x.value.length;prog(p0+(p1-p0)*Math.min(1,n/tot),s)}var o=new Uint8Array(n),q=0;ch.forEach(function(a){o.set(a,q);q+=a.length});buf=o.buffer}else buf=await r.arrayBuffer();
  try{if(c)await c.put(u,new Response(buf.slice(0)))}catch(e){}
  prog(p1,s);return buf}
 async function getTxt(u,s){return new TextDecoder().decode(await getBuf(u,s,E.p,E.p))}
 async function getAny(us,s){var er;for(var i=0;i<us.length;i++){try{return await getBuf(us[i],s,E.p,E.p)}catch(e){er=e}}throw er}
-async function init(cfg){
+function npy(d){var dv=new DataView(d.buffer,d.byteOffset,d.byteLength),maj=d[6],hl=maj==1?dv.getUint16(8,true):dv.getUint32(8,true),hs=maj==1?10:12,h=new TextDecoder().decode(d.subarray(hs,hs+hl)),sh=/'shape':\s*\(([^)]*)\)/.exec(h)[1].split(',').map(function(x){return parseInt(x)}).filter(function(x){return!isNaN(x)}),dt=/'descr':\s*'([^']+)'/.exec(h)[1];if(dt!='<f4')throw new Error('npy dtype '+dt);var a=d.slice(hs+hl);return{shape:sh,data:new Float32Array(a.buffer,0,a.byteLength/4)}}
+async function npz(buf){var v=new DataView(buf),u8=new Uint8Array(buf),o={},i=buf.byteLength-22;while(i>=0&&v.getUint32(i,true)!=0x06054b50)i--;if(i<0)throw new Error('bad npz');var n=v.getUint16(i+10,true),cd=v.getUint32(i+16,true);
+ for(var k=0;k<n;k++){var me=v.getUint16(cd+10,true),cs=v.getUint32(cd+20,true),nl=v.getUint16(cd+28,true),el=v.getUint16(cd+30,true),cl=v.getUint16(cd+32,true),lo=v.getUint32(cd+42,true),name=new TextDecoder().decode(u8.subarray(cd+46,cd+46+nl));cd+=46+nl+el+cl;
+  var lnl=v.getUint16(lo+26,true),lel=v.getUint16(lo+28,true),ds=lo+30+lnl+lel,raw=u8.subarray(ds,ds+cs),data;
+  if(me==0)data=raw;else if(me==8){var st=new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'));data=new Uint8Array(await new Response(st).arrayBuffer())}else throw new Error('npz method '+me);
+  o[name.replace(/\.npy$/,'')]=npy(data)}
+ return o}
+function pickList(j){var best=null;(function w(o,dep){if(!o||typeof o!='object'||dep>3)return;if(Array.isArray(o)){if(o.length>=30&&o.length<=400&&o.every(function(x){return typeof x=='string'})){if(!best||o.length>best.length)best=o}o.forEach(function(x){w(x,dep+1)})}else{var ks=Object.keys(o);if(ks.length>=30&&ks.length<=400&&ks.every(function(k){return Number.isInteger(o[k])})){var arr=[];ks.forEach(function(k){arr[o[k]]=k});if(!best||arr.length>best.length)best=arr}ks.forEach(function(k){w(o[k],dep+1)})}})(j,0);return best}
+function pickMap(j){var best=null;(function w(o,dep){if(!o||typeof o!='object'||dep>3||Array.isArray(o))return;var ks=Object.keys(o);if(ks.length>=60&&ks.every(function(k){return Number.isInteger(o[k])})){if(!best||ks.length>Object.keys(best).length)best=o}ks.forEach(function(k){w(o[k],dep+1)})})(j,0);return best}
+var VOW={AA:1,AE:1,AH:1,AO:1,AW:1,AY:1,EH:1,ER:1,EY:1,IH:1,IY:1,OW:1,OY:1,UH:1,UW:1};
+var A_IPA={AA:'ɑː',AE:'æ',AH:'ʌ',AO:'ɔː',AW:'aʊ',AY:'aɪ',B:'b',CH:'tʃ',D:'d',DH:'ð',EH:'ɛ',ER:'ɜː',EY:'eɪ',F:'f',G:'ɡ',HH:'h',IH:'ɪ',IY:'iː',JH:'dʒ',K:'k',L:'l',M:'m',N:'n',NG:'ŋ',OW:'oʊ',OY:'ɔɪ',P:'p',R:'ɹ',S:'s',SH:'ʃ',T:'t',TH:'θ',UH:'ʊ',UW:'uː',V:'v',W:'w',Y:'j',Z:'z',ZH:'ʒ'};
+var A_MIS={AA:'ɑ',AE:'æ',AH:'ʌ',AO:'ɔ',AW:'W',AY:'I',B:'b',CH:'ʧ',D:'d',DH:'ð',EH:'ɛ',ER:'ɜɹ',EY:'A',F:'f',G:'ɡ',HH:'h',IH:'ɪ',IY:'i',JH:'ʤ',K:'k',L:'l',M:'m',N:'n',NG:'ŋ',OW:'O',OY:'Y',P:'p',R:'ɹ',S:'s',SH:'ʃ',T:'t',TH:'θ',UH:'ʊ',UW:'u',V:'v',W:'w',Y:'j',Z:'z',ZH:'ʒ'};
+function toPh(ids,st,mode,uk){var T=mode=='mis'?A_MIS:A_IPA,o='';for(var i=0;i<ids.length;i++){var s=E.list[ids[i]];if(s==null)continue;s=String(s);var m=/^([A-Z]{1,2})([0-2])?$/.exec(s);
+  if(m&&T[m[1]]){var b=m[1],p=T[b],sx=st&&st[i]!=null?+st[i]:(m[2]?+m[2]:0);if(VOW[b]){if(sx==0){if(b=='AH')p='ə';else if(b=='ER')p=mode=='mis'?'əɹ':'ɚ'}if(uk&&b=='OW')p='Q';o+=(sx==1?'ˈ':sx==2?'ˌ':'')+p}else o+=p}
+  else if(/^<.*>$/.test(s)||s=='SIL'||s=='PAD')continue;else if(/^(SP|sp|_|\|)$/.test(s))o+=' ';else o+=s}
+ return o}
+var KSYM=['$'].concat(Array.from(';:,.!?¡¿—…"«»“” '),Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),Array.from("ɑɐɒæɓʙβɔɕçɗɖðʤəɘɚɛɜɝɞɟʄɡɠɢʛɦɧħɥʜɨɪʝɭɬɫɮʟɱɯɰŋɳɲɴøɵɸθœɶʘɹɺɾɻʀʁɽʂʃʈʧʉʊʋⱱʌɣɤʍχʎʏʑʐʒʔʡʕʢǀǁǂǃˈˌːˑʼʴʰʱʲʷˠˤ˞↓↑→↗↘'̩'ᵻ")),KMAP={};KSYM.forEach(function(c,i){KMAP[c]=i});
+var KV={Jasper:'expr-voice-2-m',Bruno:'expr-voice-3-m',Hugo:'expr-voice-4-m',Leo:'expr-voice-5-m'};
+var MODELS={
+ tiny:{hf:'https://huggingface.co/n4ze3m/tiny-voca/resolve/main/',model:'onnx/model.onnx'},
+ para:{hf:'https://huggingface.co/sahilmahendrakar/Paradee-8M-v1.2/resolve/main/',model:'onnx/paradee_int8.onnx',cfg:'config.json'},
+ kit:{hf:'https://huggingface.co/KittenML/kitten-tts-nano-0.8-fp32/resolve/main/',model:'kitten_tts_nano_v0_8.onnx',cfg:'config.json',vox:'voices.npz'}};
+async function dzFiles(br){var er,list=null;
+ try{var h=await getTxt('https://cdn.jsdelivr.net/gh/n4ze3m/dizione@'+br+'/flat','dz'),m,re=/href="([^"]+)"/g,set={};while((m=re.exec(h))){var p=m[1].replace(/^https?:\/\/[^\/]+/,'').replace(/^\/?gh\/n4ze3m\/dizione@[^\/]+\//,'').replace(/^\/+/,'');if(/\.[a-z]+$/i.test(p)&&p.indexOf('..')<0)set[p]=1}list=Object.keys(set);if(!list.length)list=null}catch(e){er=e}
+ if(!list){try{list=JSON.parse(await getTxt('https://data.jsdelivr.com/v1/packages/gh/n4ze3m/dizione@'+br+'?structure=flat','dz')).files.map(function(f){return f.name.replace(/^\//,'')})}catch(e){er=er||e}}
+ if(!list){try{list=JSON.parse(await getTxt('https://api.github.com/repos/n4ze3m/dizione/git/trees/'+br+'?recursive=1','dz')).tree.filter(function(x){return x.type=='blob'}).map(function(x){return x.path})}catch(e){er=er||e}}
+ if(!list)throw er||new Error('dizione file list');return list}
+async function init(cfg){var M=MODELS[cfg.mid];E.m=cfg.mid;
  prog(.01,2);var ort;try{ort=await import(cfg.ort+'ort.wasm.min.mjs')}catch(e0){ort=await import(cfg.ort+'ort.min.mjs')}E.ort=ort;ort.env.wasm.wasmPaths=cfg.ort;ort.env.wasm.numThreads=1;ort.env.wasm.proxy=false;
- var mb=await getBuf(cfg.hf+'resolve/main/onnx/model.onnx',1,.02,.5);
- prog(.52,2);E.ses=await ort.InferenceSession.create(new Uint8Array(mb),{executionProviders:['wasm']});
- prog(.58,3);var pm=await import(cfg.py+'pyodide.mjs');var py=await pm.loadPyodide({indexURL:cfg.py});E.py=py;
- prog(.74,4);var br='main';try{br=JSON.parse(await getTxt('https://api.github.com/repos/n4ze3m/dizione','dz')).default_branch||'main'}catch(e){}
- var files=null,er;try{files=JSON.parse(await getTxt('https://api.github.com/repos/n4ze3m/dizione/git/trees/'+br+'?recursive=1','dz')).tree.filter(function(x){return x.type=='blob'}).map(function(x){return x.path})}catch(e){er=e}
- if(!files){try{files=JSON.parse(await getTxt('https://data.jsdelivr.com/v1/packages/gh/n4ze3m/dizione@'+br+'?structure=flat','dz')).files.map(function(f){return f.name.replace(/^\//,'')})}catch(e){throw er||e}}
+ var mb=await getBuf(M.hf+M.model,1,.02,.45);
+ if(M.cfg){E.kcfg=JSON.parse(await getTxt(M.hf+M.cfg,1));if(cfg.mid=='para'){var mp=pickMap(E.kcfg);if(!mp){try{mp=pickMap(JSON.parse(await getTxt(M.hf+'tokenizer.json',1)))}catch(e){}}if(!mp)throw new Error('Paradee vocabulary not found ('+Object.keys(E.kcfg).join(',')+')');E.vocab=mp}}
+ if(M.vox)E.vox=await npz(await getBuf(M.hf+M.vox,1,.45,.5));
+ prog(.5,2);E.ses=await ort.InferenceSession.create(new Uint8Array(mb),{executionProviders:['wasm']});
+ prog(.52,3);var pm=await import(cfg.py+'pyodide.mjs');var py=await pm.loadPyodide({indexURL:cfg.py});E.py=py;
+ prog(.7,4);var T='https://huggingface.co/n4ze3m/tiny-voca/resolve/main/',files=null,br='main',er;
+ try{files=await dzFiles('main')}catch(e){er=e;try{files=await dzFiles('master');br='master'}catch(e2){throw er}}
  files=files.filter(function(n){return/\.(py|json|txt|tsv|csv)$/i.test(n)&&!/(^|\/)(tests?|docs?|examples?|scripts?|benchmarks?|\.github)\//i.test(n)});
  var pk=files.filter(function(n){return/(^|\/)dizione\/__init__\.py$/.test(n)})[0],root=pk?pk.replace(/\/?dizione\/__init__\.py$/,''):'';
- if(!pk&&files.indexOf('dizione.py')<0)throw new Error('dizione source not found in the repository');
+ if(!pk&&files.indexOf('dizione.py')<0)throw new Error('dizione source not found ('+files.length+' files listed)');
  files=files.filter(function(n){return!root||n.indexOf(root+'/')==0});
- for(var i=0;i<files.length;i++){var n=files[i],t=await getAny(['https://cdn.jsdelivr.net/gh/n4ze3m/dizione@'+br+'/'+n,'https://raw.githubusercontent.com/n4ze3m/dizione/'+br+'/'+n],'dz'),pth='/dz/'+n;py.FS.mkdirTree(pth.slice(0,pth.lastIndexOf('/')));py.FS.writeFile(pth,new Uint8Array(t));prog(.74+.08*(i+1)/files.length,4)}
- prog(.82,5);var info=JSON.parse(await getTxt('https://huggingface.co/api/models/n4ze3m/tiny-voca','dd')),ph=(info.siblings||[]).map(function(x){return x.rfilename}).filter(function(n){return n.indexOf('phonemizer/')==0});
+ for(var i=0;i<files.length;i++){var n=files[i],t=await getAny(['https://cdn.jsdelivr.net/gh/n4ze3m/dizione@'+br+'/'+n,'https://raw.githubusercontent.com/n4ze3m/dizione/'+br+'/'+n],'dz'),pth='/dz/'+n;py.FS.mkdirTree(pth.slice(0,pth.lastIndexOf('/')));py.FS.writeFile(pth,new Uint8Array(t));prog(.7+.07*(i+1)/files.length,4)}
+ prog(.78,5);var info=JSON.parse(await getTxt('https://huggingface.co/api/models/n4ze3m/tiny-voca','dd')),ph=(info.siblings||[]).map(function(x){return x.rfilename}).filter(function(n){return n.indexOf('phonemizer/')==0});
  if(!ph.length)throw new Error('phonemizer data not found');py.FS.mkdirTree('/ph');
- for(var j=0;j<ph.length;j++){var rel=ph[j].slice(11),b=await getBuf(cfg.hf+'resolve/main/'+ph[j].split('/').map(encodeURIComponent).join('/'),5,E.p,E.p);var d2='/ph/'+rel;py.FS.mkdirTree(d2.slice(0,d2.lastIndexOf('/')));py.FS.writeFile(d2,new Uint8Array(b));prog(.82+.12*(j+1)/ph.length,5)}
- prog(.95,6);py.runPython("import sys,os\nsys.path.insert(0,'/dz"+(root?'/'+root:'')+"')\nos.environ['DIZIONE_DATA']='/ph'");
+ for(var j=0;j<ph.length;j++){var rel=ph[j].slice(11),b=await getBuf(T+ph[j].split('/').map(encodeURIComponent).join('/'),5,E.p,E.p);var d2='/ph/'+rel;py.FS.mkdirTree(d2.slice(0,d2.lastIndexOf('/')));py.FS.writeFile(d2,new Uint8Array(b));prog(.78+.12*(j+1)/ph.length,5)}
+ prog(.92,6);if(cfg.mid!='tiny'){var tc=JSON.parse(await getTxt(T+'config.json',6));E.list=pickList(tc);if(!E.list)throw new Error('Tiny Voca phoneme table not found ('+Object.keys(tc).join(',')+')')}
+ py.runPython("import sys,os\nsys.path.insert(0,'/dz"+(root?'/'+root:'')+"')\nos.environ['DIZIONE_DATA']='/ph'");
  for(var k=0;k<8;k++){try{py.runPython('import dizione');break}catch(e){var mm=/No module named '([\w.]+)'/.exec(String(e));if(!mm||k==7)throw e;var nm=mm[1].split('.')[0];try{await py.loadPackage(nm)}catch(e2){await py.loadPackage('micropip');await py.pyimport('micropip').install(nm)}}}
  py.runPython("dizione.phonemize('Hello.')");prog(1,6)}
-async function syn(m){var py=E.py,ort=E.ort;py.globals.set('tts_txt',m.text);var pr=py.runPython("_p=dizione.phonemize(tts_txt)\n[list(_p.ids),list(_p.stress)]"),js=pr.toJs();pr.destroy();var ids=js[0],st=js[1],n=ids.length;if(!n)return null;
- var I=function(a){return BigInt64Array.from(a,function(x){return BigInt(x)})},F=function(x){return new ort.Tensor('float32',Float32Array.from([x]),[1])};
- var r=await E.ses.run({tokens:new ort.Tensor('int64',I(ids),[1,n]),stress:new ort.Tensor('int64',I(st),[1,n]),voice:new ort.Tensor('int64',BigInt64Array.from([1n]),[1]),speed:F(m.spd),pitch_shift:F(m.pit),pitch_range:F(m.rng)});
- var o=r.audio||r[E.ses.outputNames[0]],a=Float32Array.from(o.data),mx=0,i;for(i=0;i<a.length;i++){var z=Math.abs(a[i]);if(z>mx)mx=z}var g=mx>0?Math.min(1,.99/mx):1;for(i=0;i<a.length;i++)a[i]*=g;return a}
+function phon(text){var py=E.py;py.globals.set('tts_txt',text);var pr=py.runPython("_p=dizione.phonemize(tts_txt)\n[list(_p.ids),list(_p.stress)]"),js=pr.toJs();pr.destroy();return js}
+async function syn(m){var ort=E.ort,js=phon(m.text),ids=js[0],st=js[1],n=ids.length;if(!n)return null;
+ var I=function(a){return BigInt64Array.from(a,function(x){return BigInt(x)})},F=function(x){return new ort.Tensor('float32',Float32Array.from([x]),[1])},r;
+ if(E.m=='tiny'){r=await E.ses.run({tokens:new ort.Tensor('int64',I(ids),[1,n]),stress:new ort.Tensor('int64',I(st),[1,n]),voice:new ort.Tensor('int64',BigInt64Array.from([1n]),[1]),speed:F(m.spd),pitch_shift:F(m.pit),pitch_range:F(m.rng)})}
+ else if(E.m=='para'){var ps=toPh(ids,st,'mis',m.vc=='bm_fable'),tk=[0];for(var c of ps){if(E.vocab[c]!=null)tk.push(E.vocab[c])}tk.push(0);if(tk.length<3)return null;var vl=E.kcfg.voices,vi=Array.isArray(vl)?vl.indexOf(m.vc):-1;if(vi<0)vi=m.vc=='bm_fable'?3:2;
+  r=await E.ses.run({input_ids:new ort.Tensor('int64',I(tk),[1,tk.length]),speed:F(m.spd),voice:new ort.Tensor('int64',BigInt64Array.from([vi]),[1])})}
+ else{var ip=toPh(ids,st,'ipa',0),tk2=[0];for(var c2 of ip){if(KMAP[c2]!=null)tk2.push(KMAP[c2])}tk2.push(10,0);var key=KV[m.vc]||m.vc,arr=E.vox[key];if(!arr)throw new Error('voice '+key+' not in voices.npz ('+Object.keys(E.vox).join(',')+')');
+  var rows=arr.shape.length>1?arr.shape[0]:1,w=arr.shape[arr.shape.length-1],row=Math.min(m.text.length,rows-1),sty=arr.data.slice(row*w,row*w+w),pr2=E.kcfg&&E.kcfg.speed_priors&&E.kcfg.speed_priors[key]||1;
+  r=await E.ses.run({input_ids:new ort.Tensor('int64',I(tk2),[1,tk2.length]),style:new ort.Tensor('float32',sty,[1,w]),speed:F(m.spd*pr2)})}
+ var o=r.audio||r.waveform||r[E.ses.outputNames[0]],a=Float32Array.from(o.data),mx=0,i;if(E.m=='kit'&&a.length>20000)a=a.slice(0,a.length-5000);for(i=0;i<a.length;i++){if(a[i]!==a[i])a[i]=0;var z=Math.abs(a[i]);if(z>mx)mx=z}var g=mx>0?Math.min(1,.99/mx):1;for(i=0;i<a.length;i++)a[i]*=g;return a}
 self.onmessage=async function(ev){var m=ev.data;
- if(m.t=='init'){try{await init(m.cfg);post({t:'ready'})}catch(e){post({t:'err',m:String(e&&e.message||e).slice(0,300)})}}
- else if(m.t=='syn'){try{var a=await syn(m);if(a)post({t:'audio',id:m.id,a:a},[a.buffer]);else post({t:'audio',id:m.id,a:null})}catch(e){post({t:'err',id:m.id,m:String(e&&e.message||e).slice(0,300)})}}}
+ if(m.t=='init'){try{await init(m.cfg);post({t:'ready'})}catch(e){post({t:'err',m:String(e&&e.message||e).slice(0,400)})}}
+ else if(m.t=='syn'){try{var a=await syn(m);if(a)post({t:'audio',id:m.id,a:a},[a.buffer]);else post({t:'audio',id:m.id,a:null})}catch(e){post({t:'err',id:m.id,m:String(e&&e.message||e).slice(0,400)})}}}
 }
-var TTSV={ort:'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',py:'https://cdn.jsdelivr.net/pyodide/v0.27.2/full/',hf:'https://huggingface.co/n4ze3m/tiny-voca/',st:'idle',pg:0,stg:0,err:'',w:null,rid:0,pend:{},busy:0,cancel:0,gp:0,text:'',last:null,au:null,msg:'',c:S('hsttsc',null)||{}};
-['spd','pit','rng','vol','gap'].forEach(function(k,i){TTSV[k]=typeof TTSV.c[k]=='number'?TTSV.c[k]:[1,0,1,100,.18][i]});TTSV.sty=TTSV.c.sty||'';
-var TTSSL=[['spd','tts_sp',.5,2,.05,function(v){return v.toFixed(2)+'×'}],['pit','tts_pi',-6,6,.5,function(v){return(v>0?'+':'')+v.toFixed(1)+' st'},'tts_lo','tts_hg'],['rng','tts_ra',0,2,.05,function(v){return v.toFixed(2)},'tts_fl','tts_ex'],['vol','tts_vo',0,200,5,function(v){return Math.round(v)+'%'}],['gap','tts_pa',0,1,.05,function(v){return v.toFixed(2)+'s'}]];
+var TTSM={tiny:{n:'Tiny Voca',mb:21,vc:[['M2','M2']]},para:{n:'Paradee 1.2',mb:9,vc:[['am_puck','Puck (US)'],['bm_fable','Fable (UK)']]},kit:{n:'Kitten TTS Nano',mb:57,vc:[['Jasper','Jasper'],['Bruno','Bruno'],['Hugo','Hugo'],['Leo','Leo']]}};
+var TTSCSP='https://huggingface.co https://*.huggingface.co https://*.hf.co https://cas-bridge.xethub.hf.co https://api.github.com https://data.jsdelivr.com https://pypi.org https://files.pythonhosted.org';
+var TTSV={ort:'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',py:'https://cdn.jsdelivr.net/pyodide/v0.27.2/full/',st:'idle',pg:0,stg:0,err:'',w:null,rid:0,pend:{},busy:0,cancel:0,text:'',last:null,au:null,msg:'',csp:{},c:S('hsttsc',null)||{}};
+['spd','pit','rng','vol','gap'].forEach(function(k,i){TTSV[k]=typeof TTSV.c[k]=='number'?TTSV.c[k]:[1,0,1,100,.18][i]});TTSV.sty=TTSV.c.sty||'';TTSV.mid=TTSM[TTSV.c.mid]?TTSV.c.mid:'tiny';TTSV.vcs=TTSV.c.vcs||{};
+function ttsVc(){var v=TTSV.vcs[TTSV.mid],l=TTSM[TTSV.mid].vc;return l.some(function(x){return x[0]==v})?v:l[0][0]}
+var TTSSL=[['spd','tts_sp',.5,2,.05,function(v){return v.toFixed(2)+'×'}],['pit','tts_pi',-6,6,.5,function(v){return(v>0?'+':'')+v.toFixed(1)+' st'},'tts_lo','tts_hg',1],['rng','tts_ra',0,2,.05,function(v){return v.toFixed(2)},'tts_fl','tts_ex',1],['vol','tts_vo',0,200,5,function(v){return Math.round(v)+'%'}],['gap','tts_pa',0,1,.05,function(v){return v.toFixed(2)+'s'}]];
 var TTSSTY={y1:[.95,0,1,.22],y2:[.9,-1.5,.8,.3],y3:[.85,-1,.6,.35],y4:[.95,.5,1.1,.22],y5:[1.1,0,.9,.12],y6:[.9,1,1.5,.3],y7:[1.05,1,1.2,.15]};
-function ttsSave(){TTSV.c={spd:TTSV.spd,pit:TTSV.pit,rng:TTSV.rng,vol:TTSV.vol,gap:TTSV.gap,sty:TTSV.sty};try{P('hsttsc',TTSV.c)}catch(e){}}
+function ttsSave(){TTSV.vcs[TTSV.mid]=ttsVc();TTSV.c={spd:TTSV.spd,pit:TTSV.pit,rng:TTSV.rng,vol:TTSV.vol,gap:TTSV.gap,sty:TTSV.sty,mid:TTSV.mid,vcs:TTSV.vcs};try{P('hsttsc',TTSV.c)}catch(e){}}
 function ttsRe(){if(typeof HED!='undefined'&&HED&&hedAlive()&&HED.pop=='tts')hedPanel()}
 function ttsSt(m){TTSV.msg=m;var e=$('#hedtst');if(e)e.textContent=m}
 function ttsPb(p,txt){TTSV.pg=p;var b=$('#hedtpb i');if(b)b.style.width=Math.round(p*100)+'%';var t=$('#hedtpt');if(t)t.textContent=txt}
@@ -5937,19 +5990,21 @@ function ttsKill(){if(TTSV.w){try{TTSV.w.terminate()}catch(e){}TTSV.w=null}Objec
 function ttsWorker(){if(TTSV.w)return TTSV.w;var u=URL.createObjectURL(new Blob(['('+ttsWorkerMain.toString()+')()'],{type:'text/javascript'})),w=new Worker(u,{type:'module'});
  w.onmessage=function(ev){var m=ev.data;
   if(m.t=='prog'){TTSV.stg=m.s;ttsPb(m.p,ttsStgTxt())}
-  else if(m.t=='ready'){TTSV.st='ready';TTSV.err='';try{P('hsttsd',1)}catch(e){}ttsRe()}
+  else if(m.t=='csp'){try{TTSV.csp[new URL(m.u).host]=m.d}catch(e){TTSV.csp[String(m.u).slice(0,40)]=m.d}}
+  else if(m.t=='ready'){TTSV.st='ready';TTSV.err='';try{P('hsttsd_'+TTSV.mid,1)}catch(e){}ttsRe()}
   else if(m.t=='audio'){var q=TTSV.pend[m.id];if(q){delete TTSV.pend[m.id];q[0](m.a)}}
   else if(m.t=='err'){if(m.id!=null){var q2=TTSV.pend[m.id];if(q2){delete TTSV.pend[m.id];q2[1](new Error(m.m))}}else{ttsKill();TTSV.st='err';TTSV.err=m.m;ttsRe()}}};
  w.onerror=function(e){var mm=(e&&e.message)||'worker error';ttsKill();TTSV.st='err';TTSV.err=mm;ttsRe()};
  TTSV.w=w;return w}
-function ttsStart(){if(TTSV.st=='dl'||TTSV.st=='ready')return;TTSV.st='dl';TTSV.pg=0;TTSV.stg=2;TTSV.err='';try{var w=ttsWorker();w.postMessage({t:'init',cfg:{ort:TTSV.ort,py:TTSV.py,hf:TTSV.hf}})}catch(e){TTSV.st='err';TTSV.err=String(e&&e.message||e)}ttsRe()}
+function ttsStart(){if(TTSV.st=='dl'||TTSV.st=='ready')return;TTSV.st='dl';TTSV.pg=0;TTSV.stg=2;TTSV.err='';TTSV.csp={};try{var w=ttsWorker();w.postMessage({t:'init',cfg:{mid:TTSV.mid,ort:TTSV.ort,py:TTSV.py}})}catch(e){TTSV.st='err';TTSV.err=String(e&&e.message||e)}ttsRe()}
 function ttsStopDl(){ttsKill();TTSV.st='idle';TTSV.pg=0;ttsRe()}
+function ttsPick(k,g){if(k=='ttsmd'){if(TTSV.mid==g||TTSV.busy)return;ttsKill();TTSV.st='idle';TTSV.mid=g;TTSV.last=null;ttsSave();ttsRe()}else if(k=='ttsvc'){TTSV.vcs[TTSV.mid]=g;TTSV.last=null;ttsSave();D.querySelectorAll('.hedtvc button').forEach(function(b){b.classList.toggle('on',b.dataset.ha=='ttsvc:'+g)})}}
 function ttsCall(m){return new Promise(function(ok,no){var id=++TTSV.rid;TTSV.pend[id]=[ok,no];m.id=id;TTSV.w.postMessage(m)})}
 function ttsSplit(t){var o=[];(t.replace(/\s+/g,' ').trim().match(/[^.!?…]+[.!?…]*/g)||[]).forEach(function(s){s=s.trim();if(!s||!/[A-Za-z0-9]/.test(s))return;if(!/[.!?…]$/.test(s))s+='.';while(s.length>280){var k=s.lastIndexOf(',',280);if(k<80)k=s.lastIndexOf(' ',280);if(k<40)k=280;o.push(s.slice(0,k+1).trim());s=s.slice(k+1).trim()}if(s)o.push(s)});return o}
 function ttsWav(a,sr){var n=a.length,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=function(o,s){for(var i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);for(var i=0;i<n;i++){var x=Math.max(-1,Math.min(1,a[i]));v.setInt16(44+i*2,x<0?x*32768:x*32767,true)}return new Blob([b],{type:'audio/wav'})}
-function ttsKey(){return[TTSV.text.trim(),TTSV.spd,TTSV.pit,TTSV.rng,TTSV.vol,TTSV.gap].join('|')}
+function ttsKey(){return[TTSV.mid,ttsVc(),TTSV.text.trim(),TTSV.spd,TTSV.pit,TTSV.rng,TTSV.vol,TTSV.gap].join('|')}
 async function ttsSynth(){var parts=ttsSplit(TTSV.text),outs=[],tot=0,sr=24000;if(!parts.length)throw new Error(hedt('tts_em'));
- for(var i=0;i<parts.length;i++){if(TTSV.cancel)throw new Error('cancel');ttsPb(i/parts.length,hedt('tts_gn')+' '+(i+1)+'/'+parts.length);var a=await ttsCall({t:'syn',text:parts[i],spd:TTSV.spd,pit:TTSV.pit*.058,rng:TTSV.rng});if(a){outs.push(a);tot+=a.length}}
+ for(var i=0;i<parts.length;i++){if(TTSV.cancel)throw new Error('cancel');ttsPb(i/parts.length,hedt('tts_gn')+' '+(i+1)+'/'+parts.length);var a=await ttsCall({t:'syn',text:parts[i],spd:TTSV.spd,pit:TTSV.pit*.058,rng:TTSV.rng,vc:ttsVc()});if(a){outs.push(a);tot+=a.length}}
  if(!outs.length)throw new Error('empty');var gap=Math.round(sr*TTSV.gap),g=TTSV.vol/100,all=new Float32Array(tot+gap*(outs.length-1)),p=0;outs.forEach(function(c,i){for(var q=0;q<c.length;q++)all[p+q]=c[q]*g;p+=c.length+(i<outs.length-1?gap:0)});
  var f=new File([ttsWav(all,sr)],'voice-ai-'+hedPad(new Date().getMinutes())+hedPad(new Date().getSeconds())+'.wav',{type:'audio/wav'});return{f:f,dur:all.length/sr}}
 function ttsRun(mode){if(TTSV.busy||TTSV.st!='ready')return;if(mode=='play'&&TTSV.au&&!TTSV.au.paused){TTSV.au.pause();TTSV.au=null;ttsBtn();return}
@@ -5959,7 +6014,7 @@ function ttsRun(mode){if(TTSV.busy||TTSV.st!='ready')return;if(mode=='play'&&TTS
   if(mode=='dl'){var a=D.createElement('a');a.href=L.u;a.download=L.f.name;D.body.appendChild(a);a.click();a.remove();return}
   if(mode=='add'){if(!HED||!hedAlive())return;if(TTSV.au){TTSV.au.pause();TTSV.au=null}var at=HED.t,cx=HED.addCtx&&HED.addCtx.tr?{role:'aud',ak:'rec',tr:HED.addCtx.tr}:{role:'aud',ak:'rec'};HED.pop='';hedPanel();hedAddFile(new File([L.f],L.f.name,{type:L.f.type}),at,cx);return}
   if(TTSV.au)TTSV.au.pause();TTSV.au=new Audio(L.u);TTSV.au.onended=function(){TTSV.au=null;ttsBtn()};TTSV.au.play().catch(function(){});ttsBtn()
- }).catch(function(e){TTSV.busy=0;ttsBtn();var m=String(e&&e.message||e);if(m=='cancel'){ttsSt(hedt('tts_cd'));ttsPb(0,hedt('tts_cd'));return}if(m=='stopped')return;ttsSt(hedt('tts_er')+' — '+m.slice(0,160));toast(hedt('tts_er'))})}
+ }).catch(function(e){TTSV.busy=0;ttsBtn();var m=String(e&&e.message||e);if(m=='cancel'){ttsSt(hedt('tts_cd'));ttsPb(0,hedt('tts_cd'));return}if(m=='stopped')return;ttsSt(hedt('tts_er')+' — '+m.slice(0,200));toast(hedt('tts_er'))})}
 function ttsBtn(){var b=TTSV.busy;D.querySelectorAll('.hedtts [data-ha^="tts"]').forEach(function(x){var k=x.dataset.ha;if(k=='ttscan'){x.style.display=b?'':'none';return}x.disabled=!!b&&k!='ttsstop'});var pr=$('#hedtgp');if(pr)pr.style.display=b?'':'none';var pv=$('#hedtpv');if(pv)pv.lastChild.textContent=(TTSV.au&&!TTSV.au.paused)?hedt('tts_sx'):hedt('tts_pv')}
 function ttsCnt(){var t=TTSV.text,w=(t.trim().match(/\S+/g)||[]).length,a=$('#hedtcc'),b=$('#hedtwc'),d=$('#hedtdu');if(a)a.textContent=t.length;if(b)b.textContent=w;if(d)d.textContent=w?'≈ '+Math.max(1,Math.round(w/2.6/TTSV.spd))+' s':''}
 function ttsSl(i){var s=TTSSL[i],e=$('#hedts_'+s[0]);if(!e)return;var o=e.parentNode.querySelector('output');if(o)o.textContent=s[5](TTSV[s[0]])}
@@ -5971,22 +6026,26 @@ function ttsAct(k,g){
  if(k=='ttsdl')ttsStart();else if(k=='ttsstop')ttsStopDl();else if(k=='ttsretry'){TTSV.st='idle';ttsStart()}
  else if(k=='ttsplay')ttsRun('play');else if(k=='ttsadd')ttsRun('add');else if(k=='ttsdw')ttsRun('dl');
  else if(k=='ttscan'){TTSV.cancel=1}
+ else if(k=='ttsmd'||k=='ttsvc')ttsPick(k,g);
+ else if(k=='ttscopy'){var t=TTSCSP,ok=function(){toast(hedt('tts_cpd'))};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok).catch(function(){});else{var ta=D.createElement('textarea');ta.value=t;D.body.appendChild(ta);ta.select();try{D.execCommand('copy');ok()}catch(e){}ta.remove()}}
  else if(k=='ttsclr'){TTSV.text='';var x=$('#hedttx');if(x)x.value='';ttsCnt()}
  else if(k=='ttsrep')ttsPaste();
  else if(k=='ttssmp'){TTSV.text='Hello! This is a sample of the AI voice. You can change the speed, the pitch and the style.';var x2=$('#hedttx');if(x2)x2.value=TTSV.text;ttsCnt()}
  else if(k=='ttsst')ttsSetSty(g);
  else if(k=='ttsrs'){TTSV.sty='';TTSV.spd=1;TTSV.pit=0;TTSV.rng=1;TTSV.vol=100;TTSV.gap=.18;TTSSL.forEach(function(s,i){var e=$('#hedts_'+s[0]);if(e){e.value=TTSV[s[0]];ttsSl(i)}});D.querySelectorAll('.hedtch button.on').forEach(function(b){b.classList.remove('on')});ttsSave();ttsCnt()}}
-function hedTtsBody(){var st=TTSV.st,esc2=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')};
- if(st=='idle'&&S('hsttsd',0)){setTimeout(ttsStart,0);st='dl'}
- if(st=='idle')return'<div class="hedtts"><div class="hedtcard"><b>'+hedt('tts_dt')+'</b><p>'+hedt('tts_dd')+'</p><button type="button" class="hedttbn pri" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+'</button></div></div>';
- if(st=='dl')return'<div class="hedtts"><div class="hedtcard"><b>'+hedt('tts_dt')+'</b><div class="hedtpb" id="hedtpb"><i style="width:'+Math.round(TTSV.pg*100)+'%"></i></div><p id="hedtpt">'+ttsStgTxt()+'</p><button type="button" class="hedttbn" data-ha="ttsstop">'+hedIcm('stopi')+hedt('tts_stp')+'</button></div></div>';
- if(st=='err')return'<div class="hedtts"><div class="hedtcard"><b>'+hedt('tts_er')+'</b><p class="hedterr">'+esc2(TTSV.err||'?')+'</p><button type="button" class="hedttbn pri" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button></div></div>';
- setTimeout(ttsBind,0);var h='<div class="hedtts"><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtcnt"><span><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+'</span><span id="hedtdu"></span></div>'
+function hedTtsBody(){var st=TTSV.st,esc2=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')},M=TTSM[TTSV.mid],
+ mchips='<div class="hedtlb">'+hedt('tts_mdl')+'</div><div class="hedtch hedtmd">'+Object.keys(TTSM).map(function(k){return'<button type="button" data-ha="ttsmd:'+k+'"'+(TTSV.mid==k?' class="on"':'')+'>'+TTSM[k].n+'</button>'}).join('')+'</div>';
+ if(st=='idle'&&S('hsttsd_'+TTSV.mid,0)){setTimeout(ttsStart,0);st='dl'}
+ if(st=='idle')return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><p>'+hedt('tts_dd').replace('{m}',M.mb).replace('{n}',M.mb+26)+'</p><button type="button" class="hedttbn pri" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+' (~'+(M.mb+26)+' MB)</button></div></div>';
+ if(st=='dl')return'<div class="hedtts"><div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><div class="hedtpb" id="hedtpb"><i style="width:'+Math.round(TTSV.pg*100)+'%"></i></div><p id="hedtpt">'+ttsStgTxt()+'</p><button type="button" class="hedttbn" data-ha="ttsstop">'+hedIcm('stopi')+hedt('tts_stp')+'</button></div></div>';
+ if(st=='err'){var cs=Object.keys(TTSV.csp).length||/Cannot reach|Failed to fetch/i.test(TTSV.err||'');return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_er')+' · '+M.n+'</b><p class="hedterr">'+esc2(TTSV.err||'?')+'</p>'+(cs?'<p>'+hedt('tts_csp')+'</p><code class="hedtcode">'+TTSCSP+'</code><button type="button" class="hedttbs" data-ha="ttscopy">'+hedt('tts_cpy')+'</button>':'')+'<button type="button" class="hedttbn pri" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button></div></div>'}
+ setTimeout(ttsBind,0);var vc=ttsVc(),h='<div class="hedtts">'+mchips+'<div class="hedtlb">'+hedt('tts_vcm')+' · '+hedt('tts_lgs')+'</div><div class="hedtch hedtvc">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtcnt"><span><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+'</span><span id="hedtdu"></span></div>'
  +'<div class="hedttb2"><button type="button" class="hedttbs" data-ha="ttsclr">'+hedIcm('clr')+hedt('tts_clr')+'</button><button type="button" class="hedttbs" data-ha="ttsrep">'+hedIcm('pst')+hedt('tts_rep')+'</button><button type="button" class="hedttbs" data-ha="ttssmp">'+hedIcm('smp')+hedt('tts_smp')+'</button></div>'
  +'<div class="hedttb"><button type="button" class="hedttbn" id="hedtpv" data-ha="ttsplay">'+hedIcm('play2')+'<span>'+hedt('tts_pv')+'</span></button><button type="button" class="hedttbn pri" data-ha="ttsadd">'+hedIcm('plus')+hedt('tts_ad')+'</button></div>'
  +'<div class="hedtgp" id="hedtgp" style="display:none"><div class="hedtpb" id="hedtpb"><i style="width:0"></i></div><div class="hedtgpr"><span id="hedtpt"></span><button type="button" class="hedttbs" data-ha="ttscan">'+hedIcm('cancel')+hedt('tts_cn')+'</button></div></div>'
  +'<div class="hedtlb">'+hedt('tts_stl')+'</div><div class="hedtch">'+['y1','y2','y3','y4','y5','y6','y7'].map(function(k){return'<button type="button" data-ha="ttsst:'+k+'"'+(TTSV.sty==k?' class="on"':'')+'>'+hedt('tts_'+k)+'</button>'}).join('')+'</div><p class="hedtnote">'+hedt('tts_yn')+'</p>';
- TTSSL.forEach(function(s){h+='<label class="hedttl"><span>'+hedt(s[1])+'</span><input type="range" id="hedts_'+s[0]+'" min="'+s[2]+'" max="'+s[3]+'" step="'+s[4]+'" value="'+TTSV[s[0]]+'"><output>'+s[5](TTSV[s[0]])+'</output></label>'+(s[6]?'<div class="hedtend"><span>'+hedt(s[6])+'</span><span>'+hedt(s[7])+'</span></div>':'')});
+ TTSSL.forEach(function(s){if(s[8]&&TTSV.mid!='tiny')return;h+='<label class="hedttl"><span>'+hedt(s[1])+'</span><input type="range" id="hedts_'+s[0]+'" min="'+s[2]+'" max="'+s[3]+'" step="'+s[4]+'" value="'+TTSV[s[0]]+'"><output>'+s[5](TTSV[s[0]])+'</output></label>'+(s[6]?'<div class="hedtend"><span>'+hedt(s[6])+'</span><span>'+hedt(s[7])+'</span></div>':'')});
+ if(TTSV.mid!='tiny')h+='<p class="hedtnote">'+hedt('tts_np')+'</p>';
  return h+'<div class="hedttb2"><button type="button" class="hedttbs" data-ha="ttsrs">'+hedIcm('rs')+hedt('tts_rs')+'</button><button type="button" class="hedttbs" data-ha="ttsdw">'+hedIcm('dl')+hedt('tts_wv')+'</button></div><p class="hedhint" id="hedtst">'+esc2(TTSV.msg||hedt('tts_h'))+'</p></div>'}
 /* ---------- project thumbnail (cover) ---------- */
 function thmBox(){var c=HED.p&&HED.p.cover;if(!c)return{w:46,h:40};var p=c.r.split(':'),r=p[0]/p[1],w=54,h=46;if(r>w/h)h=Math.round(w/r);else w=Math.round(h*r);return{w:Math.max(24,w),h:Math.max(24,h)}}
@@ -6016,8 +6075,11 @@ HEDCSS+=`
 .hed .hedtn .hedtp2{background:transparent!important;color:var(--tx)!important;border-radius:8px;width:26px;height:30px;opacity:.8;box-shadow:none}.hed .hedtn .hedtp2 .hedic.hmdi{width:22px;height:22px}
 .hed .hedic.hmdi{fill:currentColor;stroke:none}.hed .hedic.hmdi path{stroke:none!important;fill:currentColor!important}
 .hedpth.hedpcv{aspect-ratio:auto}.hedpth.hedpcv img{width:100%;height:100%;object-fit:contain;background:transparent}
+.hedtcode{display:block;word-break:break-all;user-select:all;font-size:11px;padding:8px;border-radius:8px;background:rgba(127,127,127,.15)}
+.hedtmd button,.hedtvc button{white-space:nowrap}
 `;
 /* CHANGELOG
+4.20.0 — Voice (AI): found why the download failed — the site's Content-Security-Policy (connect-src) blocks huggingface.co; the error card now says so and lists the exact addresses to add (with a Copy button); three male-voice models (Tiny Voca, Paradee 1.2 [Puck US / Fable UK], Kitten TTS Nano [Jasper, Bruno, Hugo, Leo]) all share one phonemizer; English only (the only language those models support among the four site languages); error messages name the host that could not be reached.
 4.19.0 — Multi Editor: Voice (AI) rewritten — the engine runs in its own worker, asks before the one-time ~47 MB download and can be stopped while downloading, shows real error messages; new controls: speed 0.5–2.0×, pitch (low–high), expression (flat–expressive), volume, pause, 7 voice-style presets (speed/pitch/expression only), character and word counters, Clear, Replace-from-clipboard, Sample, Reset controls, generation progress + Cancel, Download WAV, remembered settings. Timeline: white track-icon column with plain open-source icons (Material Design Icons) and plain + buttons (no gold circle); new + below the last track adds a project thumbnail (picture or current frame) that is shown in the timeline and in the project list in the picture's own ratio.
 4.18.2 — Fixed: the renewed Multi Editor icons (4.17.0) did not show because the icon table name HEDM clashed with the existing menu-state object HEDM; the table is now HEDMI and every toolbar / panel-header icon, the Voice (AI) icon and the keyframe copy/paste check mark use it. The Voice (AI) panel is more compact (Preview / Add buttons directly under the text box) and its tile uses the new voice icon.
 4.18.1 — Fixed: the Voice (AI) tile now also appears in the Audio panel (the + of an audio track, next to Audio / Sound effect / Record); Voice (AI) is also a tool in the main toolbar (Layers, Resize, Verses, Coder, Voice, Animate all …) with a new voice icon (Material Design Icons).
