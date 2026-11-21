@@ -1,6 +1,6 @@
 "use strict";
-/* Huda Studio studio.js — version 4.20.1 — Multi Editor (admin) */
-var STUDIO_JS_VERSION="4.20.1"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+/* Huda Studio studio.js — version 4.20.2 — Multi Editor (admin) */
+var STUDIO_JS_VERSION="4.20.2"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -5834,9 +5834,6 @@ tts_ok:['தயார்','Ready','සූදානම්','جاهز'],
 tts_em:['உரையை எழுதவும்','Type some text first','පළමුව පෙළක් ලියන්න','اكتب نصًا أولًا'],
 tts_er:['குரல் உருவாக்க முடியவில்லை','Could not make the voice','හඬ සෑදිය නොහැකි විය','تعذّر إنشاء الصوت'],
 tts_h:['ஆங்கிலம் மட்டும். அயல் பெயர்கள் தவறாக ஒலிக்கலாம்.','English only. Foreign names may be mispronounced.','ඉංග්‍රීසි පමණි. විදේශීය නම් වැරදි ලෙස කියවිය හැක.','الإنجليزية فقط. قد تُنطق الأسماء الأجنبية خطأً.'],
-tts_dt:['குரல் இயந்திரத்தைப் பதிவிறக்கவா?','Download the voice engine?','හඬ එන්ජිම බාගත කරන්නද?','تحميل محرك الصوت؟'],
-tts_dd:['ஒரு முறை மட்டும் சுமார் 47 MB பதிவிறக்கம் (குரல் மாதிரி, இயக்கத் தளம், உச்சரிப்பு அகராதி). Wi‑Fi பரிந்துரை. இந்தச் சாதனத்தில் சேமிக்கப்படும்; அதன் பின் உரை எங்கும் அனுப்பப்படாது.','One-time download of about 47 MB (voice model, runtime and pronunciation dictionary). Wi‑Fi is recommended. It is stored on this device and your text is never sent anywhere.','එක් වරක් MB 47 ක් පමණ බාගත කිරීම (හඬ මාදිලිය, runtime සහ උච්චාරණ ශබ්දකෝෂය). Wi‑Fi යෝග්‍යයි. මෙම උපාංගයේ ගබඩා වේ; ඔබේ පෙළ කිසිවිටක නොයැවේ.','تحميل لمرة واحدة بحجم 47 MB تقريبًا (نموذج الصوت وبيئة التشغيل وقاموس النطق). يُنصح باستخدام Wi‑Fi. يُحفظ على هذا الجهاز ولا يُرسل نصك إلى أي مكان.'],
-tts_db:['பதிவிறக்கு (~47 MB)','Download (~47 MB)','බාගන්න (~47 MB)','تحميل (~47 MB)'],
 tts_stp:['நிறுத்து','Stop','නවත්වන්න','إيقاف'],
 tts_try:['மீண்டும் முயற்சி','Try again','නැවත උත්සාහ කරන්න','أعد المحاولة'],
 tts_s1:['குரல் மாதிரி','Voice model','හඬ මාදිලිය','نموذج الصوت'],
@@ -5886,7 +5883,7 @@ HEDTT.thumb='thm_t';HEDPI.thumb='imgp';
 /* ---------- engine: a module worker (Pyodide phonemizer + ONNX Runtime Web); three models: Tiny Voca, Paradee 1.2, Kitten TTS Nano (male voices only) ---------- */
 Object.assign(HEDT,{
 tts_dt:['குரல் இயந்திரத்தைப் பதிவிறக்கவா?','Download the voice engine?','හඬ එන්ජිම බාගත කරන්නද?','تحميل محرك الصوت؟'],
-tts_dd:['ஒரு முறை மட்டும் பதிவிறக்கம்: குரல் மாதிரி சுமார் {m} MB + பகிரப்பட்ட இயந்திரம் சுமார் 26 MB (மொத்தம் ≈ {n} MB). Wi‑Fi பரிந்துரை. சாதனத்தில் சேமிக்கப்படும்; உரை எங்கும் அனுப்பப்படாது.','One-time download: voice model about {m} MB + shared engine about 26 MB (≈ {n} MB in total). Wi‑Fi is recommended. It is stored on this device and your text is never sent anywhere.','එක් වරක් බාගත කිරීම: හඬ මාදිලිය MB {m} ක් පමණ + හවුල් එන්ජිම MB 26 ක් පමණ (මුළු ≈ MB {n}). Wi‑Fi යෝග්‍යයි. උපාංගයේ ගබඩා වේ; ඔබේ පෙළ කිසිවිටක නොයැවේ.','تحميل لمرة واحدة: نموذج الصوت نحو {m} MB + المحرك المشترك نحو 26 MB (≈ {n} MB إجمالًا). يُنصح باستخدام Wi‑Fi. يُحفظ على الجهاز ولا يُرسل نصك إلى أي مكان.'],
+tts_dd:['ஒரு முறை மட்டும் பதிவிறக்கம்: குரல் மாதிரி சுமார் {m} MB + பகிரப்பட்ட இயந்திரம் சுமார் 34 MB (மொத்தம் ≈ {n} MB). சாதனத்தில் சேமிக்கப்படும்; உரை எங்கும் அனுப்பப்படாது.','One-time download: voice model about {m} MB + shared engine about 34 MB (≈ {n} MB in total). It is stored on this device and your text is never sent anywhere.','එක් වරක් බාගත කිරීම: හඬ මාදිලිය MB {m} ක් පමණ + හවුල් එන්ජිම MB 34 ක් පමණ (මුළු ≈ MB {n}). උපාංගයේ ගබඩා වේ; ඔබේ පෙළ කිසිවිටක නොයැවේ.','تحميل لمرة واحدة: نموذج الصوت نحو {m} MB + المحرك المشترك نحو 34 MB (≈ {n} MB إجمالًا). يُحفظ على الجهاز ولا يُرسل نصك إلى أي مكان.'],
 tts_db:['பதிவிறக்கு','Download','බාගන්න','تحميل'],
 tts_mdl:['குரல் மாதிரி','Voice model','හඬ මාදිලිය','نموذج الصوت'],
 tts_vcm:['குரல் (ஆண்)','Voice (male)','හඬ (පිරිමි)','الصوت (ذكر)'],
@@ -5894,7 +5891,7 @@ tts_lgs:['மொழி: ஆங்கிலம்','Language: English','භාෂ
 tts_csp:['இணையதளத்தின் பாதுகாப்புக் கொள்கை (CSP) பதிவிறக்கத்தைத் தடுக்கிறது. theme-இன் connect-src-இல் கீழ்க்காணும் முகவரிகளைச் சேர்த்து, பக்கத்தை reload செய்யவும்:','The site\u2019s security policy (CSP) is blocking the download. Add these addresses to connect-src in the theme, then reload the page:','අඩවියේ ආරක්ෂණ ප්‍රතිපත්තිය (CSP) බාගත කිරීම අවහිර කරයි. theme හි connect-src වෙත මෙම ලිපින එක් කර පිටුව නැවත පූරණය කරන්න:','سياسة أمان الموقع (CSP) تمنع التحميل. أضف هذه العناوين إلى connect-src في القالب ثم أعد تحميل الصفحة:'],
 tts_cpy:['நகலெடு','Copy','පිටපත් කරන්න','نسخ'],
 tts_cpd:['நகலெடுக்கப்பட்டது','Copied','පිටපත් කළා','تم النسخ'],
-tts_np:['இந்த மாதிரியில் சுருதி/வெளிப்பாடு கட்டுப்பாடு இல்லை.','Pitch and expression are available only in Tiny Voca.','තානය/ප්‍රකාශනය Tiny Voca හි පමණි.','النبرة والتعبير متاحان في Tiny Voca فقط.']
+tts_np:['வெளிப்பாடு Tiny Voca-வில் மட்டும். இந்த மாதிரியில் சுருதி ஒலியை மறுமாதிரி செய்து அமைக்கப்படும் (சிறிய மாற்றங்கள் நன்றாக இருக்கும்).','Expression works only in Tiny Voca. In this model pitch is applied by resampling the audio (small shifts sound best).','ප්‍රකාශනය Tiny Voca හි පමණි. මෙම මාදිලියේ තානය ශබ්දය නැවත නියැදි කිරීමෙන් යෙදේ (කුඩා වෙනස්කම් හොඳයි).','التعبير يعمل في Tiny Voca فقط. في هذا النموذج تُطبَّق النبرة بإعادة أخذ عينات الصوت (التغييرات الصغيرة أفضل).']
 });
 function ttsWorkerMain(){
 var E={ses:null,py:null,ort:null,p:0,m:null,list:null,vocab:null,vox:null,kcfg:null,pcfg:null};
@@ -5958,8 +5955,9 @@ async function init(cfg){var M=MODELS[cfg.mid];E.m=cfg.mid;
  for(var j=0;j<ph.length;j++){var rel=ph[j].slice(11),b=await getBuf(T+ph[j].split('/').map(encodeURIComponent).join('/'),5,E.p,E.p);var d2='/ph/'+rel;py.FS.mkdirTree(d2.slice(0,d2.lastIndexOf('/')));py.FS.writeFile(d2,new Uint8Array(b));prog(.78+.12*(j+1)/ph.length,5)}
  prog(.92,6);if(cfg.mid!='tiny'){var tc=JSON.parse(await getTxt(T+'config.json',6));E.list=pickList(tc);if(!E.list)throw new Error('Tiny Voca phoneme table not found ('+Object.keys(tc).join(',')+')')}
  py.runPython("import sys,os\nsys.path.insert(0,'/dz"+(root?'/'+root:'')+"')\nos.environ['DIZIONE_DATA']='/ph'");
- for(var k=0;k<8;k++){try{py.runPython("import traceback\ntry:\n  import dizione\n  _ie=''\nexcept Exception:\n  _ie=traceback.format_exc()\nif _ie: raise ImportError(_ie.strip().splitlines()[-1])");break}catch(e){var es=String(e),mm=/No module named '([\w.]+)'/.exec(es);if(!mm||k==7||/^dizione/.test(mm[1]))throw new Error(es.trim().split('\n').slice(-2).join(' | ')+' [files '+E.nf+(pdir?', pkg '+pdir:'')+']');var nm=mm[1].split('.')[0];try{await py.loadPackage(nm)}catch(e2){await py.loadPackage('micropip');await py.pyimport('micropip').install(nm)}}}
- py.runPython("dizione.phonemize('Hello.')");prog(1,6)}
+ var pyTry=async function(code){for(var k=0;k<10;k++){try{return py.runPython(code)}catch(e){var es=String(e),mm=/No module named '([\w.]+)'/.exec(es);if(!mm||k==9||/^dizione/.test(mm[1]))throw new Error(es.trim().split('\n').slice(-2).join(' | ')+' [files '+E.nf+(pdir?', pkg '+pdir:'')+']');var nm=mm[1].split('.')[0];prog(.96,6);try{await py.loadPackage(nm)}catch(e2){await py.loadPackage('micropip');await py.pyimport('micropip').install(nm)}}}};
+ await pyTry("import traceback\ntry:\n  import dizione\n  _ie=''\nexcept Exception:\n  _ie=traceback.format_exc()\nif _ie: raise ImportError(_ie.strip().splitlines()[-1])");
+ await pyTry("dizione.phonemize('Hello.')");prog(1,6)}
 function phon(text){var py=E.py;py.globals.set('tts_txt',text);var pr=py.runPython("_p=dizione.phonemize(tts_txt)\n[list(_p.ids),list(_p.stress)]"),js=pr.toJs();pr.destroy();return js}
 async function syn(m){var ort=E.ort,js=phon(m.text),ids=js[0],st=js[1],n=ids.length;if(!n)return null;
  var I=function(a){return BigInt64Array.from(a,function(x){return BigInt(x)})},F=function(x){return new ort.Tensor('float32',Float32Array.from([x]),[1])},r;
@@ -5980,7 +5978,7 @@ var TTSCSP='https://huggingface.co https://*.huggingface.co https://*.hf.co http
 var TTSV={ort:'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',py:'https://cdn.jsdelivr.net/pyodide/v0.27.2/full/',st:'idle',pg:0,stg:0,err:'',w:null,rid:0,pend:{},busy:0,cancel:0,text:'',last:null,au:null,msg:'',csp:{},c:S('hsttsc',null)||{}};
 ['spd','pit','rng','vol','gap'].forEach(function(k,i){TTSV[k]=typeof TTSV.c[k]=='number'?TTSV.c[k]:[1,0,1,100,.18][i]});TTSV.sty=TTSV.c.sty||'';TTSV.mid=TTSM[TTSV.c.mid]?TTSV.c.mid:'tiny';TTSV.vcs=TTSV.c.vcs||{};
 function ttsVc(){var v=TTSV.vcs[TTSV.mid],l=TTSM[TTSV.mid].vc;return l.some(function(x){return x[0]==v})?v:l[0][0]}
-var TTSSL=[['spd','tts_sp',.5,2,.05,function(v){return v.toFixed(2)+'×'}],['pit','tts_pi',-6,6,.5,function(v){return(v>0?'+':'')+v.toFixed(1)+' st'},'tts_lo','tts_hg',1],['rng','tts_ra',0,2,.05,function(v){return v.toFixed(2)},'tts_fl','tts_ex',1],['vol','tts_vo',0,200,5,function(v){return Math.round(v)+'%'}],['gap','tts_pa',0,1,.05,function(v){return v.toFixed(2)+'s'}]];
+var TTSSL=[['spd','tts_sp',.5,2,.05,function(v){return v.toFixed(2)+'×'}],['pit','tts_pi',-6,6,.5,function(v){return(v>0?'+':'')+v.toFixed(1)+' st'},'tts_lo','tts_hg'],['rng','tts_ra',0,2,.05,function(v){return v.toFixed(2)},'tts_fl','tts_ex',1],['vol','tts_vo',0,200,5,function(v){return Math.round(v)+'%'}],['gap','tts_pa',0,1,.05,function(v){return v.toFixed(2)+'s'}]];
 var TTSSTY={y1:[.95,0,1,.22],y2:[.9,-1.5,.8,.3],y3:[.85,-1,.6,.35],y4:[.95,.5,1.1,.22],y5:[1.1,0,.9,.12],y6:[.9,1,1.5,.3],y7:[1.05,1,1.2,.15]};
 function ttsSave(){TTSV.vcs[TTSV.mid]=ttsVc();TTSV.c={spd:TTSV.spd,pit:TTSV.pit,rng:TTSV.rng,vol:TTSV.vol,gap:TTSV.gap,sty:TTSV.sty,mid:TTSV.mid,vcs:TTSV.vcs};try{P('hsttsc',TTSV.c)}catch(e){}}
 function ttsRe(){if(typeof HED!='undefined'&&HED&&hedAlive()&&HED.pop=='tts')hedPanel()}
@@ -6003,9 +6001,10 @@ function ttsPick(k,g){if(k=='ttsmd'){if(TTSV.mid==g||TTSV.busy)return;ttsKill();
 function ttsCall(m){return new Promise(function(ok,no){var id=++TTSV.rid;TTSV.pend[id]=[ok,no];m.id=id;TTSV.w.postMessage(m)})}
 function ttsSplit(t){var o=[];(t.replace(/\s+/g,' ').trim().match(/[^.!?…]+[.!?…]*/g)||[]).forEach(function(s){s=s.trim();if(!s||!/[A-Za-z0-9]/.test(s))return;if(!/[.!?…]$/.test(s))s+='.';while(s.length>280){var k=s.lastIndexOf(',',280);if(k<80)k=s.lastIndexOf(' ',280);if(k<40)k=280;o.push(s.slice(0,k+1).trim());s=s.slice(k+1).trim()}if(s)o.push(s)});return o}
 function ttsWav(a,sr){var n=a.length,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=function(o,s){for(var i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);for(var i=0;i<n;i++){var x=Math.max(-1,Math.min(1,a[i]));v.setInt16(44+i*2,x<0?x*32768:x*32767,true)}return new Blob([b],{type:'audio/wav'})}
+function ttsRs(a,r){var n=Math.floor(a.length/r),o=new Float32Array(n);for(var i=0;i<n;i++){var x=i*r,j=Math.floor(x),f=x-j;o[i]=(a[j]||0)*(1-f)+(a[j+1]||0)*f}return o}
 function ttsKey(){return[TTSV.mid,ttsVc(),TTSV.text.trim(),TTSV.spd,TTSV.pit,TTSV.rng,TTSV.vol,TTSV.gap].join('|')}
 async function ttsSynth(){var parts=ttsSplit(TTSV.text),outs=[],tot=0,sr=24000;if(!parts.length)throw new Error(hedt('tts_em'));
- for(var i=0;i<parts.length;i++){if(TTSV.cancel)throw new Error('cancel');ttsPb(i/parts.length,hedt('tts_gn')+' '+(i+1)+'/'+parts.length);var a=await ttsCall({t:'syn',text:parts[i],spd:TTSV.spd,pit:TTSV.pit*.058,rng:TTSV.rng,vc:ttsVc()});if(a){outs.push(a);tot+=a.length}}
+ for(var i=0;i<parts.length;i++){if(TTSV.cancel)throw new Error('cancel');ttsPb(i/parts.length,hedt('tts_gn')+' '+(i+1)+'/'+parts.length);var pr=TTSV.mid=='tiny'?1:Math.pow(2,TTSV.pit/12),a=await ttsCall({t:'syn',text:parts[i],spd:TTSV.spd/pr,pit:TTSV.pit*.058,rng:TTSV.rng,vc:ttsVc()});if(a&&pr!=1)a=ttsRs(a,pr);if(a){outs.push(a);tot+=a.length}}
  if(!outs.length)throw new Error('empty');var gap=Math.round(sr*TTSV.gap),g=TTSV.vol/100,all=new Float32Array(tot+gap*(outs.length-1)),p=0;outs.forEach(function(c,i){for(var q=0;q<c.length;q++)all[p+q]=c[q]*g;p+=c.length+(i<outs.length-1?gap:0)});
  var f=new File([ttsWav(all,sr)],'voice-ai-'+hedPad(new Date().getMinutes())+hedPad(new Date().getSeconds())+'.wav',{type:'audio/wav'});return{f:f,dur:all.length/sr}}
 function ttsRun(mode){if(TTSV.busy||TTSV.st!='ready')return;if(mode=='play'&&TTSV.au&&!TTSV.au.paused){TTSV.au.pause();TTSV.au=null;ttsBtn();return}
@@ -6037,7 +6036,7 @@ function ttsAct(k,g){
 function hedTtsBody(){var st=TTSV.st,esc2=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')},M=TTSM[TTSV.mid],
  mchips='<div class="hedtlb">'+hedt('tts_mdl')+'</div><div class="hedtch hedtmd">'+Object.keys(TTSM).map(function(k){return'<button type="button" data-ha="ttsmd:'+k+'"'+(TTSV.mid==k?' class="on"':'')+'>'+TTSM[k].n+'</button>'}).join('')+'</div>';
  if(st=='idle'&&S('hsttsd_'+TTSV.mid,0)){setTimeout(ttsStart,0);st='dl'}
- if(st=='idle')return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><p>'+hedt('tts_dd').replace('{m}',M.mb).replace('{n}',M.mb+26)+'</p><button type="button" class="hedttbn pri" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+' (~'+(M.mb+26)+' MB)</button></div></div>';
+ if(st=='idle')return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><p>'+hedt('tts_dd').replace('{m}',M.mb).replace('{n}',M.mb+34)+'</p><button type="button" class="hedttbn pri" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+' (~'+(M.mb+34)+' MB)</button></div></div>';
  if(st=='dl')return'<div class="hedtts"><div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><div class="hedtpb" id="hedtpb"><i style="width:'+Math.round(TTSV.pg*100)+'%"></i></div><p id="hedtpt">'+ttsStgTxt()+'</p><button type="button" class="hedttbn" data-ha="ttsstop">'+hedIcm('stopi')+hedt('tts_stp')+'</button></div></div>';
  if(st=='err'){var cs=Object.keys(TTSV.csp).length||/Cannot reach|Failed to fetch/i.test(TTSV.err||'');return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_er')+' · '+M.n+'</b><p class="hedterr">'+esc2(TTSV.err||'?')+'</p>'+(cs?'<p>'+hedt('tts_csp')+'</p><code class="hedtcode">'+TTSCSP+'</code><button type="button" class="hedttbs" data-ha="ttscopy">'+hedt('tts_cpy')+'</button>':'')+'<button type="button" class="hedttbn pri" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button></div></div>'}
  if(!TTSV.text&&!TTSV.seen){TTSV.text=TTSSAMPLE}TTSV.seen=1;setTimeout(ttsBind,0);var vc=ttsVc(),h='<div class="hedtts">'+mchips+'<div class="hedtlb">'+hedt('tts_vcm')+' · '+hedt('tts_lgs')+'</div><div class="hedtch hedtvc">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtcnt"><span><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+'</span><span id="hedtdu"></span></div>'
@@ -6080,6 +6079,7 @@ HEDCSS+=`
 .hedtmd button,.hedtvc button{white-space:nowrap}
 `;
 /* CHANGELOG
+4.20.2 — Fixed: Voice (AI) failed with "No module named numpy" (the phonemizer loads numpy on first use) — missing Python packages are now installed automatically in the self-test too; pitch also works for Paradee and Kitten (audio resampling); the Wi-Fi sentence was removed from the download notice; shared engine size updated to about 34 MB.
 4.20.1 — Fixed: Voice (AI) engine failed at "import dizione" — the phonemizer package is now fetched completely (GitHub file tree first, whole package folder, no file-type filter) and import errors show their last lines; the Sample text button is first and the text box starts with a Huda Studio introduction and tagline.
 4.20.0 — Voice (AI): found why the download failed — the site's Content-Security-Policy (connect-src) blocks huggingface.co; the error card now says so and lists the exact addresses to add (with a Copy button); three male-voice models (Tiny Voca, Paradee 1.2 [Puck US / Fable UK], Kitten TTS Nano [Jasper, Bruno, Hugo, Leo]) all share one phonemizer; English only (the only language those models support among the four site languages); error messages name the host that could not be reached.
 4.19.0 — Multi Editor: Voice (AI) rewritten — the engine runs in its own worker, asks before the one-time ~47 MB download and can be stopped while downloading, shows real error messages; new controls: speed 0.5–2.0×, pitch (low–high), expression (flat–expressive), volume, pause, 7 voice-style presets (speed/pitch/expression only), character and word counters, Clear, Replace-from-clipboard, Sample, Reset controls, generation progress + Cancel, Download WAV, remembered settings. Timeline: white track-icon column with plain open-source icons (Material Design Icons) and plain + buttons (no gold circle); new + below the last track adds a project thumbnail (picture or current frame) that is shown in the timeline and in the project list in the picture's own ratio.
