@@ -1,6 +1,6 @@
 "use strict";
-/* Huda Studio studio.js — version 4.20.0 — Multi Editor (admin) */
-var STUDIO_JS_VERSION="4.20.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+/* Huda Studio studio.js — version 4.20.1 — Multi Editor (admin) */
+var STUDIO_JS_VERSION="4.20.1"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -5935,10 +5935,10 @@ var MODELS={
  para:{hf:'https://huggingface.co/sahilmahendrakar/Paradee-8M-v1.2/resolve/main/',model:'onnx/paradee_int8.onnx',cfg:'config.json'},
  kit:{hf:'https://huggingface.co/KittenML/kitten-tts-nano-0.8-fp32/resolve/main/',model:'kitten_tts_nano_v0_8.onnx',cfg:'config.json',vox:'voices.npz'}};
 async function dzFiles(br){var er,list=null;
- try{var h=await getTxt('https://cdn.jsdelivr.net/gh/n4ze3m/dizione@'+br+'/flat','dz'),m,re=/href="([^"]+)"/g,set={};while((m=re.exec(h))){var p=m[1].replace(/^https?:\/\/[^\/]+/,'').replace(/^\/?gh\/n4ze3m\/dizione@[^\/]+\//,'').replace(/^\/+/,'');if(/\.[a-z]+$/i.test(p)&&p.indexOf('..')<0)set[p]=1}list=Object.keys(set);if(!list.length)list=null}catch(e){er=e}
- if(!list){try{list=JSON.parse(await getTxt('https://data.jsdelivr.com/v1/packages/gh/n4ze3m/dizione@'+br+'?structure=flat','dz')).files.map(function(f){return f.name.replace(/^\//,'')})}catch(e){er=er||e}}
- if(!list){try{list=JSON.parse(await getTxt('https://api.github.com/repos/n4ze3m/dizione/git/trees/'+br+'?recursive=1','dz')).tree.filter(function(x){return x.type=='blob'}).map(function(x){return x.path})}catch(e){er=er||e}}
- if(!list)throw er||new Error('dizione file list');return list}
+ try{list=JSON.parse(await getTxt('https://api.github.com/repos/n4ze3m/dizione/git/trees/'+br+'?recursive=1','dz')).tree.filter(function(x){return x.type=='blob'}).map(function(x){return x.path})}catch(e){er=e}
+ if(!list||!list.length){list=null;try{list=JSON.parse(await getTxt('https://data.jsdelivr.com/v1/packages/gh/n4ze3m/dizione@'+br+'?structure=flat','dz')).files.map(function(f){return f.name.replace(/^\//,'')})}catch(e){er=er||e}}
+ if(!list||!list.length){list=null;try{var h=await getTxt('https://cdn.jsdelivr.net/gh/n4ze3m/dizione@'+br+'/flat','dz'),m,re=/href="([^"]+)"/g,set={};while((m=re.exec(h))){var p=m[1].replace(/^https?:\/\/[^\/]+/,'').replace(/^\/?gh\/n4ze3m\/dizione@[^\/]+\//,'').replace(/^\/+/,'');if(/\.[a-z0-9]+$/i.test(p)&&p.indexOf('..')<0)set[p]=1}list=Object.keys(set)}catch(e){er=er||e}}
+ if(!list||!list.length)throw er||new Error('dizione file list');return list}
 async function init(cfg){var M=MODELS[cfg.mid];E.m=cfg.mid;
  prog(.01,2);var ort;try{ort=await import(cfg.ort+'ort.wasm.min.mjs')}catch(e0){ort=await import(cfg.ort+'ort.min.mjs')}E.ort=ort;ort.env.wasm.wasmPaths=cfg.ort;ort.env.wasm.numThreads=1;ort.env.wasm.proxy=false;
  var mb=await getBuf(M.hf+M.model,1,.02,.45);
@@ -5948,17 +5948,17 @@ async function init(cfg){var M=MODELS[cfg.mid];E.m=cfg.mid;
  prog(.52,3);var pm=await import(cfg.py+'pyodide.mjs');var py=await pm.loadPyodide({indexURL:cfg.py});E.py=py;
  prog(.7,4);var T='https://huggingface.co/n4ze3m/tiny-voca/resolve/main/',files=null,br='main',er;
  try{files=await dzFiles('main')}catch(e){er=e;try{files=await dzFiles('master');br='master'}catch(e2){throw er}}
- files=files.filter(function(n){return/\.(py|json|txt|tsv|csv)$/i.test(n)&&!/(^|\/)(tests?|docs?|examples?|scripts?|benchmarks?|\.github)\//i.test(n)});
- var pk=files.filter(function(n){return/(^|\/)dizione\/__init__\.py$/.test(n)})[0],root=pk?pk.replace(/\/?dizione\/__init__\.py$/,''):'';
+ var pk=files.filter(function(n){return/(^|\/)dizione\/__init__\.py$/.test(n)})[0];
  if(!pk&&files.indexOf('dizione.py')<0)throw new Error('dizione source not found ('+files.length+' files listed)');
- files=files.filter(function(n){return!root||n.indexOf(root+'/')==0});
+ var root=pk?pk.replace(/\/?dizione\/__init__\.py$/,''):'',pdir=pk?pk.replace(/__init__\.py$/,''):'';
+ files=files.filter(function(n){return pk?n.indexOf(pdir)==0&&!/(^|\/)(tests?|__pycache__)\//.test(n)&&!/\.(pyc|md|png|jpe?g|gif|svg)$/i.test(n):n=='dizione.py'});E.nf=files.length;
  for(var i=0;i<files.length;i++){var n=files[i],t=await getAny(['https://cdn.jsdelivr.net/gh/n4ze3m/dizione@'+br+'/'+n,'https://raw.githubusercontent.com/n4ze3m/dizione/'+br+'/'+n],'dz'),pth='/dz/'+n;py.FS.mkdirTree(pth.slice(0,pth.lastIndexOf('/')));py.FS.writeFile(pth,new Uint8Array(t));prog(.7+.07*(i+1)/files.length,4)}
  prog(.78,5);var info=JSON.parse(await getTxt('https://huggingface.co/api/models/n4ze3m/tiny-voca','dd')),ph=(info.siblings||[]).map(function(x){return x.rfilename}).filter(function(n){return n.indexOf('phonemizer/')==0});
  if(!ph.length)throw new Error('phonemizer data not found');py.FS.mkdirTree('/ph');
  for(var j=0;j<ph.length;j++){var rel=ph[j].slice(11),b=await getBuf(T+ph[j].split('/').map(encodeURIComponent).join('/'),5,E.p,E.p);var d2='/ph/'+rel;py.FS.mkdirTree(d2.slice(0,d2.lastIndexOf('/')));py.FS.writeFile(d2,new Uint8Array(b));prog(.78+.12*(j+1)/ph.length,5)}
  prog(.92,6);if(cfg.mid!='tiny'){var tc=JSON.parse(await getTxt(T+'config.json',6));E.list=pickList(tc);if(!E.list)throw new Error('Tiny Voca phoneme table not found ('+Object.keys(tc).join(',')+')')}
  py.runPython("import sys,os\nsys.path.insert(0,'/dz"+(root?'/'+root:'')+"')\nos.environ['DIZIONE_DATA']='/ph'");
- for(var k=0;k<8;k++){try{py.runPython('import dizione');break}catch(e){var mm=/No module named '([\w.]+)'/.exec(String(e));if(!mm||k==7)throw e;var nm=mm[1].split('.')[0];try{await py.loadPackage(nm)}catch(e2){await py.loadPackage('micropip');await py.pyimport('micropip').install(nm)}}}
+ for(var k=0;k<8;k++){try{py.runPython("import traceback\ntry:\n  import dizione\n  _ie=''\nexcept Exception:\n  _ie=traceback.format_exc()\nif _ie: raise ImportError(_ie.strip().splitlines()[-1])");break}catch(e){var es=String(e),mm=/No module named '([\w.]+)'/.exec(es);if(!mm||k==7||/^dizione/.test(mm[1]))throw new Error(es.trim().split('\n').slice(-2).join(' | ')+' [files '+E.nf+(pdir?', pkg '+pdir:'')+']');var nm=mm[1].split('.')[0];try{await py.loadPackage(nm)}catch(e2){await py.loadPackage('micropip');await py.pyimport('micropip').install(nm)}}}
  py.runPython("dizione.phonemize('Hello.')");prog(1,6)}
 function phon(text){var py=E.py;py.globals.set('tts_txt',text);var pr=py.runPython("_p=dizione.phonemize(tts_txt)\n[list(_p.ids),list(_p.stress)]"),js=pr.toJs();pr.destroy();return js}
 async function syn(m){var ort=E.ort,js=phon(m.text),ids=js[0],st=js[1],n=ids.length;if(!n)return null;
@@ -5971,9 +5971,10 @@ async function syn(m){var ort=E.ort,js=phon(m.text),ids=js[0],st=js[1],n=ids.len
   r=await E.ses.run({input_ids:new ort.Tensor('int64',I(tk2),[1,tk2.length]),style:new ort.Tensor('float32',sty,[1,w]),speed:F(m.spd*pr2)})}
  var o=r.audio||r.waveform||r[E.ses.outputNames[0]],a=Float32Array.from(o.data),mx=0,i;if(E.m=='kit'&&a.length>20000)a=a.slice(0,a.length-5000);for(i=0;i<a.length;i++){if(a[i]!==a[i])a[i]=0;var z=Math.abs(a[i]);if(z>mx)mx=z}var g=mx>0?Math.min(1,.99/mx):1;for(i=0;i<a.length;i++)a[i]*=g;return a}
 self.onmessage=async function(ev){var m=ev.data;
- if(m.t=='init'){try{await init(m.cfg);post({t:'ready'})}catch(e){post({t:'err',m:String(e&&e.message||e).slice(0,400)})}}
+ if(m.t=='init'){try{await init(m.cfg);post({t:'ready'})}catch(e){post({t:'err',m:String(e&&e.message||e).slice(-420)})}}
  else if(m.t=='syn'){try{var a=await syn(m);if(a)post({t:'audio',id:m.id,a:a},[a.buffer]);else post({t:'audio',id:m.id,a:null})}catch(e){post({t:'err',id:m.id,m:String(e&&e.message||e).slice(0,400)})}}}
 }
+var TTSSAMPLE='Welcome to Huda Studio, a simple and powerful place to create Quran and Islamic videos, designs and audio right from your phone. Add verses, recitations and your own voice, shape every scene, and share beautiful content with the world. Huda Studio. Where guidance meets creativity.';
 var TTSM={tiny:{n:'Tiny Voca',mb:21,vc:[['M2','M2']]},para:{n:'Paradee 1.2',mb:9,vc:[['am_puck','Puck (US)'],['bm_fable','Fable (UK)']]},kit:{n:'Kitten TTS Nano',mb:57,vc:[['Jasper','Jasper'],['Bruno','Bruno'],['Hugo','Hugo'],['Leo','Leo']]}};
 var TTSCSP='https://huggingface.co https://*.huggingface.co https://*.hf.co https://cas-bridge.xethub.hf.co https://api.github.com https://data.jsdelivr.com https://pypi.org https://files.pythonhosted.org';
 var TTSV={ort:'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',py:'https://cdn.jsdelivr.net/pyodide/v0.27.2/full/',st:'idle',pg:0,stg:0,err:'',w:null,rid:0,pend:{},busy:0,cancel:0,text:'',last:null,au:null,msg:'',csp:{},c:S('hsttsc',null)||{}};
@@ -6030,7 +6031,7 @@ function ttsAct(k,g){
  else if(k=='ttscopy'){var t=TTSCSP,ok=function(){toast(hedt('tts_cpd'))};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok).catch(function(){});else{var ta=D.createElement('textarea');ta.value=t;D.body.appendChild(ta);ta.select();try{D.execCommand('copy');ok()}catch(e){}ta.remove()}}
  else if(k=='ttsclr'){TTSV.text='';var x=$('#hedttx');if(x)x.value='';ttsCnt()}
  else if(k=='ttsrep')ttsPaste();
- else if(k=='ttssmp'){TTSV.text='Hello! This is a sample of the AI voice. You can change the speed, the pitch and the style.';var x2=$('#hedttx');if(x2)x2.value=TTSV.text;ttsCnt()}
+ else if(k=='ttssmp'){TTSV.text=TTSSAMPLE;var x2=$('#hedttx');if(x2)x2.value=TTSV.text;ttsCnt()}
  else if(k=='ttsst')ttsSetSty(g);
  else if(k=='ttsrs'){TTSV.sty='';TTSV.spd=1;TTSV.pit=0;TTSV.rng=1;TTSV.vol=100;TTSV.gap=.18;TTSSL.forEach(function(s,i){var e=$('#hedts_'+s[0]);if(e){e.value=TTSV[s[0]];ttsSl(i)}});D.querySelectorAll('.hedtch button.on').forEach(function(b){b.classList.remove('on')});ttsSave();ttsCnt()}}
 function hedTtsBody(){var st=TTSV.st,esc2=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')},M=TTSM[TTSV.mid],
@@ -6039,8 +6040,8 @@ function hedTtsBody(){var st=TTSV.st,esc2=function(s){return String(s).replace(/
  if(st=='idle')return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><p>'+hedt('tts_dd').replace('{m}',M.mb).replace('{n}',M.mb+26)+'</p><button type="button" class="hedttbn pri" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+' (~'+(M.mb+26)+' MB)</button></div></div>';
  if(st=='dl')return'<div class="hedtts"><div class="hedtcard"><b>'+hedt('tts_dt')+' · '+M.n+'</b><div class="hedtpb" id="hedtpb"><i style="width:'+Math.round(TTSV.pg*100)+'%"></i></div><p id="hedtpt">'+ttsStgTxt()+'</p><button type="button" class="hedttbn" data-ha="ttsstop">'+hedIcm('stopi')+hedt('tts_stp')+'</button></div></div>';
  if(st=='err'){var cs=Object.keys(TTSV.csp).length||/Cannot reach|Failed to fetch/i.test(TTSV.err||'');return'<div class="hedtts">'+mchips+'<div class="hedtcard"><b>'+hedt('tts_er')+' · '+M.n+'</b><p class="hedterr">'+esc2(TTSV.err||'?')+'</p>'+(cs?'<p>'+hedt('tts_csp')+'</p><code class="hedtcode">'+TTSCSP+'</code><button type="button" class="hedttbs" data-ha="ttscopy">'+hedt('tts_cpy')+'</button>':'')+'<button type="button" class="hedttbn pri" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button></div></div>'}
- setTimeout(ttsBind,0);var vc=ttsVc(),h='<div class="hedtts">'+mchips+'<div class="hedtlb">'+hedt('tts_vcm')+' · '+hedt('tts_lgs')+'</div><div class="hedtch hedtvc">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtcnt"><span><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+'</span><span id="hedtdu"></span></div>'
- +'<div class="hedttb2"><button type="button" class="hedttbs" data-ha="ttsclr">'+hedIcm('clr')+hedt('tts_clr')+'</button><button type="button" class="hedttbs" data-ha="ttsrep">'+hedIcm('pst')+hedt('tts_rep')+'</button><button type="button" class="hedttbs" data-ha="ttssmp">'+hedIcm('smp')+hedt('tts_smp')+'</button></div>'
+ if(!TTSV.text&&!TTSV.seen){TTSV.text=TTSSAMPLE}TTSV.seen=1;setTimeout(ttsBind,0);var vc=ttsVc(),h='<div class="hedtts">'+mchips+'<div class="hedtlb">'+hedt('tts_vcm')+' · '+hedt('tts_lgs')+'</div><div class="hedtch hedtvc">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtcnt"><span><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+'</span><span id="hedtdu"></span></div>'
+ +'<div class="hedttb2"><button type="button" class="hedttbs" data-ha="ttssmp">'+hedIcm('smp')+hedt('tts_smp')+'</button><button type="button" class="hedttbs" data-ha="ttsclr">'+hedIcm('clr')+hedt('tts_clr')+'</button><button type="button" class="hedttbs" data-ha="ttsrep">'+hedIcm('pst')+hedt('tts_rep')+'</button></div>'
  +'<div class="hedttb"><button type="button" class="hedttbn" id="hedtpv" data-ha="ttsplay">'+hedIcm('play2')+'<span>'+hedt('tts_pv')+'</span></button><button type="button" class="hedttbn pri" data-ha="ttsadd">'+hedIcm('plus')+hedt('tts_ad')+'</button></div>'
  +'<div class="hedtgp" id="hedtgp" style="display:none"><div class="hedtpb" id="hedtpb"><i style="width:0"></i></div><div class="hedtgpr"><span id="hedtpt"></span><button type="button" class="hedttbs" data-ha="ttscan">'+hedIcm('cancel')+hedt('tts_cn')+'</button></div></div>'
  +'<div class="hedtlb">'+hedt('tts_stl')+'</div><div class="hedtch">'+['y1','y2','y3','y4','y5','y6','y7'].map(function(k){return'<button type="button" data-ha="ttsst:'+k+'"'+(TTSV.sty==k?' class="on"':'')+'>'+hedt('tts_'+k)+'</button>'}).join('')+'</div><p class="hedtnote">'+hedt('tts_yn')+'</p>';
@@ -6079,6 +6080,7 @@ HEDCSS+=`
 .hedtmd button,.hedtvc button{white-space:nowrap}
 `;
 /* CHANGELOG
+4.20.1 — Fixed: Voice (AI) engine failed at "import dizione" — the phonemizer package is now fetched completely (GitHub file tree first, whole package folder, no file-type filter) and import errors show their last lines; the Sample text button is first and the text box starts with a Huda Studio introduction and tagline.
 4.20.0 — Voice (AI): found why the download failed — the site's Content-Security-Policy (connect-src) blocks huggingface.co; the error card now says so and lists the exact addresses to add (with a Copy button); three male-voice models (Tiny Voca, Paradee 1.2 [Puck US / Fable UK], Kitten TTS Nano [Jasper, Bruno, Hugo, Leo]) all share one phonemizer; English only (the only language those models support among the four site languages); error messages name the host that could not be reached.
 4.19.0 — Multi Editor: Voice (AI) rewritten — the engine runs in its own worker, asks before the one-time ~47 MB download and can be stopped while downloading, shows real error messages; new controls: speed 0.5–2.0×, pitch (low–high), expression (flat–expressive), volume, pause, 7 voice-style presets (speed/pitch/expression only), character and word counters, Clear, Replace-from-clipboard, Sample, Reset controls, generation progress + Cancel, Download WAV, remembered settings. Timeline: white track-icon column with plain open-source icons (Material Design Icons) and plain + buttons (no gold circle); new + below the last track adds a project thumbnail (picture or current frame) that is shown in the timeline and in the project list in the picture's own ratio.
 4.18.2 — Fixed: the renewed Multi Editor icons (4.17.0) did not show because the icon table name HEDM clashed with the existing menu-state object HEDM; the table is now HEDMI and every toolbar / panel-header icon, the Voice (AI) icon and the keyframe copy/paste check mark use it. The Voice (AI) panel is more compact (Preview / Add buttons directly under the text box) and its tile uses the new voice icon.
