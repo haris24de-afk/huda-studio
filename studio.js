@@ -1,7 +1,7 @@
 "use strict";
-/* Huda Studio studio.js — version 4.21.0 — Multi Editor (admin) */
+/* Huda Studio studio.js — version 4.22.0 — Multi Editor (admin) */
 /* Third-party notice (not shown in the UI): the toolbar / panel icon path data embedded in this file (HEDMI table) comes from Material Design Icons by Pictogrammers, https://pictogrammers.com/library/mdi/ , licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0). Unless required by applicable law or agreed to in writing, the icons are distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND. */
-var STUDIO_JS_VERSION="4.21.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+var STUDIO_JS_VERSION="4.22.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -3225,7 +3225,7 @@ function hedBar(){var el=$('#hedbar');if(!el)return;var c=hedSelC(),h='',P=funct
  var hr1=$('#hed');if(hr1)hr1.classList.toggle('hednomain',hedNoMain());var sc=el.scrollLeft;el.innerHTML=hedBarOrder(h);el.scrollLeft=sc;var rp=$('#hedrecp');if(rp)rp.classList.toggle('on',!!HED.rec)}
 /* ---- popup (does not push the layout) ---- */
 function hedPanel(){var c=hedSelC();var hr0=$('#hed');if(hr0)hr0.classList.toggle('hedmsx',HED.pop=='mast');if(HED.pop!='mast'&&typeof STCA!=='undefined'&&STCA&&STCA.hed)hedMsDetach();HED.ddl={};hedPC=c;hedBar();var p=$('#hedpop');if(!p)return;if(HED.pop&&!hedPopOk(HED.pop,c))HED.pop='';if(!HED.pop){p.classList.remove('on');p.innerHTML='';if(HED.eyed)hedEyeEnd();if(HED.cpkT)HED.cpkT=null;if(HED.vr)hedVrKill();var hr0=$('#hed');if(hr0){hr0.classList.remove('xpop');hr0.classList.remove('cpkon');hr0.classList.remove('cptgt');hr0.classList.remove('vron');hr0.classList.remove('ttson')}p.style.maxHeight='';p.style.height='';hedBar();hedTimeUi();return}
- var o=p.querySelector('.hedpbody'),sc=o?o.scrollTop:0;p.innerHTML='<div class="hedgrip" aria-label="resize"><i></i></div><div class="hedphd">'+(HED.pop=='cpk'?'<span class="cpkhi">'+hi('cpk')+'</span>':(HEDPI[HED.pop]?'<span class="cpkhi ico">'+hedIcm(HEDPI[HED.pop])+'</span>':''))+'<b>'+hedt(HED.pop=='jn'&&HED.jn&&HED.jn.k=='mid'?'b_trn':(HEDTT[HED.pop]||'b_more'))+'</b><span class="hedsp"></span>'+(HED.pop=='layers'?'<button type="button" class="hedib'+(HED.lsm?' on':'')+'" data-ha="lsm" aria-label="select">'+hi('msel')+'</button>':'')+(HED.pop=='verses'?hedVsHead():HED.pop=='t3d'?hedT3Head(c):'<button type="button" class="hedib" data-ha="'+(HED.pop=='vrec'?'vradd':'popx')+'" aria-label="done">'+hi('check')+'</button>')+'</div><div class="hedpbody">'+hedPopBody(HED.pop,c)+'</div>';p.classList.add('on');p.classList.toggle('big',HED.pop=='layers');var hr=$('#hed');if(hr){hr.classList.toggle('xpop',HED.pop=='exp');hr.classList.toggle('cpkon',HED.pop=='cpk');hr.classList.toggle('cptgt',!!HED.cpkT);hr.classList.toggle('vron',HED.pop=='vrec');hr.classList.toggle('ttson',HED.pop=='tts')}if(HED.eyed&&HED.pop!='cpk')hedEyeEnd();if(HED.cpkT&&HED.pop!='cpk')HED.cpkT=null;if(HED.vr&&HED.pop!='vrec')hedVrKill();hedPopSize(p);if(HED.pop=='cpk')hedCpkHook(p);var pbx=p.querySelector('.hedpbody');if(pbx){var fx=HED.pop=='exp'&&HED.xs&&HED.xh;pbx.classList.toggle('xfix',!!fx);pbx.style.minHeight=fx?HED.xh+'px':''}var n=p.querySelector('.hedpbody');if(n)n.scrollTop=sc;hedBar();hedTimeUi()}
+ var o=p.querySelector('.hedpbody'),sc=o?o.scrollTop:0;p.innerHTML='<div class="hedgrip" aria-label="resize"><i></i></div><div class="hedphd">'+(HED.pop=='cpk'?'<span class="cpkhi">'+hi('cpk')+'</span>':(HEDPI[HED.pop]?'<span class="cpkhi ico">'+hedIcm(HEDPI[HED.pop])+'</span>':''))+'<b>'+hedt(HED.pop=='jn'&&HED.jn&&HED.jn.k=='mid'?'b_trn':(HEDTT[HED.pop]||'b_more'))+'</b><span class="hedsp"></span>'+(HED.pop=='layers'?'<button type="button" class="hedib'+(HED.lsm?' on':'')+'" data-ha="lsm" aria-label="select">'+hi('msel')+'</button>':'')+(HED.pop=='verses'?hedVsHead():HED.pop=='t3d'?hedT3Head(c):HED.pop=='tts'?'<button type="button" class="hedib hedvx" data-ha="popx" aria-label="close">'+hi('xx')+'</button>':'<button type="button" class="hedib" data-ha="'+(HED.pop=='vrec'?'vradd':'popx')+'" aria-label="done">'+hi('check')+'</button>')+'</div><div class="hedpbody">'+hedPopBody(HED.pop,c)+'</div>';p.classList.add('on');p.classList.toggle('big',HED.pop=='layers');var hr=$('#hed');if(hr){hr.classList.toggle('xpop',HED.pop=='exp');hr.classList.toggle('cpkon',HED.pop=='cpk');hr.classList.toggle('cptgt',!!HED.cpkT);hr.classList.toggle('vron',HED.pop=='vrec');hr.classList.toggle('ttson',HED.pop=='tts')}if(HED.eyed&&HED.pop!='cpk')hedEyeEnd();if(HED.cpkT&&HED.pop!='cpk')HED.cpkT=null;if(HED.vr&&HED.pop!='vrec')hedVrKill();hedPopSize(p);if(HED.pop=='cpk')hedCpkHook(p);var pbx=p.querySelector('.hedpbody');if(pbx){var fx=HED.pop=='exp'&&HED.xs&&HED.xh;pbx.classList.toggle('xfix',!!fx);pbx.style.minHeight=fx?HED.xh+'px':''}var n=p.querySelector('.hedpbody');if(n)n.scrollTop=sc;hedBar();hedTimeUi()}
 function hedPopBody(k,c){var h='',x;var xb=hedPopBody2(k,c);if(xb!=null)return xb;switch(k){
  case'mainadd':h='<div class="hedtiles">'+hTile('pop:scr','bg',hedt('scr_n'))+hTile('addv','video',hedt('scr_ph'))+'</div>';break;
  case'scr':h='<div class="hedsw hedscr">'+HEDSCR.map(function(q){return'<button type="button" style="background:'+q+'" data-ha="scradd:'+q+'" aria-label="'+q+'"></button>'}).join('')+'</div><div class="hedsr hedcr"><label>'+hedt('scr_cu')+'</label><button type="button" class="hedcolb" data-ha="cpkt2:#scrc" style="background:'+(HED.scrc||'#ffffff')+'"></button><button type="button" class="hedchip" data-ha="scrcu">'+hedt('scr_add')+'</button></div>';break;
@@ -4676,7 +4676,7 @@ function hedCpkBody(c){var cf=cpkInit(c),k=HED.cpk,g=!HED.cpkT&&cf.m=='g',hx=cpk
 /* every bottom sheet: the grip bar resizes it (drag) or toggles small/large (tap); the sheet may never cover the preview or the Undo/Redo row */
 function hedPopDef(p){var tp=$('.hedtp');if(!tp)return 400;return Math.max(150,Math.floor(p.getBoundingClientRect().bottom-tp.getBoundingClientRect().bottom-2))}
 function hedPopMax(p){var hd=$('.hedhd');if(!hd)return 500;return Math.max(150,Math.floor(p.getBoundingClientRect().bottom-hd.getBoundingClientRect().bottom-6))}
-function hedPopSize(p){p.style.height='';p.style.maxHeight='';HED.ph=HED.ph||{};var k=HED.pop,mx=hedPopMax(p),h=HED.ph[k];if(k=='cpk')p.style.maxHeight=Math.min(hedPopDef(p),560)+'px';if(h){p.style.maxHeight=mx+'px';p.style.height=Math.max(140,Math.min(h,mx))+'px'}
+function hedPopSize(p){p.style.height='';p.style.maxHeight='';HED.ph=HED.ph||{};var k=HED.pop,mx=hedPopMax(p),h=HED.ph[k];if(k=='cpk'||k=='tts')p.style.maxHeight=Math.min(hedPopDef(p),560)+'px';if(h){p.style.maxHeight=mx+'px';p.style.height=Math.max(140,Math.min(h,mx))+'px'}
  if(!p._gr){p._gr=1;p.addEventListener('click',function(e){if(Date.now()-(HED.gripT||0)<650&&!(e.target.closest&&e.target.closest('.hedgrip'))){e.stopPropagation();e.preventDefault()}},true);p.addEventListener('pointerdown',hedGrDown);p.addEventListener('pointermove',hedGrMove);p.addEventListener('pointerup',hedGrUp);p.addEventListener('pointercancel',hedGrUp)}}
 function hedGrDown(e){var g=e.target.closest&&e.target.closest('.hedgrip');if(!g||!HED)return;HED.gripT=Date.now();var p=g.parentNode;e.preventDefault();HED.gr={p:p,g:g,pid:e.pointerId,y0:e.clientY,h0:p.offsetHeight,mx:hedPopMax(p),mv:0};g.classList.add('on');try{g.setPointerCapture(e.pointerId)}catch(x){}}
 function hedGrMove(e){var r=HED&&HED.gr;if(!r||e.pointerId!=r.pid)return;var dy=r.y0-e.clientY;if(Math.abs(dy)>5)r.mv=1;if(!r.mv)return;e.preventDefault();var h=Math.max(60,Math.min(r.mx,r.h0+dy));r.p.style.maxHeight=r.mx+'px';r.p.style.height=h+'px';HED.ph=HED.ph||{};HED.ph[HED.pop]=h}
@@ -5974,7 +5974,7 @@ self.onmessage=async function(ev){var m=ev.data;
  else if(m.t=='syn'){try{var a=await syn(m);if(a)post({t:'audio',id:m.id,a:a},[a.buffer]);else post({t:'audio',id:m.id,a:null})}catch(e){post({t:'err',id:m.id,m:String(e&&e.message||e).slice(0,400)})}}}
 }
 var TTSSAMPLE='Welcome to Huda Studio, a simple and powerful place to create Quran and Islamic videos, designs and audio right from your phone. Add verses, recitations and your own voice, shape every scene, and share beautiful content with the world. Huda Studio. Where guidance meets creativity.';
-var TTSM={tiny:{n:'Tiny Voca',mb:21,vc:[['M2','M2']]},para:{n:'Paradee 1.2',mb:9,vc:[['am_puck','Puck (US)'],['bm_fable','Fable (UK)']]},kit:{n:'Kitten TTS Nano',mb:57,vc:[['Jasper','Jasper'],['Bruno','Bruno'],['Hugo','Hugo'],['Leo','Leo']]}};
+var TTSM={tiny:{n:'Tiny Voca',l:'en',mb:21,vc:[['M2','M2']]},para:{n:'Paradee 1.2',l:'en',mb:9,vc:[['am_puck','Puck (US)'],['bm_fable','Fable (UK)']]},kit:{n:'Kitten TTS Nano',l:'en',mb:57,vc:[['Jasper','Jasper'],['Bruno','Bruno'],['Hugo','Hugo'],['Leo','Leo']]}};
 var TTSCSP='https://huggingface.co https://*.huggingface.co https://*.hf.co https://cas-bridge.xethub.hf.co https://api.github.com https://data.jsdelivr.com https://pypi.org https://files.pythonhosted.org';
 var TTSV={ort:'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',py:'https://cdn.jsdelivr.net/pyodide/v0.27.2/full/',st:'idle',pg:0,stg:0,err:'',w:null,rid:0,pend:{},busy:0,cancel:0,text:'',last:null,au:null,msg:'',csp:{},c:S('hsttsc',null)||{}};
 ['spd','pit','rng','vol','gap'].forEach(function(k,i){TTSV[k]=typeof TTSV.c[k]=='number'?TTSV.c[k]:[1,0,1,100,.18][i]});TTSV.sty=TTSV.c.sty||'';TTSV.mid=TTSM[TTSV.c.mid]?TTSV.c.mid:'tiny';TTSV.vcs=TTSV.c.vcs||{};
@@ -5996,7 +5996,7 @@ function ttsWorker(){if(TTSV.w)return TTSV.w;var u=URL.createObjectURL(new Blob(
  TTSV.w=w;return w}
 function ttsStart(){if(TTSV.st=='dl'||TTSV.st=='ready')return;TTSV.st='dl';TTSV.pg=0;TTSV.stg=2;TTSV.err='';TTSV.csp={};try{var w=ttsWorker();w.postMessage({t:'init',cfg:{mid:TTSV.mid,ort:TTSV.ort,py:TTSV.py}})}catch(e){TTSV.st='err';TTSV.err=String(e&&e.message||e)}ttsRe()}
 function ttsStopDl(){ttsKill();TTSV.st='idle';TTSV.pg=0;ttsRe()}
-function ttsPick(k,g){if(k=='ttsmd'){if(TTSV.mid==g||TTSV.busy)return;ttsKill();TTSV.st='idle';TTSV.mid=g;TTSV.last=null;ttsSave();ttsRe()}else if(k=='ttsvc'){TTSV.vcs[TTSV.mid]=g;TTSV.last=null;ttsSave();D.querySelectorAll('.hedtvc button').forEach(function(b){b.classList.toggle('on',b.dataset.ha=='ttsvc:'+g)})}}
+function ttsPick(k,g){if(k=='ttsmd'){if(TTSV.mid==g||TTSV.busy)return;ttsKill();TTSV.st='idle';TTSV.mid=g;TTSV.last=null;ttsSave();ttsRe()}else if(k=='ttsvc'){TTSV.vcs[TTSV.mid]=g;TTSV.last=null;ttsSave();D.querySelectorAll('.hedtvr .hedtch button').forEach(function(b){b.classList.toggle('on',b.dataset.ha=='ttsvc:'+g)})}}
 function ttsCall(m){return new Promise(function(ok,no){var id=++TTSV.rid;TTSV.pend[id]=[ok,no];m.id=id;TTSV.w.postMessage(m)})}
 function ttsSplit(t){var o=[];(t.replace(/\s+/g,' ').trim().match(/[^.!?…]+[.!?…]*/g)||[]).forEach(function(s){s=s.trim();if(!s||!/[A-Za-z0-9]/.test(s))return;if(!/[.!?…]$/.test(s))s+='.';while(s.length>280){var k=s.lastIndexOf(',',280);if(k<80)k=s.lastIndexOf(' ',280);if(k<40)k=280;o.push(s.slice(0,k+1).trim());s=s.slice(k+1).trim()}if(s)o.push(s)});return o}
 function ttsWav(a,sr){var n=a.length,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=function(o,s){for(var i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);for(var i=0;i<n;i++){var x=Math.max(-1,Math.min(1,a[i]));v.setInt16(44+i*2,x<0?x*32768:x*32767,true)}return new Blob([b],{type:'audio/wav'})}
@@ -6027,13 +6027,15 @@ ts_st:['அமைப்புகள்','Settings','සැකසුම්','ال
 ts_del:['மாதிரியை நீக்கு','Delete model','මාදිලිය මකන්න','حذف النموذج'],
 ts_del2:['உறுதிசெய்ய மீண்டும் தொடு','Tap again to delete','තහවුරු කිරීමට නැවත ඔබන්න','اضغط مرة أخرى للحذف'],
 ts_deld:['மாதிரி நீக்கப்பட்டது','Model deleted','මාදිලිය මකා දැමුවා','تم حذف النموذج'],
-ts_pa:['இடைநிறுத்து','Pause','විරාමය','إيقاف مؤقت']
+ts_pa:['இடைநிறுத்து','Pause','විරාමය','إيقاف مؤقت'],
+ts_delq:['“{m}” மாதிரியை நீக்கவா? மீண்டும் பயன்படுத்த மறுபடியும் பதிவிறக்க வேண்டும்.','Delete the “{m}” model? You will need to download it again to use it.','“{m}” මාදිලිය මකන්නද? නැවත භාවිතා කිරීමට නැවත බාගත කළ යුතුය.','حذف نموذج «{m}»؟ ستحتاج إلى تنزيله مرة أخرى لاستخدامه.'],
+tts_l_en:['ஆங்கிலம்','English','ඉංග්‍රීසි','الإنجليزية']
 });
-TTSV.text=S('hsttstx','')||'';TTSV.sopen=true;TTSV.delc=0;TTSV.cn='hs-tts-v1';
+TTSV.text=S('hsttstx','')||'';TTSV.sopen=false;TTSV.delc=0;TTSV.cn='hs-tts-v1';
 var TTSDEL={tiny:'https://huggingface.co/n4ze3m/tiny-voca/resolve/main/onnx/model.onnx',para:'https://huggingface.co/sahilmahendrakar/Paradee-8M-v1.2/',kit:'https://huggingface.co/KittenML/kitten-tts-nano-0.8-fp32/'};
 function ttsSt(m){TTSV.msg=m;var e=$('#hedtst');if(e){e.textContent=m;e.style.display=m?'':'none'}}
 function ttsPb(p,txt){TTSV.pg=p;var b=$('#hedtpb i');if(b)b.style.width=Math.round(p*100)+'%';var t=$('#hedtpt');if(t)t.textContent=txt}
-function ttsDp(p,txt){TTSV.pg=p;var b=$('#hedtdb i');if(b)b.style.width=Math.round(p*100)+'%';var t=$('#hedtdt');if(t)t.textContent=txt}
+function ttsDp(p,txt){TTSV.pg=p;var b=$('#hedtdb>i');if(b)b.style.width=Math.round(p*100)+'%';var bx=$('#hedtdb'),t=$('#hedtdt');if(t&&bx&&bx.dataset.m=='dl')t.textContent=Math.round(p*100)+'%'}
 function ttsWfDraw(){var L=TTSV.last,w=$('#hedtwf'),r=$('#hedtwr');if(!L||!w||!r)return;w.innerHTML=L.peaks.map(function(p){return'<i style="height:'+Math.max(10,Math.round(p*100))+'%"></i>'}).join('');var t=$('#hedttm');if(t)t.textContent='0:00 / '+ttsFmt(L.dur);r.style.display=''}
 function ttsPlaying(){return!!(TTSV.au&&!TTSV.au.paused&&!TTSV.au.ended)}
 function ttsFmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+hedPad(s%60)}
@@ -6052,16 +6054,17 @@ function ttsBind(){var x=$('#hedttx');if(x){x.oninput=function(){TTSV.text=x.val
 function ttsPlayL(L){if(TTSV.au)try{TTSV.au.pause()}catch(e){}var a=new Audio(L.u);TTSV.au=a;TTSV.aul=L;a.ontimeupdate=ttsWfUp;a.onplay=a.onpause=a.onended=function(){ttsBtn();ttsWfUp()};a.play().catch(function(){});ttsBtn()}
 function ttsSetSty(k){var p=TTSSTY[k];if(!p)return;TTSV.sty=k;TTSV.spd=p[0];TTSV.pit=p[1];TTSV.rng=p[2];TTSV.gap=p[3];TTSSL.forEach(function(s,i){var e=$('#hedts_'+s[0]);if(e){e.value=TTSV[s[0]];ttsSl(i)}});D.querySelectorAll('.hedtch.hdsty button').forEach(function(b){b.classList.toggle('on',b.dataset.ha=='ttsst:'+k)});ttsSave();ttsCnt();ttsWfVis()}
 function ttsPaste(){var set=function(s){TTSV.text=String(s||'').slice(0,5000);var x=$('#hedttx');if(x)x.value=TTSV.text;ttsCnt();ttsWfVis();try{P('hsttstx',TTSV.text)}catch(e){}};set('');if(navigator.clipboard&&navigator.clipboard.readText)navigator.clipboard.readText().then(function(s){if(s&&s.trim())set(s);else toast(hedt('tts_cb0'))}).catch(function(){var x=$('#hedttx');if(x)x.focus();toast(hedt('tts_cb1'))});else{var x=$('#hedttx');if(x)x.focus();toast(hedt('tts_cb1'))}}
-function ttsDelModel(){var id=TTSV.mid;if(!TTSV.delc){TTSV.delc=1;ttsRe();clearTimeout(TTSV.dt);TTSV.dt=setTimeout(function(){if(TTSV.delc){TTSV.delc=0;ttsRe()}},3000);return}
- TTSV.delc=0;clearTimeout(TTSV.dt);ttsKill();TTSV.st='idle';TTSV.last=null;TTSV.aul=null;if(TTSV.au){try{TTSV.au.pause()}catch(e){}TTSV.au=null}try{P('hsttsd_'+id,0)}catch(e){}
+function ttsDelModel(){var id=TTSV.mid;hedConfirm(hedt('ts_delq').replace('{m}',TTSM[id].n),function(){ttsDelDo(id)})}
+function ttsDelDo(id){ttsKill();TTSV.st='idle';TTSV.last=null;TTSV.aul=null;if(TTSV.au){try{TTSV.au.pause()}catch(e){}TTSV.au=null}try{P('hsttsd_'+id,0)}catch(e){}
  (window.caches?caches.open(TTSV.cn):Promise.reject()).then(function(c){return c.keys().then(function(ks){var pre=TTSDEL[id],alone=!Object.keys(TTSM).some(function(k){return k!=id&&S('hsttsd_'+k,0)});return Promise.all(ks.filter(function(r){return alone||r.url==pre||r.url.indexOf(pre)==0}).map(function(r){return c.delete(r)}))})}).catch(function(){}).then(function(){toast(hedt('ts_deld'));ttsRe()})}
 function ttsAct(k,g){
+ if(k!='ttsmdo'){var ml=$('#hedtml');if(ml)ml.classList.remove('on')}
  if(k=='ttsdl')ttsStart();else if(k=='ttsstop')ttsStopDl();else if(k=='ttsretry'){TTSV.st='idle';ttsStart()}
  else if(k=='ttsplay')ttsRun('play');else if(k=='ttsadd')ttsRun('add');
  else if(k=='ttscan'){TTSV.cancel=1}
  else if(k=='ttsmd'||k=='ttsvc')ttsPick(k,g);
- else if(k=='ttsmdo'){var l=$('#hedtml');if(l)l.classList.toggle('on')}
- else if(k=='ttsset'){TTSV.sopen=!TTSV.sopen;var s=$('.hedtsec');if(s)s.classList.toggle('hdshut',!TTSV.sopen)}
+ else if(k=='ttsmdo'){var l=$('#hedtml');if(l){l.classList.toggle('on');if(l.classList.contains('on'))try{l.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e){}}}
+ else if(k=='ttsset'){TTSV.sopen=!TTSV.sopen;var s=$('.hedtsec');if(s){s.classList.toggle('hdshut',!TTSV.sopen);if(TTSV.sopen)try{s.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e){}}}
  else if(k=='ttsdel')ttsDelModel();
  else if(k=='ttscopy'){var t=TTSCSP,ok=function(){toast(hedt('tts_cpd'))};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok).catch(function(){});else{var ta=D.createElement('textarea');ta.value=t;D.body.appendChild(ta);ta.select();try{D.execCommand('copy');ok()}catch(e){}ta.remove()}}
  else if(k=='ttsclr'){TTSV.text='';var x=$('#hedttx');if(x)x.value='';ttsCnt();ttsWfVis();try{P('hsttstx','')}catch(e){}}
@@ -6072,31 +6075,29 @@ function ttsAct(k,g){
 function hedTtsBody(){var esc2=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')},M=TTSM[TTSV.mid],dlf=S('hsttsd_'+TTSV.mid,0),st=TTSV.st;
  if(st=='idle'&&dlf){setTimeout(ttsStart,0);st='dl'}
  var mode=st=='ready'?'ready':st=='dl'?(dlf?'prep':'dl'):st=='err'?'err':'idle',tot=function(k){return TTSM[k].mb+34};
- var list=Object.keys(TTSM).map(function(k){var d=S('hsttsd_'+k,0);return'<button type="button" data-ha="ttsmd:'+k+'"'+(k==TTSV.mid?' class="on"':'')+'><span>'+TTSM[k].n+'</span><small>'+tot(k)+' MB</small>'+(d?'<i class="hdk">'+hedIcm('okc')+'</i>':'')+'</button>'}).join('');
- var right=mode=='idle'?'<button type="button" class="hedtbtn hdo" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+'</button>':mode=='dl'?'<button type="button" class="hedtbtn hdr" data-ha="ttsstop">'+hedIcm('stopi')+hedt('tts_stp')+'</button>':mode=='prep'?'<span class="hedtbadge hdy"><i class="hedtspin"></i>'+hedt('ts_pp')+'</span>':mode=='ready'?'<span class="hedtbadge hdg">'+hedIcm('okc')+hedt('ts_dn')+'</span><button type="button" class="hedtic2'+(TTSV.delc?' hdr':'')+'" data-ha="ttsdel" aria-label="'+hedt('ts_del')+'">'+hedIcm('trashx')+(TTSV.delc?'<span>'+hedt('ts_del2')+'</span>':'')+'</button>':'<button type="button" class="hedtbtn hdo" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button>';
- var below=(mode=='dl'||mode=='prep')?'<div class="hedtdp'+(mode=='prep'?' hdy':'')+'"><div class="hedtpb" id="hedtdb"><i style="width:'+Math.round(TTSV.pg*100)+'%"></i></div><span id="hedtdt">'+ttsStgTxt()+'</span></div>':'';
+ var bt=function(k){var d=S('hsttsd_'+k,0);return'<button type="button" data-ha="ttsmd:'+k+'"'+(k==TTSV.mid?' class="on"':'')+'><span>'+TTSM[k].n+'</span><small>'+tot(k)+' MB</small>'+(d?'<i class="hdk">'+hedIcm('okc')+'</i>':'')+'</button>'},grp={};Object.keys(TTSM).forEach(function(k){var l=TTSM[k].l||'en';(grp[l]=grp[l]||[]).push(k)});
+ var list=Object.keys(grp).map(function(l){return'<div class="hedtmh">'+hedt('tts_l_'+l)+'</div>'+grp[l].map(bt).join('')}).join('');
+ var pct=Math.round(TTSV.pg*100),right=mode=='idle'?'<button type="button" class="hedtbtn hdo" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+'</button>':mode=='dl'?'<div class="hedtpg" id="hedtdb" data-m="dl"><i style="width:'+pct+'%"></i><span id="hedtdt">'+pct+'%</span></div><button type="button" class="hedtstp" data-ha="ttsstop" aria-label="'+hedt('tts_stp')+'">'+hedIcm('stopi')+'</button>':mode=='prep'?'<div class="hedtpg hdy" id="hedtdb" data-m="prep"><i style="width:'+pct+'%"></i><span id="hedtdt"><b class="hedtspin"></b>'+hedt('ts_pp')+'</span></div>':mode=='ready'?'<span class="hedtbadge hdg">'+hedIcm('okc')+hedt('ts_dn')+'</span><button type="button" class="hedtic2" data-ha="ttsdel" aria-label="'+hedt('ts_del')+'">'+hedIcm('trashx')+'</button>':'<button type="button" class="hedtbtn hdo" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button>';
+ var below='';
  if(mode=='err'){var cs=Object.keys(TTSV.csp).length||/Cannot reach|Failed to fetch/i.test(TTSV.err||'');below='<div class="hedtcard"><p class="hedterr">'+esc2(TTSV.err||'?')+'</p>'+(cs?'<p>'+hedt('tts_csp')+'</p><code class="hedtcode">'+TTSCSP+'</code><button type="button" class="hedtmini" data-ha="ttscopy">'+hedt('tts_cpy')+'</button>':'')+'</div>'}
  if(!TTSV.text&&!TTSV.seen){TTSV.text=TTSSAMPLE}TTSV.seen=1;setTimeout(ttsBind,0);
- var vc=ttsVc(),L=TTSV.last&&TTSV.last.k==ttsKey()?TTSV.last:null,h='<div class="hedtts">'
+ var vc=ttsVc(),L=TTSV.last&&TTSV.last.k==ttsKey()?TTSV.last:null,h='<div class="hedtts hdtv">'
  +'<div class="hedtbox"><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtbar2"><span class="hedtcnt"><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+' <span id="hedtdu"></span></span><button type="button" class="hedtmini" data-ha="ttssmp">'+hedIcm('smp')+hedt('tts_smp')+'</button><button type="button" class="hedtmini" data-ha="ttsrep">'+hedIcm('pst')+hedt('tts_rep')+'</button><button type="button" class="hedtmini hdr" data-ha="ttsclr">'+hedIcm('clr')+hedt('tts_clr')+'</button></div></div>'
  +'<div class="hedtmr"><button type="button" class="hedtmp" data-ha="ttsmdo"><span class="hdnm">'+M.n+'</span><small>'+tot(TTSV.mid)+' MB</small>'+hedIcm('chev')+'</button><div class="hedtml" id="hedtml">'+list+'</div>'+right+'</div>'+below
- +'<div class="hedtsec'+(TTSV.sopen?'':' hdshut')+'"><button type="button" class="hedtsh" data-ha="ttsset">'+hedIcm('gearx')+'<span>'+hedt('ts_st')+'</span><i class="hdchev">'+hedIcm('chev')+'</i></button><div class="hedtsb">'
- +(M.vc.length>1?'<div class="hedtch">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div>':'')
+ +(M.vc.length>1?'<div class="hedtvr"><span>'+hedt('tts_vcm')+'</span><div class="hedtch">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div></div>':'')+'<div class="hedtsec'+(TTSV.sopen?'':' hdshut')+'"><button type="button" class="hedtsh" data-ha="ttsset">'+hedIcm('gearx')+'<span>'+hedt('ts_st')+'</span><i class="hdchev">'+hedIcm('chev')+'</i></button><div class="hedtsb">'
+ 
  +'<div class="hedtch hdsty">'+['y1','y2','y3','y4','y5','y6','y7'].map(function(k){return'<button type="button" data-ha="ttsst:'+k+'"'+(TTSV.sty==k?' class="on"':'')+'>'+hedt('tts_'+k)+'</button>'}).join('')+'</div><div class="hedtgrid">';
  TTSSL.forEach(function(s){if(s[8]&&TTSV.mid!='tiny')return;h+='<div class="hedtsl"><div class="hdt"><span>'+hedt(s[1])+'</span><b id="hedtv_'+s[0]+'">'+s[5](TTSV[s[0]])+'</b></div><input type="range" id="hedts_'+s[0]+'" min="'+s[2]+'" max="'+s[3]+'" step="'+s[4]+'" value="'+TTSV[s[0]]+'">'+(s[6]?'<div class="hde"><span>'+hedt(s[6])+'</span><span>'+hedt(s[7])+'</span></div>':'')+'</div>'});
  h+='</div><div class="hedtfoot"><span>'+hedt('tts_lgs')+'</span><button type="button" class="hedtmini" data-ha="ttsrs">'+hedIcm('rs')+hedt('tts_rs')+'</button></div></div></div>'
  +'<div class="hedtwr" id="hedtwr"'+(L?'':' style="display:none"')+'><button type="button" class="hedtpl" id="hedtpl" data-ha="ttsplay">'+hedIcm('play2')+'</button><div class="hedtwf" id="hedtwf">'+(L?L.peaks.map(function(p){return'<i style="height:'+Math.max(10,Math.round(p*100))+'%"></i>'}).join(''):'')+'</div><span id="hedttm">'+(L?'0:00 / '+ttsFmt(L.dur):'')+'</span></div>'
  +'<div class="hedtgp" id="hedtgp" style="display:none"><div class="hedtpb" id="hedtpb"><i style="width:0"></i></div><div class="hedtgpr"><span id="hedtpt"></span><button type="button" class="hedtmini hdr" data-ha="ttscan">'+hedIcm('cancel')+hedt('tts_cn')+'</button></div></div>'
+ +'<p class="hedtst" id="hedtst" style="display:'+(TTSV.msg?'':'none')+'">'+esc2(TTSV.msg)+'</p>'
  +'<div class="hedtact"><button type="button" class="hedtpvb" id="hedtpv" data-ha="ttsplay">'+hedIcm('play2')+'<span>'+hedt('tts_pv')+'</span></button><button type="button" class="hedtadb" data-ha="ttsadd">'+hedIcm('plus')+'<span>'+hedt('tts_ad')+'</span></button></div>'
- +'<p class="hedtst" id="hedtst" style="display:'+(TTSV.msg?'':'none')+'">'+esc2(TTSV.msg)+'</p></div>';
+ +'</div>';
  return h}
 HEDCSS+=`
-.hed.ttson .hedbar{display:none!important}
-.hed.ttson .hedpop{top:0!important;bottom:0!important;height:auto!important;max-height:none!important;border-radius:0!important;border:0!important;z-index:60;animation:hedttin .25s ease-out}
-.hed.ttson .hedgrip,.hed.ttson .hedphd:before{display:none}
-.hed.ttson .hedphd{padding:calc(10px + env(safe-area-inset-top)) 12px 6px 16px}.hed.ttson .hedphd b{padding-top:0;font-size:17px}
-.hed.ttson .hedpbody{padding:4px 14px calc(14px + env(safe-area-inset-bottom));overflow-y:auto}
-@keyframes hedttin{from{transform:translateY(28px);opacity:0}to{transform:none;opacity:1}}
+.hed.ttson .hedbar{visibility:hidden}.hed.ttson .hedpop{bottom:0;max-height:min(56%,470px);animation:cpkup .3s cubic-bezier(.2,.85,.25,1)}
+.hed.ttson .hedpbody{padding:4px 14px calc(14px + env(safe-area-inset-bottom));overflow-x:hidden}
 @keyframes hedspin{to{transform:rotate(360deg)}}
 .hedtts{display:flex;flex-direction:column;gap:10px;padding:2px 0}
 .hedtbox{border:1px solid var(--bd);border-radius:16px;background:var(--cd);overflow:hidden}.hedtbox:focus-within{border-color:var(--g);box-shadow:0 0 0 3px rgba(var(--gr),.16)}
@@ -6160,7 +6161,31 @@ HEDCSS+=`
 .hedtcode{display:block;word-break:break-all;user-select:all;font-size:11px;padding:8px;border-radius:8px;background:rgba(127,127,127,.15)}
 .hedtmd button,.hedtvc button{white-space:nowrap}
 `;
+HEDCSS+=`
+.hedtts.hdtv{display:flex;flex-direction:column;gap:8px;padding:2px 0;min-width:0;max-width:100%;box-sizing:border-box}
+.hedtts.hdtv>*{min-width:0;max-width:100%;box-sizing:border-box}
+.hedtts.hdtv .hedtbox textarea{border:0;border-radius:0;background:transparent;padding:10px 12px 2px;min-height:72px;resize:none;box-shadow:none}
+.hedtts.hdtv .hedtmini{padding:3px 8px;font-size:10.5px;gap:3px}.hedtts.hdtv .hedtmini .hedic{width:12px;height:12px}
+.hedtts.hdtv .hedtbar2{padding:2px 8px 6px;gap:5px}
+.hedtts.hdtv .hedtmp{padding:7px 10px;font-size:13px;border-radius:12px}.hedtts.hdtv .hedtmp .hedic{width:16px;height:16px}
+.hedtts.hdtv .hedtbtn{padding:7px 11px;font-size:12.5px;border-radius:10px}
+.hedtts.hdtv .hedtbadge{padding:5px 9px;font-size:11.5px}
+.hedtts.hdtv .hedtic2{min-width:32px;height:32px;border-radius:10px}.hedtts.hdtv .hedtic2 .hedic{width:17px;height:17px}
+.hedtmh{font-size:10.5px;font-weight:800;opacity:.6;padding:8px 14px 2px;letter-spacing:.2px}
+.hedtpg{position:relative;flex:none;min-width:76px;height:32px;border-radius:10px;border:1px solid var(--bd);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;color:#1a1405}
+.hedtpg>i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--g),var(--g2));transition:width .2s}
+.hedtpg>span{position:relative;display:flex;align-items:center;gap:5px;white-space:nowrap;padding:0 10px;font-variant-numeric:tabular-nums}
+.hedtpg.hdy{min-width:0;border-color:rgba(217,154,0,.45);background:rgba(217,154,0,.12)}.hedtpg.hdy>i{background:rgba(240,180,41,.55)}.hedtpg.hdy .hedtspin{display:inline-block;flex:none}
+.hedtstp{flex:none;width:32px;height:32px;border:0;border-radius:50%;background:#d23b3b;color:#fff;display:grid;place-items:center;padding:0}.hedtstp .hedic{width:16px;height:16px}
+.hedtvr{display:flex;align-items:center;gap:8px}.hedtvr>span{font-size:12px;font-weight:700;opacity:.7;white-space:nowrap}.hedtvr .hedtch{flex:1;min-width:0;padding-bottom:0}.hedtvr .hedtch button{padding:5px 11px;font-size:12.5px}
+.hedtts.hdtv .hedtact{position:sticky;bottom:0;z-index:3;background:var(--cd);padding:6px 0 2px;gap:8px}
+.hedtts.hdtv .hedtact button{height:30px;border-radius:10px;font-size:12px;gap:5px;padding:0 8px}.hedtts.hdtv .hedtact .hedic{width:16px;height:16px}
+.hedtts.hdtv .hedtact .hedtadb{box-shadow:0 3px 8px rgba(var(--gr),.3)}
+.hedtts.hdtv .hedtsh{padding:8px 12px;font-size:13px}.hedtts.hdtv .hedtsh .hedic{width:18px;height:18px}
+`;
 /* CHANGELOG
+4.22.0 — Text To Speech popup: (1) the content no longer runs off the screen (a later thumbnail style had turned the popup into an auto-width grid; it now has its own flex layout and the text box lost its double border); (2) it is a half-screen sheet like the Colour popup — the preview and Undo/Redo stay visible, the grip bar on top drags or taps to enlarge, and the green tick is now a red × close icon; (3) the download progress with the percentage is shown inside the Download box itself (white → gold fill, small red stop icon; yellow “Preparing…” fill while an already-downloaded model starts), nothing below; (4) Sample / Replace / Clear / Preview / Add to timeline and the model, download and Settings buttons are about half the old size, and Preview / Add stay pinned at the bottom of the sheet; (5) deleting a downloaded model asks in a small separate pop-up instead of “tap again”; (6) the model list starts with a small language heading (English) — models are grouped by language; (7) voices of Paradee 1.2 and Kitten TTS Nano can now be chosen: the selected voice was never highlighted because the highlight code looked for an old class name; the voice row now sits outside Settings; Settings starts closed.
+4.21.0 — Text To Speech popup redesigned (text box first, Clear / Replace under it, model drop-down, Downloaded / Preparing badges, Settings section); Material Design Icons licence note added as a hidden comment at the top.
 4.20.2 — Fixed: Voice (AI) failed with "No module named numpy" (the phonemizer loads numpy on first use) — missing Python packages are now installed automatically in the self-test too; pitch also works for Paradee and Kitten (audio resampling); the Wi-Fi sentence was removed from the download notice; shared engine size updated to about 34 MB.
 4.20.1 — Fixed: Voice (AI) engine failed at "import dizione" — the phonemizer package is now fetched completely (GitHub file tree first, whole package folder, no file-type filter) and import errors show their last lines; the Sample text button is first and the text box starts with a Huda Studio introduction and tagline.
 4.20.0 — Voice (AI): found why the download failed — the site's Content-Security-Policy (connect-src) blocks huggingface.co; the error card now says so and lists the exact addresses to add (with a Copy button); three male-voice models (Tiny Voca, Paradee 1.2 [Puck US / Fable UK], Kitten TTS Nano [Jasper, Bruno, Hugo, Leo]) all share one phonemizer; English only (the only language those models support among the four site languages); error messages name the host that could not be reached.
