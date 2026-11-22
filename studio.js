@@ -1,7 +1,7 @@
 "use strict";
-/* Huda Studio studio.js — version 4.22.0 — Multi Editor (admin) */
+/* Huda Studio studio.js — version 4.23.0 — Multi Editor (admin) */
 /* Third-party notice (not shown in the UI): the toolbar / panel icon path data embedded in this file (HEDMI table) comes from Material Design Icons by Pictogrammers, https://pictogrammers.com/library/mdi/ , licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0). Unless required by applicable law or agreed to in writing, the icons are distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND. */
-var STUDIO_JS_VERSION="4.22.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
+var STUDIO_JS_VERSION="4.23.0"; /* Semantic Versioning MAJOR.MINOR.PATCH — see CHANGELOG at the end of this file */
 var STR={sq:[1,1,'1:1'],p45:[4,5,'4:5'],p34:[3,4,'3:4'],st:[9,16,'9:16'],wd:[16,9,'16:9']};
 var STY=[
  {id:'classic',n:['கிளாசிக் சட்டம்','Classic frame'],hy:92,top:205,bot:200,fy:70,mx:.11},
@@ -3225,7 +3225,7 @@ function hedBar(){var el=$('#hedbar');if(!el)return;var c=hedSelC(),h='',P=funct
  var hr1=$('#hed');if(hr1)hr1.classList.toggle('hednomain',hedNoMain());var sc=el.scrollLeft;el.innerHTML=hedBarOrder(h);el.scrollLeft=sc;var rp=$('#hedrecp');if(rp)rp.classList.toggle('on',!!HED.rec)}
 /* ---- popup (does not push the layout) ---- */
 function hedPanel(){var c=hedSelC();var hr0=$('#hed');if(hr0)hr0.classList.toggle('hedmsx',HED.pop=='mast');if(HED.pop!='mast'&&typeof STCA!=='undefined'&&STCA&&STCA.hed)hedMsDetach();HED.ddl={};hedPC=c;hedBar();var p=$('#hedpop');if(!p)return;if(HED.pop&&!hedPopOk(HED.pop,c))HED.pop='';if(!HED.pop){p.classList.remove('on');p.innerHTML='';if(HED.eyed)hedEyeEnd();if(HED.cpkT)HED.cpkT=null;if(HED.vr)hedVrKill();var hr0=$('#hed');if(hr0){hr0.classList.remove('xpop');hr0.classList.remove('cpkon');hr0.classList.remove('cptgt');hr0.classList.remove('vron');hr0.classList.remove('ttson')}p.style.maxHeight='';p.style.height='';hedBar();hedTimeUi();return}
- var o=p.querySelector('.hedpbody'),sc=o?o.scrollTop:0;p.innerHTML='<div class="hedgrip" aria-label="resize"><i></i></div><div class="hedphd">'+(HED.pop=='cpk'?'<span class="cpkhi">'+hi('cpk')+'</span>':(HEDPI[HED.pop]?'<span class="cpkhi ico">'+hedIcm(HEDPI[HED.pop])+'</span>':''))+'<b>'+hedt(HED.pop=='jn'&&HED.jn&&HED.jn.k=='mid'?'b_trn':(HEDTT[HED.pop]||'b_more'))+'</b><span class="hedsp"></span>'+(HED.pop=='layers'?'<button type="button" class="hedib'+(HED.lsm?' on':'')+'" data-ha="lsm" aria-label="select">'+hi('msel')+'</button>':'')+(HED.pop=='verses'?hedVsHead():HED.pop=='t3d'?hedT3Head(c):HED.pop=='tts'?'<button type="button" class="hedib hedvx" data-ha="popx" aria-label="close">'+hi('xx')+'</button>':'<button type="button" class="hedib" data-ha="'+(HED.pop=='vrec'?'vradd':'popx')+'" aria-label="done">'+hi('check')+'</button>')+'</div><div class="hedpbody">'+hedPopBody(HED.pop,c)+'</div>';p.classList.add('on');p.classList.toggle('big',HED.pop=='layers');var hr=$('#hed');if(hr){hr.classList.toggle('xpop',HED.pop=='exp');hr.classList.toggle('cpkon',HED.pop=='cpk');hr.classList.toggle('cptgt',!!HED.cpkT);hr.classList.toggle('vron',HED.pop=='vrec');hr.classList.toggle('ttson',HED.pop=='tts')}if(HED.eyed&&HED.pop!='cpk')hedEyeEnd();if(HED.cpkT&&HED.pop!='cpk')HED.cpkT=null;if(HED.vr&&HED.pop!='vrec')hedVrKill();hedPopSize(p);if(HED.pop=='cpk')hedCpkHook(p);var pbx=p.querySelector('.hedpbody');if(pbx){var fx=HED.pop=='exp'&&HED.xs&&HED.xh;pbx.classList.toggle('xfix',!!fx);pbx.style.minHeight=fx?HED.xh+'px':''}var n=p.querySelector('.hedpbody');if(n)n.scrollTop=sc;hedBar();hedTimeUi()}
+ var o=p.querySelector('.hedpbody'),sc=o?o.scrollTop:0;p.innerHTML='<div class="hedgrip" aria-label="resize"><i></i></div><div class="hedphd">'+(HED.pop=='cpk'?'<span class="cpkhi">'+hi('cpk')+'</span>':(HEDPI[HED.pop]?'<span class="cpkhi ico">'+hedIcm(HEDPI[HED.pop])+'</span>':''))+'<b>'+hedt(HED.pop=='jn'&&HED.jn&&HED.jn.k=='mid'?'b_trn':(HEDTT[HED.pop]||'b_more'))+'</b><span class="hedsp"></span>'+(HED.pop=='layers'?'<button type="button" class="hedib'+(HED.lsm?' on':'')+'" data-ha="lsm" aria-label="select">'+hi('msel')+'</button>':'')+(HED.pop=='verses'?hedVsHead():HED.pop=='t3d'?hedT3Head(c):(HED.pop=='tts'||HED.pop=='exp')?'<button type="button" class="hedib'+(HED.pop=='tts'?' hedvx':'')+'" data-ha="popx" aria-label="close">'+hi('xx')+'</button>':'<button type="button" class="hedib" data-ha="'+(HED.pop=='vrec'?'vradd':'popx')+'" aria-label="done">'+hi('check')+'</button>')+'</div><div class="hedpbody">'+hedPopBody(HED.pop,c)+'</div>';p.classList.add('on');p.classList.toggle('big',HED.pop=='layers');var hr=$('#hed');if(hr){hr.classList.toggle('xpop',HED.pop=='exp');hr.classList.toggle('cpkon',HED.pop=='cpk');hr.classList.toggle('cptgt',!!HED.cpkT);hr.classList.toggle('vron',HED.pop=='vrec');hr.classList.toggle('ttson',HED.pop=='tts')}if(HED.eyed&&HED.pop!='cpk')hedEyeEnd();if(HED.cpkT&&HED.pop!='cpk')HED.cpkT=null;if(HED.vr&&HED.pop!='vrec')hedVrKill();hedPopSize(p);if(HED.pop=='cpk')hedCpkHook(p);var pbx=p.querySelector('.hedpbody');if(pbx){var fx=HED.pop=='exp'&&HED.xs&&HED.xh;pbx.classList.toggle('xfix',!!fx);pbx.style.minHeight=fx?HED.xh+'px':''}var n=p.querySelector('.hedpbody');if(n)n.scrollTop=sc;hedBar();hedTimeUi()}
 function hedPopBody(k,c){var h='',x;var xb=hedPopBody2(k,c);if(xb!=null)return xb;switch(k){
  case'mainadd':h='<div class="hedtiles">'+hTile('pop:scr','bg',hedt('scr_n'))+hTile('addv','video',hedt('scr_ph'))+'</div>';break;
  case'scr':h='<div class="hedsw hedscr">'+HEDSCR.map(function(q){return'<button type="button" style="background:'+q+'" data-ha="scradd:'+q+'" aria-label="'+q+'"></button>'}).join('')+'</div><div class="hedsr hedcr"><label>'+hedt('scr_cu')+'</label><button type="button" class="hedcolb" data-ha="cpkt2:#scrc" style="background:'+(HED.scrc||'#ffffff')+'"></button><button type="button" class="hedchip" data-ha="scrcu">'+hedt('scr_add')+'</button></div>';break;
@@ -3314,7 +3314,9 @@ function hedAct(a){var q=a.split(':'),k=q[0],g=q.slice(1).join(':'),c=hedSelC();
  case'addt':HED.pop='';hedAddText();break;case'adds':hedAddShape(g,HED.addCtx&&HED.addCtx.tr);break;case'addst':hedAddSticker(g);break;case'addbg':HED.pop='';hedAddShape('bg');break;case'addtr':HED.pop='';hedAddTrack(g);break;
  case'rec':hedVrOpen();break;
  case'fs':$('#hedpv').classList.toggle('fs');setTimeout(hedFitPv,60);break;
- case'exv':hedExport('vid');break;case'exp':hedExport(g);break;case'cancel':if(HED.job){HED.job.cancel=1;HED.job.pz=0}break;
+ case'exv':hedExport('vid');break;case'exp':hedExport(g);break;
+ case'xdd':{var xf0=hxS();xf0.dd=(xf0.dd==g?'':g);hedPanel();break}case'xpk':hxPick(g);break;case'xpm':hxPm(g);break;case'xpt':hxPt(g);break;case'xgo':hxGo();break;
+ case'xwarn':hedSheet('<p class="hedmq">'+esc(hedt('weak'))+'</p><div class="hedgr2"><button type="button" class="hedbt hedgo" data-ha="shx">'+hedt('okb')+'</button></div>');break;case'cancel':if(HED.job){HED.job.cancel=1;HED.job.pz=0}break;
  case'shx':hedSheet('');break;case'cfy':hedSheet('');if(HED.cfy)HED.cfy();break;
  case'antab':HED.at=g;hedPanel();break;case'ani':if(c){hedHist();hedTgt(c).forEach(function(q){q.ai=g});hedPanel();hedDrawSoon();hedSaveSoon();hedTl();hedAnPrev(c,'in')}break;case'ano':if(c){hedHist();hedTgt(c).forEach(function(q){q.ao=g});hedPanel();hedDrawSoon();hedSaveSoon();hedTl();hedAnPrev(c,'out')}break;
  case'jn':hedJn(g);break;case'jns':hedJns(g);break;case'ala':hedAnimAll(g);break;
@@ -3391,25 +3393,28 @@ function hedExName(ext){var n=(HED.xn||'').replace(/[\\\/:*?"<>|]+/g,' ').trim()
 async function hedExport(kind){if(HED.job)return;hedPause();var d=hedDims(),W=d.W,H=d.H,fps=HED.p.fps,job=HED.job={cancel:0,pz:0},xe={},cv=D.createElement('canvas'),wl=null,snap=JSON.parse(JSON.stringify(HED.p)),sw=function(f){var lv=HED.p;HED.p=snap;try{return f()}finally{HED.p=lv}};cv.width=W;cv.height=H;var ctx=cv.getContext('2d');HED.xp=snap;var pb0=$('#hedpop .hedpbody');HED.xh=(HED.pop=='exp'&&pb0)?pb0.offsetHeight:0;
  try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(function(l){wl=l}).catch(function(){})}catch(e){}
  try{hedProg(.02,hedt('x_prep'));await hedFontsReady();
-  if(kind=='png'||kind=='jpg'){var t=hedTNow();await sw(function(){return hedPrep(t,xe)});sw(function(){hedDraw(ctx,W,H,t,{u:1,els:xe})});var c2=cv;if(kind=='jpg'){c2=D.createElement('canvas');c2.width=W;c2.height=H;var x2=c2.getContext('2d');x2.fillStyle='#000';x2.fillRect(0,0,W,H);x2.drawImage(cv,0,0)}
-   var bl=await new Promise(function(ok){c2.toBlob(ok,kind=='jpg'?'image/jpeg':'image/png',.95)});if(!bl)throw new Error('x');stSave(bl,hedExName(kind),'Multi Editor');hedProg(1,hedt('x_ok_s'),'ok');return}
-  var tot=hedDur(),N=Math.max(1,Math.ceil(tot*fps));hedProg(.04,hedt('x_audio'));var mix=await sw(function(){return hedMix(tot)});if(job.cancel){hedProg(null);return}
-  var wc=null;try{wc=await stWcRec(W,H,!!mix,mix,[],[0],tot,fps)}catch(e){wc=null}var res=null;
+  if(kind=='png'||kind=='jpg'){var ts=hxImgTimes(),ni=ts.length;for(var ii=0;ii<ni;ii++){if(job.cancel){hedProg(null);return}var t=ts[ii];await sw(function(){return hedPrep(t,xe)});sw(function(){hedDraw(ctx,W,H,t,{u:1,els:xe})});var c2=cv;if(kind=='jpg'){c2=D.createElement('canvas');c2.width=W;c2.height=H;var x2=c2.getContext('2d');x2.fillStyle='#000';x2.fillRect(0,0,W,H);x2.drawImage(cv,0,0)}
+   var bl=await new Promise(function(ok){c2.toBlob(ok,kind=='jpg'?'image/jpeg':'image/png',.95)});if(!bl)throw new Error('x');stSave(bl,ni>1?hedExName(kind).replace(/\.(png|jpg)$/,' '+(ii+1)+'.$1'):hedExName(kind),'Multi Editor');hedProg(.1+.88*(ii+1)/ni,hedt('x_busy'));if(ni>1)await hedSleep(300)}
+   hedProg(1,hedt('x_ok_s'),'ok');return}
+  var R=hxRanges(),full=R.length==1&&R[0].s<=1e-6&&R[0].e>=hedDur()-1e-6,fx=hxS(),tot=hedDur(),mix=null,mix0=null;hedProg(.04,hedt('x_audio'));mix=await sw(function(){return hedMix(tot)});mix0=mix;if(job.cancel){hedProg(null);return}
+  var cnt=R.map(function(r){return Math.max(1,Math.ceil((r.e-r.s)*fps))}),N=cnt.reduce(function(p,q){return p+q},0),fT=function(k){var o=0;for(var i=0;i<R.length;i++){if(k<o+cnt[i])return Math.min(R[i].s+(k-o)/fps,hedDur()-.0005);o+=cnt[i]}return R[R.length-1].s};
+  if(full){N=Math.max(1,Math.ceil(tot*fps));fT=function(k){return k/fps}}else{mix=hxSliceMix(mix,R);tot=R.reduce(function(p,r){return p+(r.e-r.s)},0)}
+  var wc=null;if(fx.fmt!='webm'){try{wc=await stWcRec(W,H,!!mix,mix,[],[0],tot,fps)}catch(e){wc=null}}var res=null;
   if(wc){var fin=new Promise(function(ok){wc.onstop=ok});if(wc.start)wc.start();
-   for(var k=0;k<N;k++){while(job.pz&&!job.cancel)await hedSleep(120);if(job.cancel){try{wc.stop()}catch(e){}hedProg(null);return}var tm=k/fps;await sw(function(){return hedPrepS(tm,xe,fps)});sw(function(){hedDraw(ctx,W,H,tm,{u:1,els:xe})});while(wc.q()>6)await hedSleep(8);wc.pushAt(cv,k);if(k%2==0){hedProg(.06+.92*k/N,hedt('x_busy'));await hedSleep(0)}}
+   for(var k=0;k<N;k++){while(job.pz&&!job.cancel)await hedSleep(120);if(job.cancel){try{wc.stop()}catch(e){}hedProg(null);return}var tm=fT(k);await sw(function(){return hedPrepS(tm,xe,fps)});sw(function(){hedDraw(ctx,W,H,tm,{u:1,els:xe})});while(wc.q()>6)await hedSleep(8);wc.pushAt(cv,k);if(k%2==0){hedProg(.06+.92*k/N,hedt('x_busy'));await hedSleep(0)}}
    wc.stop();await fin;if(!wc.blob)throw new Error('x');res={blob:wc.blob,ext:'mp4'}}
-  else res=await hedExportMr(W,H,tot,fps,mix,job);
+  else{if(R.length>1&&!full)throw new Error('x');res=await hedExportMr(W,H,hedDur(),fps,mix0,job,R[0].s,R[R.length-1].e,fx.fmt=='webm'?'webm':'')}
   if(!res){hedProg(null);return}stSave(res.blob,hedExName(res.ext),'Multi Editor');hedProg(1,hedt('x_ok_s'),'ok')}
  catch(e){hedProg(1,hedt('x_err_s'),'err');toast(hedt('x_err'))}
  finally{try{if(wl)wl.release()}catch(e){}Object.keys(xe).forEach(function(k){try{xe[k].pause();xe[k].removeAttribute('src');xe[k].load()}catch(e){}});HED.job=null;HED.xp=null;HED.xo=null;HED.xm=0;cv.width=cv.height=1;hedXUi(1)}}
 /* real-time fallback (browsers without WebCodecs): records the live preview */
-function hedExportMr(W,H,tot,fps,mix,job){return new Promise(function(ok,no){if(!(window.MediaRecorder&&HTMLCanvasElement.prototype.captureStream)){no(new Error('x'));return}
- var cv=D.createElement('canvas');cv.width=Math.min(W,1280);cv.height=Math.round(cv.width*H/W);cv.width-=cv.width%2;cv.height-=cv.height%2;var stm=stCap(cv,fps),ac=null,asrc=null,mimes=['video/mp4;codecs=avc1.42E01E','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'],mime=mimes.filter(function(m){return MediaRecorder.isTypeSupported(m)})[0]||'',opt={videoBitsPerSecond:5e6};if(mime)opt.mimeType=mime;
+function hedExportMr(W,H,tot,fps,mix,job,ra,rb,pref){var a0=ra||0,b0=rb||tot;return new Promise(function(ok,no){if(!(window.MediaRecorder&&HTMLCanvasElement.prototype.captureStream)){no(new Error('x'));return}
+ var cv=D.createElement('canvas');cv.width=Math.min(W,1280);cv.height=Math.round(cv.width*H/W);cv.width-=cv.width%2;cv.height-=cv.height%2;var stm=stCap(cv,fps),ac=null,asrc=null,mimes=pref=='webm'?['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm']:['video/mp4;codecs=avc1.42E01E','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'],mime=mimes.filter(function(m){return MediaRecorder.isTypeSupported(m)})[0]||'',opt={videoBitsPerSecond:5e6};if(mime)opt.mimeType=mime;
  if(mix){try{var AC=window.AudioContext||window.webkitAudioContext;ac=new AC();var dst=ac.createMediaStreamDestination();asrc=ac.createBufferSource();asrc.buffer=mix;asrc.connect(dst);dst.stream.getAudioTracks().forEach(function(tr){stm.addTrack(tr)})}catch(e){ac=null}}
  var ch=[],rec=new MediaRecorder(stm,opt),t0=performance.now(),done=0;job.onpz=function(z){try{if(z){hedPause();rec.pause()}else{rec.resume();hedPlay()}}catch(e){}};rec.ondataavailable=function(e){if(e.data&&e.data.size)ch.push(e.data)};
  var end=function(){if(done)return;done=1;HED.onend=null;hedPause();try{rec.stop()}catch(e){}};
  rec.onstop=function(){try{stm.getTracks().forEach(function(k){k.stop()})}catch(e){}try{if(ac)ac.close()}catch(e){}HED.xo=null;HED.xm=0;if(job.cancel){ok(null);return}var ty=(rec.mimeType||mime||'video/webm').split(';')[0];stFixDur(new Blob(ch,{type:ty}),(performance.now()-t0)/1000,ty).then(function(b){ok({blob:b,ext:ty.indexOf('mp4')>=0?'mp4':'webm'})})};
- HED.xm=1;HED.xo={cv:cv,stm:stm,after:function(){if(stm._rf){try{stm._rf.requestFrame()}catch(e){}}hedProg(.06+.92*Math.min(1,HED.t/tot),hedt('x_busy_rt'));if(job.cancel)end()}};HED.onend=end;HED.t=0;rec.start(500);t0=performance.now();if(asrc){try{asrc.start(0)}catch(e){}}hedSync(0,false);hedPlay()})}
+ HED.xm=1;HED.xo={cv:cv,stm:stm,after:function(){if(stm._rf){try{stm._rf.requestFrame()}catch(e){}}hedProg(.06+.92*Math.min(1,Math.max(0,(HED.t-a0)/Math.max(.1,b0-a0))),hedt('x_busy_rt'));if(job.cancel||(b0<tot-.001&&HED.t>=b0))end()}};HED.onend=end;HED.t=a0;rec.start(500);t0=performance.now();if(asrc){try{asrc.start(0,a0)}catch(e){}}hedSync(a0,false);hedPlay()})}
 /* ---- translations (ta, en, si, ar) ---- */
 var HEDT={
 nm:['Multi Editor','Multi Editor','Multi Editor','Multi Editor'],nm_d:['வீடியோ, படம், ஒலி, எழுத்து — ஒரே இடத்தில் திருத்து','Edit video, images, audio and text in one place','වීඩියෝ, රූප, ශබ්ද සහ පෙළ එකම තැනක සංස්කරණය කරන්න','حرّر الفيديو والصور والصوت والنص في مكان واحد'],
@@ -3715,10 +3720,7 @@ function hedFillFit(c){if(!c||!(c.k=='video'||c.k=='image'))return;hedHist();c.f
 function hedXBody(){var xs=HED.xs,d=hedDims(),mx=stMaxRes(),nm=['720P','1080P','2K','4K'];
  if(xs&&xs.st=='run'){var pc=Math.round(xs.p*100);return'<div class="hedxc run"><div class="hedxsvw">'+hedXSvg()+'</div><div class="hedxrow"><b id="hedxp">'+pc+'%</b><span id="hedxm">'+esc(xs.msg||'')+'</span></div><div class="hedxbar"><i id="hedxf" style="width:'+pc+'%"></i></div><p class="hedxn">'+hedt(HED.xo?'x_busy_rt':'x_note')+'</p><div class="hedgr2"><button type="button" class="hedbt" data-ha="xpause">'+hi(xs.pz?'play':'pause')+'<span>'+hedt(xs.pz?'x_resume':'x_pause')+'</span></button><button type="button" class="hedbt dng2" data-ha="cancel">'+hi('stop')+'<span>'+hedt('x_stop')+'</span></button></div></div>'}
  if(xs&&(xs.st=='ok'||xs.st=='err'))return'<div class="hedxc '+xs.st+'"><div class="hedxrow"><span class="hedxck">'+hi(xs.st=='ok'?'check':'close')+'</span><span id="hedxm" class="hedxms">'+esc(xs.msg||'')+'</span><button type="button" class="hedbt hedxok" data-ha="xok">'+hedt('okb')+'</button></div><div class="hedxbar"><i style="width:100%"></i></div></div>';
- var res=[1,2,3,4].map(function(i){return[i,nm[i-1]+(hedWeak(i)?hi('warn2','hedwi'):'')]}),weak=hedC(HED.p.res||2,1,4)>mx,rt=!(window.VideoEncoder&&window.AudioEncoder&&window.VideoFrame&&window.AudioData);
- return'<div class="hedsr hedcr"><label>'+hedt('fname')+'</label><input type="text" class="hedn hedname" id="hedname" placeholder="Multi Editor" value="'+esc(HED.xn)+'"></div>'+hCh('@res',res,hedC(HED.p.res||2,1,4))+hCh('@fps',[[24,'24'],[30,'30'],[60,'60']],HED.p.fps)
-  +(weak?'<p class="hedwarn">'+hi('warn2')+'<span>'+hedt('weak')+'</span></p>':'')+(rt?'<p class="hedwarn">'+hi('warn2')+'<span>'+hedt('x_rt_note')+'</span></p>':'')
-  +'<p class="hedhint">'+d.W+'×'+d.H+' · '+hedFmt(hedDur(),HED.p.fps)+'</p><div class="hedgr2">'+hBtn('exv','export',hedt('x_vid'),'hedgo')+hBtn('exp:png','image',hedt('x_png'))+hBtn('exp:jpg','image',hedt('x_jpg'))+'</div>'}
+ return hxIdle()}
 function hedXUi(full){if(!HED)return;var b=$('#hedxbtn'),xs=HED.xs;if(b){var run=!!(xs&&xs.st=='run'),ok=!!(xs&&xs.st=='ok'),er=!!(xs&&xs.st=='err'),pc=run?Math.round(xs.p*100):0,key=run?'r':ok?'o':er?'e':'n';b.classList.toggle('busy',run);b.classList.toggle('done',ok);b.classList.toggle('bad',er);
   if(b._k!=key){b._k=key;b.dataset.ha=(ok||er)?'xok':'pop:exp';b.innerHTML=run?'<i class="hedxbf"></i><span class="hedxbt"></span>':ok?hi('check')+'<span>'+hedt('x_ok_s')+'</span>':er?hi('close')+'<span>'+hedt('x_err_s')+'</span>':hi('export')+'<span>'+hedt('b_exp')+'</span>'}
   if(run){var f=b.querySelector('.hedxbf'),t=b.querySelector('.hedxbt');if(f)f.style.width=pc+'%';if(t)t.textContent=pc+'%'}}
@@ -5828,7 +5830,7 @@ b_tts:['குரல் (AI)','Voice (AI)','හඬ (AI)','صوت (AI)'],
 tts_t:['AI ஆண் குரல் (ஆங்கிலம்)','AI male voice (English)','AI පිරිමි හඬ (ඉංග්‍රීසි)','صوت ذكوري بالذكاء الاصطناعي (إنجليزي)'],
 tts_ph:['ஆங்கில உரையை இங்கே எழுதவும்…','Type English text here…','ඉංග්‍රීසි පෙළ මෙහි ලියන්න…','اكتب النص الإنجليزي هنا…'],
 tts_sp:['வேகம்','Speed','වේගය','السرعة'],
-tts_pv:['கேள்','Preview','ඇසීම','استماع'],
+tts_pv:['உருவாக்கு','Generate','සාදන්න','إنشاء'],
 tts_ad:['காலவரிசையில் சேர்','Add to timeline','කාලරේඛාවට','أضف إلى الخط الزمني'],
 tts_gn:['குரல் உருவாக்கப்படுகிறது…','Generating the voice…','හඬ සාදමින්…','جارٍ إنشاء الصوت…'],
 tts_ok:['தயார்','Ready','සූදානම්','جاهز'],
@@ -6017,7 +6019,7 @@ function ttsRun(mode){if(TTSV.busy||TTSV.st!='ready')return;if(mode=='play'&&TTS
  }).catch(function(e){TTSV.busy=0;ttsBtn();var m=String(e&&e.message||e);if(m=='cancel'){ttsSt(hedt('tts_cd'));ttsPb(0,hedt('tts_cd'));return}if(m=='stopped')return;ttsSt(hedt('tts_er')+' — '+m.slice(0,200));toast(hedt('tts_er'))})}
 /* ---------- Text To Speech popup UI (full screen, no toolbar) ---------- */
 Object.assign(HEDT,{
-tts_t:['Text To Speech','Text To Speech','පෙළ සිට කථනය','تحويل النص إلى كلام'],
+tts_t:['உரையிலிருந்து பேச்சு','Text To Speech','පෙළ සිට කථනය','تحويل النص إلى كلام'],
 tts_rep:['மீட்டமை','Replace','ප්‍රතිස්ථාපනය','استبدال'],
 tts_clr:['அழி','Clear','මකන්න','مسح'],
 tts_smp:['மாதிரி','Sample','නියැදිය','عيّنة'],
@@ -6058,6 +6060,7 @@ function ttsDelModel(){var id=TTSV.mid;hedConfirm(hedt('ts_delq').replace('{m}',
 function ttsDelDo(id){ttsKill();TTSV.st='idle';TTSV.last=null;TTSV.aul=null;if(TTSV.au){try{TTSV.au.pause()}catch(e){}TTSV.au=null}try{P('hsttsd_'+id,0)}catch(e){}
  (window.caches?caches.open(TTSV.cn):Promise.reject()).then(function(c){return c.keys().then(function(ks){var pre=TTSDEL[id],alone=!Object.keys(TTSM).some(function(k){return k!=id&&S('hsttsd_'+k,0)});return Promise.all(ks.filter(function(r){return alone||r.url==pre||r.url.indexOf(pre)==0}).map(function(r){return c.delete(r)}))})}).catch(function(){}).then(function(){toast(hedt('ts_deld'));ttsRe()})}
 function ttsAct(k,g){
+ if(k=='ttsbig'){TTSV.big=!TTSV.big;HED.ph=HED.ph||{};var pp=$('#hedpop');if(TTSV.big&&pp)HED.ph.tts=hedPopMax(pp);else delete HED.ph.tts;if(pp)hedPopSize(pp);var bx=$('.hedtbox');if(bx)bx.classList.toggle('big',!!TTSV.big);var bb=$('.hedtbig');if(bb)bb.innerHTML=hi(TTSV.big?'hxshr':'hxexp');return}
  if(k!='ttsmdo'){var ml=$('#hedtml');if(ml)ml.classList.remove('on')}
  if(k=='ttsdl')ttsStart();else if(k=='ttsstop')ttsStopDl();else if(k=='ttsretry'){TTSV.st='idle';ttsStart()}
  else if(k=='ttsplay')ttsRun('play');else if(k=='ttsadd')ttsRun('add');
@@ -6077,13 +6080,13 @@ function hedTtsBody(){var esc2=function(s){return String(s).replace(/&/g,'&amp;'
  var mode=st=='ready'?'ready':st=='dl'?(dlf?'prep':'dl'):st=='err'?'err':'idle',tot=function(k){return TTSM[k].mb+34};
  var bt=function(k){var d=S('hsttsd_'+k,0);return'<button type="button" data-ha="ttsmd:'+k+'"'+(k==TTSV.mid?' class="on"':'')+'><span>'+TTSM[k].n+'</span><small>'+tot(k)+' MB</small>'+(d?'<i class="hdk">'+hedIcm('okc')+'</i>':'')+'</button>'},grp={};Object.keys(TTSM).forEach(function(k){var l=TTSM[k].l||'en';(grp[l]=grp[l]||[]).push(k)});
  var list=Object.keys(grp).map(function(l){return'<div class="hedtmh">'+hedt('tts_l_'+l)+'</div>'+grp[l].map(bt).join('')}).join('');
- var pct=Math.round(TTSV.pg*100),right=mode=='idle'?'<button type="button" class="hedtbtn hdo" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+'</button>':mode=='dl'?'<div class="hedtpg" id="hedtdb" data-m="dl"><i style="width:'+pct+'%"></i><span id="hedtdt">'+pct+'%</span></div><button type="button" class="hedtstp" data-ha="ttsstop" aria-label="'+hedt('tts_stp')+'">'+hedIcm('stopi')+'</button>':mode=='prep'?'<div class="hedtpg hdy" id="hedtdb" data-m="prep"><i style="width:'+pct+'%"></i><span id="hedtdt"><b class="hedtspin"></b>'+hedt('ts_pp')+'</span></div>':mode=='ready'?'<span class="hedtbadge hdg">'+hedIcm('okc')+hedt('ts_dn')+'</span><button type="button" class="hedtic2" data-ha="ttsdel" aria-label="'+hedt('ts_del')+'">'+hedIcm('trashx')+'</button>':'<button type="button" class="hedtbtn hdo" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button>';
+ var pct=Math.round(TTSV.pg*100),right=mode=='idle'?'<button type="button" class="hedtbtn hdo" data-ha="ttsdl">'+hedIcm('dl')+hedt('tts_db')+'</button>':mode=='dl'?'<div class="hedtpx" id="hedtdb" data-m="dl"><i style="width:'+pct+'%"></i><span id="hedtdt">'+pct+'%</span></div><button type="button" class="hedtstp" data-ha="ttsstop" aria-label="'+hedt('tts_stp')+'">'+hedIcm('stopi')+'</button>':mode=='prep'?'<div class="hedtpx hdy" id="hedtdb" data-m="prep"><i style="width:'+pct+'%"></i><span id="hedtdt"><b class="hedtspin"></b>'+hedt('ts_pp')+'</span></div>':mode=='ready'?'<span class="hedtbadge hdg">'+hedIcm('okc')+hedt('ts_dn')+'</span><button type="button" class="hedtic2" data-ha="ttsdel" aria-label="'+hedt('ts_del')+'">'+hedIcm('trashx')+'</button>':'<button type="button" class="hedtbtn hdo" data-ha="ttsretry">'+hedIcm('rs')+hedt('tts_try')+'</button>';
  var below='';
  if(mode=='err'){var cs=Object.keys(TTSV.csp).length||/Cannot reach|Failed to fetch/i.test(TTSV.err||'');below='<div class="hedtcard"><p class="hedterr">'+esc2(TTSV.err||'?')+'</p>'+(cs?'<p>'+hedt('tts_csp')+'</p><code class="hedtcode">'+TTSCSP+'</code><button type="button" class="hedtmini" data-ha="ttscopy">'+hedt('tts_cpy')+'</button>':'')+'</div>'}
  if(!TTSV.text&&!TTSV.seen){TTSV.text=TTSSAMPLE}TTSV.seen=1;setTimeout(ttsBind,0);
  var vc=ttsVc(),L=TTSV.last&&TTSV.last.k==ttsKey()?TTSV.last:null,h='<div class="hedtts hdtv">'
- +'<div class="hedtbox"><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><div class="hedtbar2"><span class="hedtcnt"><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+' <span id="hedtdu"></span></span><button type="button" class="hedtmini" data-ha="ttssmp">'+hedIcm('smp')+hedt('tts_smp')+'</button><button type="button" class="hedtmini" data-ha="ttsrep">'+hedIcm('pst')+hedt('tts_rep')+'</button><button type="button" class="hedtmini hdr" data-ha="ttsclr">'+hedIcm('clr')+hedt('tts_clr')+'</button></div></div>'
- +'<div class="hedtmr"><button type="button" class="hedtmp" data-ha="ttsmdo"><span class="hdnm">'+M.n+'</span><small>'+tot(TTSV.mid)+' MB</small>'+hedIcm('chev')+'</button><div class="hedtml" id="hedtml">'+list+'</div>'+right+'</div>'+below
+ +'<div class="hedtbox'+(TTSV.big?' big':'')+'"><textarea id="hedttx" rows="3" maxlength="5000" placeholder="'+hedt('tts_ph').replace(/"/g,'&quot;')+'"></textarea><button type="button" class="hedtbig" data-ha="ttsbig" aria-label="expand">'+hi(TTSV.big?'hxshr':'hxexp')+'</button><div class="hedtbar2"><span class="hedtcnt"><b id="hedtcc">0</b> '+hedt('tts_chr')+' · <b id="hedtwc">0</b> '+hedt('tts_wrd')+' <span id="hedtdu"></span></span><button type="button" class="hedtmini" data-ha="ttssmp">'+hedIcm('smp')+hedt('tts_smp')+'</button><button type="button" class="hedtmini" data-ha="ttsrep">'+hedIcm('pst')+hedt('tts_rep')+'</button><button type="button" class="hedtmini hdr" data-ha="ttsclr">'+hedIcm('clr')+hedt('tts_clr')+'</button></div></div>'
+ +'<div class="hedtmr"><button type="button" class="hedtmp" data-ha="ttsmdo"><span class="hdnm">'+M.n+'</span>'+hedIcm('chev')+'</button><div class="hedtml" id="hedtml">'+list+'</div>'+right+'</div>'+below
  +(M.vc.length>1?'<div class="hedtvr"><span>'+hedt('tts_vcm')+'</span><div class="hedtch">'+M.vc.map(function(v){return'<button type="button" data-ha="ttsvc:'+v[0]+'"'+(vc==v[0]?' class="on"':'')+'>'+v[1]+'</button>'}).join('')+'</div></div>':'')+'<div class="hedtsec'+(TTSV.sopen?'':' hdshut')+'"><button type="button" class="hedtsh" data-ha="ttsset">'+hedIcm('gearx')+'<span>'+hedt('ts_st')+'</span><i class="hdchev">'+hedIcm('chev')+'</i></button><div class="hedtsb">'
  
  +'<div class="hedtch hdsty">'+['y1','y2','y3','y4','y5','y6','y7'].map(function(k){return'<button type="button" data-ha="ttsst:'+k+'"'+(TTSV.sty==k?' class="on"':'')+'>'+hedt('tts_'+k)+'</button>'}).join('')+'</div><div class="hedtgrid">';
@@ -6172,10 +6175,10 @@ HEDCSS+=`
 .hedtts.hdtv .hedtbadge{padding:5px 9px;font-size:11.5px}
 .hedtts.hdtv .hedtic2{min-width:32px;height:32px;border-radius:10px}.hedtts.hdtv .hedtic2 .hedic{width:17px;height:17px}
 .hedtmh{font-size:10.5px;font-weight:800;opacity:.6;padding:8px 14px 2px;letter-spacing:.2px}
-.hedtpg{position:relative;flex:none;min-width:76px;height:32px;border-radius:10px;border:1px solid var(--bd);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;color:#1a1405}
-.hedtpg>i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--g),var(--g2));transition:width .2s}
-.hedtpg>span{position:relative;display:flex;align-items:center;gap:5px;white-space:nowrap;padding:0 10px;font-variant-numeric:tabular-nums}
-.hedtpg.hdy{min-width:0;border-color:rgba(217,154,0,.45);background:rgba(217,154,0,.12)}.hedtpg.hdy>i{background:rgba(240,180,41,.55)}.hedtpg.hdy .hedtspin{display:inline-block;flex:none}
+.hedtpx{position:relative;flex:none;min-width:76px;height:32px;border-radius:10px;border:1px solid var(--bd);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;color:#1a1405}
+.hedtpx>i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--g),var(--g2));transition:width .2s}
+.hedtpx>span{position:relative;display:flex;align-items:center;gap:5px;white-space:nowrap;padding:0 10px;font-variant-numeric:tabular-nums}
+.hedtpx.hdy{min-width:0;border-color:rgba(217,154,0,.45);background:rgba(217,154,0,.12)}.hedtpx.hdy>i{background:rgba(240,180,41,.55)}.hedtpx.hdy .hedtspin{display:inline-block;flex:none}
 .hedtstp{flex:none;width:32px;height:32px;border:0;border-radius:50%;background:#d23b3b;color:#fff;display:grid;place-items:center;padding:0}.hedtstp .hedic{width:16px;height:16px}
 .hedtvr{display:flex;align-items:center;gap:8px}.hedtvr>span{font-size:12px;font-weight:700;opacity:.7;white-space:nowrap}.hedtvr .hedtch{flex:1;min-width:0;padding-bottom:0}.hedtvr .hedtch button{padding:5px 11px;font-size:12.5px}
 .hedtts.hdtv .hedtact{position:sticky;bottom:0;z-index:3;background:var(--cd);padding:6px 0 2px;gap:8px}
@@ -6183,7 +6186,117 @@ HEDCSS+=`
 .hedtts.hdtv .hedtact .hedtadb{box-shadow:0 3px 8px rgba(var(--gr),.3)}
 .hedtts.hdtv .hedtsh{padding:8px 12px;font-size:13px}.hedtts.hdtv .hedtsh .hedic{width:18px;height:18px}
 `;
+
+/* ================= 4.23.0 — Export popup redesign, keyboard-attached popups, TTS fixes ================= */
+HEDPI.exp='export';
+Object.assign(HEDI,{
+hxvid:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9.5v5l4.2-2.5z"/>',
+hximg:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/>',
+hxfmt:'<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M9 13.5h6M9 17h4"/>',
+hxfile:'<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/>',
+hxgauge:'<path d="M4.5 17a8.5 8.5 0 1 1 15 0"/><path d="M12 14l3.6-4.2"/><circle cx="12" cy="14" r="1.3"/>',
+hxall:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/>',
+hxthis:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9.5v5l4.2-2.5z"/>',
+hxcust:'<path d="M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z"/><path d="M13.5 7.5l3 3"/>',
+hxexp:'<path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/>',
+hxshr:'<path d="M20 10h-6V4M4 14h6v6M14 10l7-7M3 21l7-7"/>'});
+Object.assign(HEDT,{
+x_fmt:['வடிவம்','Format','ආකෘතිය','الصيغة'],x_selp:['பக்கத்தைத் தேர்ந்தெடு','Select Page','පිටුව තෝරන්න','اختر الصفحة'],
+x_all:['அனைத்தும்','All','සියල්ල','الكل'],x_this:['இது','This','මෙය','هذه'],x_cust:['தனிப்பயன்','Custom','අභිරුචි','مخصص'],
+x_res:['தெளிவுத்திறன்','Resolution','විභේදනය','الدقة'],x_fr:['பிரேம் வீதம்','Frame Rate','රාමු අනුපාතය','معدل الإطارات'],
+x_est:['மதிப்பிடப்பட்ட கோப்பு அளவு','Estimated File Size','ඇස්තමේන්තුගත ගොනු ප්‍රමාණය','حجم الملف المقدّر'],
+x_kv:['காணொளி','Video','වීඩියෝ','فيديو'],x_ki:['படம்','Image','රූපය','صورة'],
+x_pgn:['குறைந்தது ஒரு பக்கத்தைத் தேர்ந்தெடுக்கவும்','Select at least one page','අවම වශයෙන් එක් පිටුවක් තෝරන්න','اختر صفحة واحدة على الأقل'],
+x_webm_adj:['WebM-க்கு அடுத்தடுத்த பக்கங்களைத் தேர்ந்தெடுக்கவும் (அல்லது MP4 பயன்படுத்தவும்)','For WebM select adjacent pages (or use MP4)','WebM සඳහා යාබද පිටු තෝරන්න (හෝ MP4 භාවිතා කරන්න)','لـ WebM اختر صفحات متجاورة (أو استخدم MP4)']});
+/* ---- export popup (pages = clips of the main layer) ---- */
+function hxS(){if(!HED.xf)HED.xf={kind:'video',fmt:'mp4',pm:'all',sel:[],dd:''};return HED.xf}
+function hxPages(){var tr=hedMainTr();if(!tr)return[];return HED.p.cl.filter(function(c){return c.tr==tr.id}).sort(function(a,b){return a.s-b.s})}
+function hxSelPages(){var f=hxS(),L=hxPages();if(f.pm=='all')return L;if(f.pm=='this'){var t=HED.t,p=L.filter(function(c){return t>=c.s-1e-6&&t<c.s+c.d-1e-6})[0]||L[0];return p?[p]:[]}return L.filter(function(c){return f.sel.indexOf(c.id)>=0})}
+function hxRanges(){var f=hxS(),L=hxPages();if(f.pm=='all'||!L.length)return[{s:0,e:hedDur()}];return hxSelPages().map(function(c){return{s:c.s,e:Math.min(c.s+c.d,hedDur())}})}
+function hxImgTimes(){var f=hxS(),L=hxPages();if(!L.length)return[hedTNow()];var mxT=hedDur()-.0005;if(f.pm=='this'){var c=hxSelPages()[0];if(!c)return[hedTNow()];var t=hedTNow();return[(t>=c.s&&t<c.s+c.d)?t:Math.min(c.s+Math.min(c.d/2,1),mxT)]}return(f.pm=='all'?L:hxSelPages()).map(function(c){return Math.min(c.s+Math.min(c.d/2,1),mxT)})}
+function hxSliceMix(mix,R){if(!mix)return mix;try{var sr=mix.sampleRate,nc=mix.numberOfChannels,len=0,sg=R.map(function(r){var a=Math.max(0,Math.floor(r.s*sr)),b=Math.min(mix.length,Math.floor(r.e*sr));len+=Math.max(0,b-a);return[a,Math.max(a,b)]}),OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,nb=new OC(nc,Math.max(1,len),sr).createBuffer(nc,Math.max(1,len),sr),o=0;sg.forEach(function(g){for(var ch=0;ch<nc;ch++)nb.getChannelData(ch).set(mix.getChannelData(ch).subarray(g[0],g[1]),o);o+=g[1]-g[0]});return nb}catch(e){return mix}}
+function hxSetP(key,v){hedHist('p:@'+key);hedSetP(HED.p,key,v);hedSelFill();hedFitPv();hedTimeUi();hedDrawSoon();hedSaveSoon()}
+function hxPick(g){var a=g.split('~'),id=a[0],v=a[1],f=hxS();f.dd='';if(id=='kind'){f.kind=v;f.fmt=v=='video'?'mp4':'png'}else if(id=='fmt')f.fmt=v;else if(id=='res')hxSetP('res',+v);else if(id=='fps')hxSetP('fps',+v);hedPanel()}
+function hxPm(g){var f=hxS();if(g=='custom'&&f.pm!='custom'){f.sel=hxSelPages().map(function(c){return c.id})}f.pm=g;f.dd='';hedPanel()}
+function hxPt(g){var f=hxS();if(f.pm!='custom'){f.pm='custom';f.sel=[g]}else{var i=f.sel.indexOf(g);if(i>=0)f.sel.splice(i,1);else f.sel.push(g)}hedPanel()}
+function hxGo(){var f=hxS(),R=hxRanges();if(!R.length){toast(hedt('x_pgn'));return}if(f.kind=='video'&&f.fmt=='webm'&&R.length>1){for(var i=1;i<R.length;i++)if(R[i].s>R[i-1].e+.002){toast(hedt('x_webm_adj'));return}}hedExport(f.kind=='video'?'vid':f.fmt)}
+function hxFl(x){return{mp4:'MP4',webm:'WebM',png:'PNG',jpg:'JPG'}[x]||x}
+function hxMB(b){return b>=1e9?(b/1e9).toFixed(1)+' GB':b>=1e6?Math.max(1,Math.round(b/1e6))+' MB':Math.max(1,Math.round(b/1e3))+' KB'}
+function hxDm(i){var o=HED.p.res;HED.p.res=i;var d=hedDims();HED.p.res=o;return d}
+function hxEst(){var f=hxS(),d=hedDims(),px=d.W*d.H,fps=HED.p.fps||30;if(f.kind=='video'){var R=hxRanges(),dur=R.reduce(function(p,r){return p+Math.max(0,r.e-r.s)},0),br=(px>=8e6?18e6:px>=3.6e6?12e6:px>=2e6?8e6:px>1e6?5e6:3.5e6)*(fps>30?1.5:1);if(f.fmt=='webm')br=Math.min(br,5e6);return(br+128e3)/8*dur}var n=f.pm=='all'?Math.max(1,hxPages().length):Math.max(1,hxSelPages().length);return px*(f.fmt=='jpg'?.45:1.2)*n}
+function hxTh(c){try{var cv=D.createElement('canvas');cv.width=96;cv.height=54;var x=cv.getContext('2d');x.fillStyle=(c.scr&&c.sh&&typeof c.sh.c=='string')?c.sh.c:'#e8e8e8';x.fillRect(0,0,96,54);var m=HED.media&&HED.media[c.m],s=m&&m.th&&m.th[0];if(s){var r=Math.max(96/s.width,54/s.height);x.drawImage(s,(96-s.width*r)/2,(54-s.height*r)/2,s.width*r,s.height*r)}return cv.toDataURL('image/jpeg',.7)}catch(e){return''}}
+function hxSb(id,ic,lb,ex){var f=hxS();return'<button type="button" class="hxsel'+(f.dd==id?' open':'')+'" data-ha="xdd:'+id+'"><span class="hxi">'+ic+'</span><b>'+lb+'</b>'+(ex||'')+'<i class="hxch">'+hedIcm('chev')+'</i></button>'}
+function hxLs(id,it){var f=hxS();if(f.dd!=id)return'';return'<div class="hxlst">'+it.map(function(q){return'<button type="button" class="'+(q[3]?'on':'')+'" data-ha="xpk:'+id+'~'+q[0]+'"><span class="hxi">'+q[2]+'</span><b>'+q[1]+'</b>'+(q[4]||'')+(q[3]?hi('check','hxok'):'')+'</button>'}).join('')+'</div>'}
+function hxIdle(){var f=hxS(),d=hedDims(),mx=stMaxRes(),rs=hedC(HED.p.res||2,1,4),nm=['720P','1080P','2K','4K'],bd=['HD','FHD','2K','4K'],wk=rs>mx,rt=!(window.VideoEncoder&&window.AudioEncoder&&window.VideoFrame&&window.AudioData),isV=f.kind=='video',
+ kinds=[['video',hedt('x_kv'),hi('hxvid'),isV],['image',hedt('x_ki'),hi('hximg'),!isV]],
+ fmts=(isV?['mp4','webm']:['png','jpg']).map(function(x){return[x,hxFl(x),hi('hxfmt'),f.fmt==x]}),
+ ress=[1,2,3,4].map(function(i){var q=hxDm(i);return[i,nm[i-1]+' ('+q.W+' × '+q.H+')','<em class="hxbd">'+bd[i-1]+'</em>',rs==i,hedWeak(i)?hi('warn2','hedwi'):'']}),
+ fpss=[24,30,60].map(function(v){return[v,v+' FPS',hi('hxgauge'),HED.p.fps==v]}),
+ L=hxPages(),ids=hxSelPages().map(function(c){return c.id}),
+ seg=[['all','hxall',hedt('x_all')],['this','hxthis',hedt('x_this')],['custom','hxcust',hedt('x_cust')]].map(function(q){return'<button type="button" class="'+(f.pm==q[0]?'on':'')+'" data-ha="xpm:'+q[0]+'"><span class="hxi">'+hi(q[1])+'</span><b>'+q[2]+'</b></button>'}).join(''),
+ pg=L.map(function(c,i){var on=f.pm=='all'||ids.indexOf(c.id)>=0;return'<button type="button" class="hxpg'+(on?' on':'')+'" data-ha="xpt:'+c.id+'"><img alt="" src="'+hxTh(c)+'"><i class="hxn">'+(i+1)+'</i>'+(on?'<span class="hxck">'+hi('check')+'</span>':'')+'</button>'}).join('');
+ return'<div class="hx"><label class="hxl">'+hedt('x_fmt')+'</label><div class="hxrow">'+hxSb('kind',hi(isV?'hxvid':'hximg'),isV?hedt('x_kv'):hedt('x_ki'))+hxSb('fmt',hi('hxfmt'),hxFl(f.fmt))+'</div>'+hxLs('kind',kinds)+hxLs('fmt',fmts)
+ +'<label class="hxl">'+hedt('x_selp')+'</label><div class="hxseg">'+seg+'</div>'+(L.length?'<div class="hxpgs">'+pg+'</div>':'')
+ +'<label class="hxl">'+hedt('x_res')+'</label>'+hxSb('res','<em class="hxbd">'+bd[rs-1]+'</em>',nm[rs-1]+' ('+d.W+' × '+d.H+')',wk?hi('warn2','hedwi'):'')+hxLs('res',ress)
+ +(isV?'<label class="hxl">'+hedt('x_fr')+'</label>'+hxSb('fps',hi('hxgauge'),HED.p.fps+' FPS')+hxLs('fps',fpss):'')
+ +'<div class="hxnm"><label class="hxl">'+hedt('fname')+'</label><input type="text" class="hedn hedname" id="hedname" placeholder="Multi Editor" value="'+esc(HED.xn)+'"></div>'
+ +(rt&&isV?'<p class="hedwarn">'+hi('warn2')+'<span>'+hedt('x_rt_note')+'</span></p>':'')
+ +'<div class="hxsz"><span class="hxi big">'+hi('hxfile')+'</span><div><small>'+hedt('x_est')+'</small><b>≈ '+hxMB(hxEst())+'</b></div>'+(wk?'<button type="button" class="hxw" data-ha="xwarn" aria-label="warning">'+hi('warn2')+'</button>':'')+'</div>'
+ +'<button type="button" class="hedbt hedgo hxgo" data-ha="xgo">'+hi('export')+'<span>'+hedt('b_exp')+'</span></button></div>'}
+/* ---- popups attached to the keyboard (Text To Speech + Text layer) ---- */
+var HEDKBH=0;
+function hedKbOk(){return!!HED&&(HED.pop=='tts'||HED.pop=='txt')}
+function hedKbMode(){var on=hedKbOk();try{if(navigator.virtualKeyboard)navigator.virtualKeyboard.overlaysContent=on}catch(e){}if(!on)hedKbSet(0)}
+function hedKbCur(){var h=0;try{var vk=navigator.virtualKeyboard;if(vk&&vk.overlaysContent)h=vk.boundingRect.height;else if(window.visualViewport)h=Math.max(0,window.innerHeight-visualViewport.height-visualViewport.offsetTop)}catch(e){}return Math.round(h)}
+function hedKbSet(h){var r=$('#hed');if(!r)return;if(h<60)h=0;HEDKBH=h;r.style.setProperty('--kbh',h+'px');r.classList.toggle('kbon',h>0&&hedKbOk())}
+function hedKbUpd(){if(!HED||!hedAlive()){try{if(navigator.virtualKeyboard)navigator.virtualKeyboard.overlaysContent=false}catch(e){}return}hedKbSet(hedKbOk()?hedKbCur():0);var vk=navigator.virtualKeyboard;if(!(vk&&vk.overlaysContent)){try{window.scrollTo(0,0)}catch(e){}}}
+window.__hedKbU=hedKbUpd;
+if(!window.__hedKbL){window.__hedKbL=1;var hkU=function(){if(window.__hedKbU)window.__hedKbU()};try{if(navigator.virtualKeyboard)navigator.virtualKeyboard.addEventListener('geometrychange',hkU)}catch(e){}if(window.visualViewport){visualViewport.addEventListener('resize',hkU);visualViewport.addEventListener('scroll',hkU)}D.addEventListener('focusin',function(){setTimeout(hkU,120);setTimeout(hkU,450)});D.addEventListener('focusout',function(){setTimeout(hkU,150)})}
+var hedPanel0=hedPanel;hedPanel=function(){var r=hedPanel0.apply(this,arguments);try{var hr=$('#hed');if(hr)hr.classList.toggle('txton',!!HED&&HED.pop=='txt');hedKbMode()}catch(e){}return r};
+HEDCSS+=`
+.hx{display:flex;flex-direction:column;gap:6px;padding:2px 0 0}
+.hxl{font-size:13px;font-weight:800;margin:6px 2px 0;color:var(--tx)}
+.hxrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hxsel{display:flex;align-items:center;gap:8px;min-width:0;width:100%;height:46px;padding:0 12px;border-radius:14px;border:1.5px solid var(--ln);background:var(--cd);color:var(--tx);font:inherit;font-size:14px;font-weight:700;text-align:start;box-sizing:border-box}
+.hxsel b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.hxsel .hxch{display:grid;place-items:center;flex:none;transition:transform .2s}.hxsel.open .hxch{transform:rotate(180deg)}.hxsel .hxch .hedic{width:20px;height:20px}
+.hxi{display:grid;place-items:center;flex:none;color:var(--g)}.hxi .hedic{width:22px;height:22px}.hxi.big .hedic{width:28px;height:28px}
+.hxbd{font-style:normal;font-weight:900;font-size:11px;padding:3px 6px;border-radius:7px;background:#16130a;color:var(--g);letter-spacing:.3px;flex:none}
+.hxlst{display:flex;flex-direction:column;border:1.5px solid var(--ln);border-radius:14px;overflow:hidden;background:var(--cd)}
+.hxlst button{display:flex;align-items:center;gap:10px;min-height:42px;padding:0 12px;border:0;border-bottom:1px solid var(--ln);background:transparent;color:var(--tx);font:inherit;font-size:14px;text-align:start}.hxlst button:last-child{border-bottom:0}.hxlst button b{flex:1;font-weight:600}.hxlst button.on{background:rgba(var(--gr),.12)}.hxlst .hxok{color:var(--g);width:18px;height:18px}
+.hxseg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border:1.5px solid var(--ln);border-radius:14px;background:rgba(127,127,127,.08)}
+.hxseg button{display:flex;align-items:center;justify-content:center;gap:6px;height:38px;min-width:0;border:0;border-radius:10px;background:transparent;color:var(--tx);font:inherit;font-size:13px;font-weight:700}.hxseg button.on{background:linear-gradient(135deg,var(--g),var(--g2));color:#1a1405}.hxseg .hxi{color:inherit}.hxseg .hedic{width:18px;height:18px}
+.hxpgs{display:flex;gap:12px;overflow-x:auto;padding:10px 12px 16px;border:1.5px solid var(--ln);border-radius:14px;background:rgba(127,127,127,.06);scrollbar-width:none}.hxpgs::-webkit-scrollbar{display:none}
+.hxpg{position:relative;flex:none;width:92px;height:56px;padding:0;border:2px solid transparent;border-radius:10px;background:none}.hxpg img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block}
+.hxpg.on{border-color:var(--g)}.hxn{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);min-width:20px;height:20px;border-radius:10px;background:rgba(127,127,127,.6);color:#fff;font-size:11px;font-weight:700;line-height:20px;font-style:normal;text-align:center}.hxpg.on .hxn{background:var(--g);color:#1a1405}
+.hxck{position:absolute;top:-8px;right:-7px;width:20px;height:20px;border-radius:50%;background:var(--g);color:#1a1405;display:grid;place-items:center}.hxck .hedic{width:13px;height:13px}
+.hxnm .hedname{width:100%;box-sizing:border-box;height:42px;border-radius:12px}
+.hxsz{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:14px;background:rgba(127,127,127,.1);margin-top:4px}.hxsz div{flex:1}.hxsz small{display:block;font-size:12px;opacity:.7}.hxsz b{font-size:18px}
+.hxw{width:36px;height:36px;border:0;border-radius:50%;background:rgba(224,160,0,.18);color:#d08a00;display:grid;place-items:center;padding:0;flex:none}.hxw .hedic{width:20px;height:20px}
+.hxgo{position:sticky;bottom:0;width:100%;height:50px;border-radius:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px}.hxgo .hedic{width:22px;height:22px}
+.hed.xpop .hedphd .cpkhi.ico{border-right:1px solid var(--ln);padding-right:10px;margin-right:2px}
+.hed.xpop .hedpbody{padding:6px 14px calc(14px + env(safe-area-inset-bottom))}
+.hedtts.hdtv .hedtmr{display:flex;align-items:stretch;gap:8px;position:relative}
+.hedtts.hdtv .hedtmr>.hedtmp,.hedtts.hdtv .hedtmr>.hedtbadge,.hedtts.hdtv .hedtmr>.hedtpx,.hedtts.hdtv .hedtmr>.hedtbtn{flex:1 1 0;min-width:0;height:40px;box-sizing:border-box;margin:0;border-radius:12px}
+.hedtts.hdtv .hedtmr>.hedtmp{padding:0 10px;display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:13px}
+.hedtts.hdtv .hedtmp .hdnm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font-weight:800}
+.hedtts.hdtv .hedtmr>.hedtbadge{display:flex;align-items:center;justify-content:center;gap:5px;padding:0 6px;font-size:11px;white-space:nowrap;overflow:hidden}
+.hedtts.hdtv .hedtmr>.hedtbtn{display:flex;align-items:center;justify-content:center;gap:5px;padding:0 8px;font-size:12px;white-space:nowrap}
+.hedtts.hdtv .hedtmr>.hedtic2{flex:none;width:40px;height:40px;min-width:40px;border-radius:12px;color:#d23b3b;background:rgba(210,59,59,.12);border:1px solid rgba(210,59,59,.3);display:grid;place-items:center;padding:0}
+.hedtts.hdtv .hedtmr>.hedtic2 .hedic{width:18px;height:18px;color:#d23b3b}
+.hedtts.hdtv .hedtmr>.hedtstp{flex:none;width:40px;height:40px;border-radius:12px}
+.hedtts.hdtv .hedtmr>.hedtpx{margin:0}
+.hedtbox{position:relative}
+.hedtbig{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;border-radius:8px;background:rgba(127,127,127,.14);color:var(--tx);display:grid;place-items:center;padding:0;z-index:2}.hedtbig .hedic{width:16px;height:16px}
+.hedtts.hdtv .hedtbox textarea{padding-right:40px}.hedtts.hdtv .hedtbox.big textarea{min-height:200px}
+.hed.kbon .hedbar{visibility:hidden}
+.hed.kbon .hedpop{bottom:var(--kbh,0px)!important;height:auto!important;max-height:calc(100% - var(--kbh,0px) - 90px)!important;animation:none!important}
+.hed.kbon .hedpbody{padding-bottom:10px!important}
+.hed.kbon.ttson .hedtts.hdtv>*:not(.hedtbox){display:none!important}
+.hed.kbon.txton .hedpbody .hedta~*,.hed.kbon.txton .hedpbody .hedtpg{display:none!important}
+`;
 /* CHANGELOG
+4.23.0 — (1) Export popup redesigned: Format (Video / Image + MP4, WebM, PNG, JPG with icons and drop-downs), Select Page (All / This / Custom with page thumbnails; pages are the clips of the main layer), Resolution and Frame Rate drop-downs, file icon with a single ≈ size estimate, warning icon (tap for details) on weak devices, big Export button, × close icon; video exports only the chosen pages, image export saves one image per chosen page. (2) Text To Speech and Text-layer popups stick to the keyboard (the preview no longer jumps up; only the text box is shown while typing). (3) Text To Speech: model name no longer hidden behind the Downloaded badge (same size and height as the picker, size shown only in the list), red delete icon, translated title, progress box no longer sits higher (class-name clash with the text-preset grid), button “Generate”, expand icon for the text box.
 4.22.0 — Text To Speech popup: (1) the content no longer runs off the screen (a later thumbnail style had turned the popup into an auto-width grid; it now has its own flex layout and the text box lost its double border); (2) it is a half-screen sheet like the Colour popup — the preview and Undo/Redo stay visible, the grip bar on top drags or taps to enlarge, and the green tick is now a red × close icon; (3) the download progress with the percentage is shown inside the Download box itself (white → gold fill, small red stop icon; yellow “Preparing…” fill while an already-downloaded model starts), nothing below; (4) Sample / Replace / Clear / Preview / Add to timeline and the model, download and Settings buttons are about half the old size, and Preview / Add stay pinned at the bottom of the sheet; (5) deleting a downloaded model asks in a small separate pop-up instead of “tap again”; (6) the model list starts with a small language heading (English) — models are grouped by language; (7) voices of Paradee 1.2 and Kitten TTS Nano can now be chosen: the selected voice was never highlighted because the highlight code looked for an old class name; the voice row now sits outside Settings; Settings starts closed.
 4.21.0 — Text To Speech popup redesigned (text box first, Clear / Replace under it, model drop-down, Downloaded / Preparing badges, Settings section); Material Design Icons licence note added as a hidden comment at the top.
 4.20.2 — Fixed: Voice (AI) failed with "No module named numpy" (the phonemizer loads numpy on first use) — missing Python packages are now installed automatically in the self-test too; pitch also works for Paradee and Kitten (audio resampling); the Wi-Fi sentence was removed from the download notice; shared engine size updated to about 34 MB.
